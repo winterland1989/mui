@@ -1,0 +1,23 @@
+{
+  "name": "mui",
+  "version": "0.0.1",
+  "description": "a ui library for mithril",
+  "dependencies": {
+    "mithril": "^0.2.3",
+    "mmsvg": "^1.1.1",
+    "mss-js": "^0.3.2"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.10.0"
+  },
+  "scripts": {
+    "dev": "coffee -wc ./*.coffee",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/winterland1989/mui.git"
+  },
+  "author": "winter"
+}
+
