@@ -68,11 +68,10 @@ module.exports = {
 ,   getTargetData
 ,   getCurrentTargetData
 ,   targetHasClass
-,   cancelEvent
+,   cancelBubble
 ,   clearDateHMS
 ,   formatXX
 ,   formatDate
 ,   formatDateWithHMS
 ,   parseDateWithHMS
-,   Switch
 }

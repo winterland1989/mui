@@ -7,7 +7,7 @@ class AutoHide
     }) ->
         @showWidget = false # Boolean
 
-    hideInternal: (elem) -> (e) =>
+    onHideInternal: (elem) -> (e) =>
         unless elem.contains e.target
             @showWidget = false
         m.redraw()
@@ -26,9 +26,9 @@ class AutoHide
         ,
             config: (elem, afterInit, context) ->
                 unless afterInit
-                    window.addEventListener 'click', self.hideInternal(elem), true
+                    window.addEventListener 'click', self.onHideInternal(elem), true
                     context.onunload = ->
-                        window.removeEventListener 'click', self.hideInternal(elem), true
+                        window.removeEventListener 'click', self.onHideInternal(elem), true
 
         ,   if @showWidget then @widget.view()
 

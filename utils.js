@@ -90,13 +90,12 @@
     getTargetData: getTargetData,
     getCurrentTargetData: getCurrentTargetData,
     targetHasClass: targetHasClass,
-    cancelEvent: cancelEvent,
+    cancelBubble: cancelBubble,
     clearDateHMS: clearDateHMS,
     formatXX: formatXX,
     formatDate: formatDate,
     formatDateWithHMS: formatDateWithHMS,
-    parseDateWithHMS: parseDateWithHMS,
-    Switch: Switch
+    parseDateWithHMS: parseDateWithHMS
   };
 
 }).call(this);

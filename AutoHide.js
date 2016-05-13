@@ -14,7 +14,7 @@
       this.showWidget = false;
     }
 
-    AutoHide.prototype.hideInternal = function(elem) {
+    AutoHide.prototype.onHideInternal = function(elem) {
       return (function(_this) {
         return function(e) {
           if (!elem.contains(e.target)) {
@@ -42,9 +42,9 @@
       return m('.HideOnBlur', {
         config: function(elem, afterInit, context) {
           if (!afterInit) {
-            window.addEventListener('click', self.hideInternal(elem), true);
+            window.addEventListener('click', self.onHideInternal(elem), true);
             return context.onunload = function() {
-              return window.removeEventListener('click', self.hideInternal(elem), true);
+              return window.removeEventListener('click', self.onHideInternal(elem), true);
             };
           }
         }

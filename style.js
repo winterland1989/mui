@@ -17,11 +17,15 @@
   module.exports = {
     text: grey,
     main: cyan,
-    border: grey({
-      warn: orange
-    }, {
-      modalBG: 'rgba(0,0,0,0.2)'
-    }, grey, red, green, magenta, orange, cyan)
+    border: grey,
+    warn: orange,
+    modalBG: 'rgba(0,0,0,0.2)',
+    grey: grey,
+    red: red,
+    green: green,
+    magenta: magenta,
+    orange: orange,
+    cyan: cyan
   };
 
 }).call(this);

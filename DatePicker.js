@@ -156,36 +156,27 @@
       d = new Date(this.displayDate);
       d.setMonth(this.displayDate.getMonth() + 1);
       d.setDate(0);
-      this.totalDay = d.getDate();
-      return this.lineNumber = Math.ceil((this.startDay + this.totalDay) / 7);
+      return this.totalDay = d.getDate();
     };
 
     DatePicker.prototype.preMonth = function(e) {
       this.displayDate.setMonth(this.displayDate.getMonth() - 1);
-      this.init();
-      e.stopPropagation();
-      return false;
+      return this.init();
     };
 
     DatePicker.prototype.nextMonth = function(e) {
       this.displayDate.setMonth(this.displayDate.getMonth() + 1);
-      this.init();
-      e.stopPropagation();
-      return false;
+      return this.init();
     };
 
     DatePicker.prototype.preYear = function(e) {
       this.displayDate.setFullYear(this.displayDate.getFullYear() - 1);
-      this.init();
-      e.stopPropagation();
-      return false;
+      return this.init();
     };
 
     DatePicker.prototype.nextYear = function(e) {
       this.displayDate.setFullYear(this.displayDate.getFullYear() + 1);
-      this.init();
-      e.stopPropagation();
-      return false;
+      return this.init();
     };
 
     DatePicker.prototype.selectDate = function(e) {

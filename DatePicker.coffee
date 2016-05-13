@@ -101,41 +101,31 @@ class DatePicker
                                     ,   second
                     ]
     init: ->
-        # 从周几开始
+        # from which day?
         d = new Date(@displayDate)
         d.setDate(0)
         @startDay = d.getDay()
-        # 这个月有几天
+        # how many days in this month?
         d = new Date(@displayDate)
         d.setMonth(@displayDate.getMonth() + 1)
         d.setDate(0)
         @totalDay = d.getDate()
-        # 应该显示几行
-        @lineNumber = Math.ceil (@startDay + @totalDay)/7
 
     preMonth: (e) =>
         @displayDate.setMonth(@displayDate.getMonth() - 1)
         @init()
-        e.stopPropagation()
-        false
 
     nextMonth: (e) =>
         @displayDate.setMonth(@displayDate.getMonth() + 1)
         @init()
-        e.stopPropagation()
-        false
 
     preYear: (e) =>
         @displayDate.setFullYear(@displayDate.getFullYear() - 1)
         @init()
-        e.stopPropagation()
-        false
 
     nextYear: (e) =>
         @displayDate.setFullYear(@displayDate.getFullYear() + 1)
         @init()
-        e.stopPropagation()
-        false
 
     selectDate: (e) =>
         if u.targetHasClass (u.getTarget e), 'Available'

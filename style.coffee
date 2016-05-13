@@ -10,7 +10,7 @@ module.exports = {
     text: grey
 ,   main: cyan
 ,   border: grey
-    warn: orange
+,   warn: orange
 ,   modalBG: 'rgba(0,0,0,0.2)'
 
 
