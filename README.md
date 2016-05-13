@@ -1,13 +1,13 @@
 mui
 ===
 
-A very very simple ui library collection. read coffee source for document.
+A very simple ui library collection. read coffee source for document.
 
 usage
 -----
 
 + clone this repo to your node_modules
-+ use `npm` install `mithril-js` and `mss-js` to your project
++ use `npm` install `mithril-js`、 `mmsvg` and `mss-js` to your project
 + use `webpack` as build tool.
 
 Example usage:
@@ -34,6 +34,23 @@ s.tag Modal.mss
 
 m.mount main, new Demo()
 ```
+
+index
+-----
+
++ AutoHide, add *hide on blur* to a widget (click anywhere outside will hide the widget).
+
++ Button, button with attachable data, prefix/suffix icon
+
++ DatePicker, a simple date picker w/wo time select.
+
++ DropDown, a drop down selector.
+
++ Modal, add modal to a widget with auto centering.
+
++ TextInput, a text input with validation.
+
++ i18n/style, feel free to modify.  utils, a helpers collection supporting this little library down to IE9.
 
 customization
 -------------
