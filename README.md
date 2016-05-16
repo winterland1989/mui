@@ -12,7 +12,7 @@ If you find bugs or get confused, fill a issue please!
 usage
 -----
 
-+ run `npm i mui`
++ run `npm i mui-js`
 + use `webpack` as build tool.
 
 Example usage:
@@ -52,6 +52,8 @@ index
 + DropDown, a drop down selector.
 
 + Modal, add modal to a widget with auto centering.
+
++ Switch, a simple toggle button.
 
 + TextInput, a text input with validation.
 
