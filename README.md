@@ -12,12 +12,15 @@ If you find bugs or get confused, fill a issue please!
 usage
 -----
 
-+ run `npm i mui-js`
++ run `npm i mui-js`.
+
++ use `npm` install `mithril-js`、 `mmsvg` and `mss-js` to your project to get started.
+
 + use `webpack` as build tool.
 
 Example usage:
 
-```
+```coffeescript
 m = require 'mithril'
 s = require 'mss-js'
 Modal = require 'mui/Modal'
