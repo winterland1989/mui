@@ -20,7 +20,7 @@ class Switch
             onclick: @onToggleInternal
             className:  if @enable then 'Enabled' else 'Disabled'
         ,
-            m '.SwitchBtn',
+            m '.SwitchBtn'
 
 Switch.mss =
     '.Switch.Enabled':

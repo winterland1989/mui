@@ -160,8 +160,9 @@ DatePicker.mss =
         width: '250px'
         position: 'relative'
         DateInput:
-            height: '2em'
+            lineHeight: '2em'
             display: 'block'
+            fontSize: '0.9em'
             width: '100%'
             textAlign: 'center'
             border: '1px solid ' + style.border[4]
@@ -169,9 +170,9 @@ DatePicker.mss =
             position: 'absolute'
             svg:
                 fill: style.text[1]
-                height: '20px'
-                width: '20px'
-                padding: '4px'
+                height: '1.4em'
+                width: '1.4em'
+                padding: '0.3em'
             top: 0
             left: 0
         DatePickerWidget:
@@ -183,10 +184,10 @@ DatePicker.mss =
             background: '#fff'
             zIndex: 999
             NavBar:
-                padding: '4px 12px'
+                padding: '0.3em 0.9em'
                 textAlign: 'center'
-                lineHeight: '28px'
-                height: '28px'
+                lineHeight: '2em'
+                height: '2em'
 
                 PreYear_PreMonth_NextMonth_NextYear:
                     display: 'inline-block'

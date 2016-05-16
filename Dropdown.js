@@ -93,7 +93,8 @@
       width: '200px',
       DropdownInput: {
         display: 'block',
-        height: '2em',
+        lineHeight: '2em',
+        fontSize: '0.9em',
         width: '100%',
         textAlign: 'center',
         border: '1px solid ' + style.border[4]
@@ -103,7 +104,7 @@
         top: '2em',
         border: '1px solid #ccc',
         width: '198px',
-        height: '400px',
+        height: '200px',
         margin: 0,
         padding: 0,
         listStyle: 'none',
@@ -114,6 +115,7 @@
           textAlign: 'center',
           overflowX: 'hidden',
           padding: '0 4px',
+          margin: 0,
           color: style.text[5],
           $hover: {
             cursor: 'pointer',

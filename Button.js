@@ -32,7 +32,7 @@
       return m('.Button', {
         onclick: this.onClickInternal,
         'data-json': this.dataJSON
-      }, this.prefix, m('span', this.text), this.suffix);
+      }, m('.Prefix', this.prefix), m('span', this.text), m('.Suffix', this.suffix));
     };
 
     return Button;
@@ -41,10 +41,27 @@
 
   Button.mss = {
     Button: s.LineSize('2em', '1em')({
+      position: 'relative',
       width: '100px',
       textAlign: 'center',
       background: style.main[4],
       color: style.text[8],
+      Prefix_Suffix: {
+        position: 'absolute',
+        svg: {
+          fill: style.text[8],
+          height: '1.4em',
+          width: '1.4em'
+        }
+      },
+      Prefix: {
+        left: '0.3em',
+        top: '0.3em'
+      },
+      Suffix: {
+        right: '0.3em',
+        top: '0.3em'
+      },
       $hover: {
         cursor: 'pointer',
         background: style.main[5]

@@ -44,9 +44,10 @@ TextInput.mss =
         position: 'relative'
         Input:
             display: 'block'
-            border: '1px solid ' + style.border[5]
+            border: '1px solid ' + style.border[4]
             width: '100%'
             height: '100%'
+            fontSize: '1em'
             padding: '0 0.4em'
         ValidationMsg:
             background: style.warn[5]

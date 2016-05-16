@@ -1,13 +1,18 @@
 mui
 ===
 
-A very simple ui library collection. read coffee source for document.
+A very simple ui library collection made by winter!
+
+Check this little lovely [demo page](http://winterland1989.github.io/mui/) first!
+
+If you decide to use it, just read coffee source for document!
+
+If you find bugs or get confused, fill a issue please!
 
 usage
 -----
 
-+ clone this repo to your node_modules
-+ use `npm` install `mithril-js`、 `mmsvg` and `mss-js` to your project
++ run `npm i mui`
 + use `webpack` as build tool.
 
 Example usage:
@@ -56,3 +61,9 @@ customization
 -------------
 
 This library is intended to use with customization if needed, just run `npm run dev` under mui folder and change anything you want.
+
+
+license
+-------
+
+Do whatever you want to do with this library : )

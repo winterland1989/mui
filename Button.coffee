@@ -6,8 +6,8 @@ u = require './utils'
 class Button
     constructor: ({
         @text               # String
-    ,   @prefix             # mithril view
-    ,   @suffix             # mithril view
+    ,   @prefix             # mithril svg view
+    ,   @suffix             # mithril svg view
     ,   data                # HashMap
     ,   @onClick = (->)     # (HashMap) -> a
     }) ->
@@ -25,16 +25,30 @@ class Button
                 onclick: @onClickInternal
                 'data-json': @dataJSON
             ,
-                @prefix
+                m '.Prefix', @prefix
                 m 'span', @text
-                @suffix
+                m '.Suffix', @suffix
 
 Button.mss =
     Button: s.LineSize('2em', '1em')
+        position: 'relative'
         width: '100px'
         textAlign: 'center'
         background: style.main[4]
         color: style.text[8]
+        Prefix_Suffix:
+            position: 'absolute'
+            svg:
+                fill: style.text[8]
+                height: '1.4em'
+                width: '1.4em'
+        Prefix:
+            left: '0.3em'
+            top: '0.3em'
+        Suffix:
+            right: '0.3em'
+            top: '0.3em'
+
         $hover:
             cursor: 'pointer'
             background: style.main[5]
