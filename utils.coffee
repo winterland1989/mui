@@ -25,6 +25,13 @@ cancelBubble = (e) ->
     e.stopPropagation?()
     false
 
+# a mithril config function to scroll a Current element into view
+scrollToView = (elem, afterInit) ->
+    unless afterInit
+        if targetHasClass elem, 'Current'
+            offsetTop = elem.offsetTop
+            elem.parentNode.scrollTop = offsetTop
+
 # clear Date's hour minute and second
 clearDateHMS = (date) ->
     date.setHours 0
@@ -63,15 +70,23 @@ parseDateWithHMS = (dateString) ->
 # helper to format number to 2 digit
 formatXX = (x) -> if x < 10 then '0' + x.toString() else x.toString()
 
+# remove an element from array and return it, return undefined if not in array
+removeFromArray = (arr, x) ->
+    i = arr.indexOf x
+    if i != -1 then arr.splice i, 1
+    undefined
+
 module.exports = {
     getTarget
 ,   getTargetData
 ,   getCurrentTargetData
 ,   targetHasClass
 ,   cancelBubble
+,   scrollToView
 ,   clearDateHMS
 ,   formatXX
 ,   formatDate
 ,   formatDateWithHMS
 ,   parseDateWithHMS
+,   removeFromArray
 }

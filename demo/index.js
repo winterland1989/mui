@@ -44,19 +44,21 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Button, DatePicker, Demo, DropDown, Modal, Switch, TextInput, buildIcon, m, s;
+	var Button, Collaspe, DatePicker, Demo, DropDown, Modal, Switch, TextInput, buildIcon, delIcon, m, s;
 
 	m = __webpack_require__(1);
 
 	s = __webpack_require__(3);
 
-	buildIcon = __webpack_require__(7);
+	buildIcon = __webpack_require__(4);
 
-	Button = __webpack_require__(8);
+	delIcon = __webpack_require__(19);
 
-	DatePicker = __webpack_require__(9);
+	Button = __webpack_require__(5);
 
-	Switch = __webpack_require__(4);
+	DatePicker = __webpack_require__(8);
+
+	Switch = __webpack_require__(12);
 
 	DropDown = __webpack_require__(13);
 
@@ -64,21 +66,98 @@
 
 	TextInput = __webpack_require__(15);
 
+	Collaspe = __webpack_require__(16);
+
 	Demo = (function() {
 	  function Demo() {
-	    this.demoButton = new Button({
+	    var i;
+	    this.demoButton1 = new Button({
+	      text: 'Just Button'
+	    });
+	    this.demoButton2 = new Button({
 	      text: 'Build',
 	      prefix: buildIcon
 	    });
-	    this.demoDatePicker = new DatePicker({
+	    this.demoButton3 = new Button({
+	      text: 'Delete',
+	      suffix: delIcon
+	    });
+	    this.demoButtonDoc = new Collaspe({
+	      titleArray: ['Button document'],
+	      widgetArray: [
+	        {
+	          view: function() {
+	            return m('textarea', {
+	              readonly: true
+	            }, "Button = require 'mui/Button'\nbuildIcon = require 'mmsvg/google/msvg/action/build'\n\ndemoButton = new Button\n    text: 'Build'\n    prefix: buildIcon\n\n###\n    text             # String\n    prefix           # mithril svg view\n    suffix           # mithril svg view\n    data             # HashMap\n    onClick = (->)   # (HashMap) -> a\n###");
+	          }
+	        }
+	      ]
+	    });
+	    this.demoDatePicker1 = new DatePicker({
 	      date: new Date()
+	    });
+	    this.demoDatePicker2 = new DatePicker({
+	      date: new Date(),
+	      selectTime: true
+	    });
+	    this.demoDatePickerDoc = new Collaspe({
+	      titleArray: ['DatePicker document'],
+	      widgetArray: [
+	        {
+	          view: function() {
+	            return m('textarea', {
+	              readonly: true
+	            }, "# modify i18n before use\nDatePicker = require 'mui/DatePicker'\n\ndemoDatePicker2 = new DatePicker\n    date: new Date()\n    selectTime: true\n\n###\n    date                         # Date\n    selectTime                   # Boolean\n    ifDateAvailable = (-> true)  # (Date) -> Boolean\n    onSelect = (->)              # (Date) -> a\n###");
+	          }
+	        }
+	      ]
 	    });
 	    this.demoSwitch = new Switch({
 	      enable: true
 	    });
-	    this.demoDropDown = new DropDown({
+	    this.demoSwitchDoc = new Collaspe({
+	      titleArray: ['Switch document'],
+	      widgetArray: [
+	        {
+	          view: function() {
+	            return m('textarea', {
+	              readonly: true
+	            }, "Switch = require 'mui/Switch'\n\ndemoSwitch = new Switch\n    enable: true\n\n###\n    enable = true       # Boolean\n    onToggle = ( -> )   # (Boolean) -> a\n###");
+	          }
+	        }
+	      ]
+	    });
+	    this.demoDropDown1 = new DropDown({
 	      itemArray: ['foo', 'bar', '~~~'],
 	      currentIndex: 2
+	    });
+	    this.demoDropDown2 = new DropDown({
+	      itemArray: ['foo', 'bar', '~~~'],
+	      placeholder: 'please select a foo'
+	    });
+	    this.demoDropDown3 = new DropDown({
+	      itemArray: (function() {
+	        var j, results;
+	        results = [];
+	        for (i = j = 1; j <= 100; i = ++j) {
+	          results.push(i.toString());
+	        }
+	        return results;
+	      })(),
+	      currentIndex: 20
+	    });
+	    this.demoDropDownDoc = new Collaspe({
+	      titleArray: ['DropDown document'],
+	      widgetArray: [
+	        {
+	          view: function() {
+	            return m('textarea', {
+	              readonly: true
+	            }, "DropDown = require 'mui/Dropdown'\n\ndemoDropDown3 = new DropDown\n    itemArray: (i.toString() for i in [1..100])\n    currentIndex: 20\n\n###\n    itemArray               # [String]\n    currentIndex            # Int | Undefined\n    placeholder  = ''       # String\n    onSelect = (->)         # (String, Int) -> ...\n    ifAvailable = (-> true) # (String, Int) -> ture | false\n###");
+	          }
+	        }
+	      ]
 	    });
 	    this.demoModal1 = new Modal({
 	      clickToHide: true,
@@ -92,18 +171,30 @@
 	      clickToHide: false
 	    });
 	    this.demoModalOpenBtn1 = new Button({
-	      text: 'Open a modal widget',
+	      text: 'Open a modal',
 	      onClick: this.demoModal1.show
 	    });
 	    this.demoModalOpenBtn2 = new Button({
-	      text: 'Open a modal widget',
+	      text: 'Open a modal',
 	      onClick: this.demoModal2.show
 	    });
 	    this.demoModalCloseBtn = new Button({
-	      text: 'Hide this modal widget',
+	      text: 'Hide this modal',
 	      onClick: this.demoModal2.hide
 	    });
 	    this.demoModal2.widget = this.demoModalCloseBtn;
+	    this.demoModalDoc = new Collaspe({
+	      titleArray: ['Modal document'],
+	      widgetArray: [
+	        {
+	          view: function() {
+	            return m('textarea', {
+	              readonly: true
+	            }, "Modal = require 'mui/Modal'\n\ndemoModal1 = new Modal\n    clickToHide: true\n    widget: view: ->\n        m 'h2', 'Close anywhere  else to close'\n\n###\n    widget                 # mithril view\n    clickToHide = true     # Boolean\n    onHide = ( -> )        # () -> a\n###");
+	          }
+	        }
+	      ]
+	    });
 	    this.demoTextInput = new TextInput({
 	      onChange: function(str) {
 	        if (str !== 'ya!') {
@@ -111,10 +202,56 @@
 	        }
 	      }
 	    });
+	    this.demoTextInputDoc = new Collaspe({
+	      titleArray: ['TextInput document'],
+	      widgetArray: [
+	        {
+	          view: function() {
+	            return m('textarea', {
+	              readonly: true
+	            }, "TextInput = require 'mui/TextInput'\n\ndemoTextInput = new TextInput\n    onChange: (str) ->\n        if str != 'ya!'\n            new Error 'please input \"ya!\"'\n\n###\n    content = ''           # String\n    disabled = false       # Boolean\n    placeholder = ''       # String\n    onChange = ( -> )      # (String) -> a | Error\n###");
+	          }
+	        }
+	      ]
+	    });
+	    this.demoCollaspe = new Collaspe({
+	      titleArray: ['Hello', 'Byte'],
+	      expandedIndexArray: [1],
+	      autoCollaspe: true,
+	      widgetArray: [
+	        {
+	          view: function() {
+	            return m('span', 'hello world');
+	          }
+	        }, {
+	          view: function() {
+	            return m('span', 'bye world');
+	          }
+	        }
+	      ]
+	    });
+	    this.demoCollaspeDoc = new Collaspe({
+	      titleArray: ['Collaspe document'],
+	      widgetArray: [
+	        {
+	          view: function() {
+	            return m('textarea', {
+	              readonly: true
+	            }, "Collaspe = require 'mui/Collaspe'\n\ndemoCollaspe = new Collaspe\n    titleArray: ['Hello', 'Byte']\n    expandedIndexArray: [1]\n    autoCollaspe: true\n    widgetArray: [\n        view: ->\n            m 'span', 'hello world'\n    ,\n        view: ->\n            m 'span', 'bye world'\n    ]\n\n###\n    titleArray                # [String]\n    widgetArray               # [mithril widget]\n    autoCollaspe = false      # Boolean\n    expandedIndexArray = []   # [Int]\n    onExpand   = (->)         # Int -> a\n    onCollaspe = (->)         # Int -> a\n###");
+	          }
+	        }
+	      ]
+	    });
 	  }
 
 	  Demo.prototype.view = function() {
-	    return m('ul.Demo', m('li', this.demoButton.view()), m('li', this.demoDatePicker.view()), m('li', this.demoSwitch.view()), m('li', this.demoDropDown.view()), m('li', this.demoModalOpenBtn1.view(), this.demoModal1.view()), m('li', this.demoModalOpenBtn2.view(), this.demoModal2.view()), m('li', this.demoTextInput.view()));
+	    return [
+	      m('ul.Demo', m('li', this.demoButtonDoc.view()), m('li', this.demoButton1.view(), this.demoButton2.view(), this.demoButton3.view()), m('li', this.demoDatePickerDoc.view()), m('li', this.demoDatePicker1.view()), m('li', this.demoDatePicker2.view()), m('li', this.demoSwitchDoc.view()), m('li', this.demoSwitch.view()), m('li', this.demoDropDownDoc.view()), m('li', this.demoDropDown1.view()), m('li', this.demoDropDown2.view()), m('li', this.demoDropDown3.view()), m('li', this.demoModalDoc.view()), m('li', this.demoModalOpenBtn1.view(), this.demoModal1.view()), m('li', this.demoModalOpenBtn2.view(), this.demoModal2.view()), m('li', this.demoTextInputDoc.view()), m('li', this.demoTextInput.view()), m('li', this.demoCollaspeDoc.view()), m('li', this.demoCollaspe.view())), m('.Misc', m('span', 'Winter\'s ui collection'), m('a', {
+	        href: 'https://github.com/winterland1989/mui'
+	      }, 'view code on github'), m('a', {
+	        href: 'https://github.com/winterland1989/mui/blob/gh-pages/demo/index.coffee'
+	      }, 'this page\'s source'))
+	    ];
 	  };
 
 	  return Demo;
@@ -122,7 +259,7 @@
 	})();
 
 	s.tag(s.merge([
-	  Button.mss, DatePicker.mss, Switch.mss, DropDown.mss, Modal.mss, TextInput.mss, {
+	  Button.mss, DatePicker.mss, Switch.mss, DropDown.mss, Modal.mss, TextInput.mss, Collaspe.mss, {
 	    Modal: {
 	      Button: {
 	        display: 'inline-block',
@@ -137,6 +274,30 @@
 	    Demo: {
 	      listStyle: 'none',
 	      li: {
+	        margin: '14px'
+	      }
+	    },
+	    Button: {
+	      display: 'inline-block',
+	      marginRight: '14px'
+	    },
+	    Collaspe: {
+	      width: '480px',
+	      textarea: {
+	        padding: '14px',
+	        resize: 'none',
+	        width: '100%',
+	        height: '200px',
+	        border: 'none'
+	      }
+	    },
+	    Misc: {
+	      position: 'fixed',
+	      top: 0,
+	      right: 0,
+	      padding: '14px',
+	      span_a: {
+	        display: 'block',
 	        margin: '14px'
 	      }
 	    }
@@ -2855,240 +3016,12 @@
 /* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// Generated by CoffeeScript 1.10.0
-	(function() {
-	  var Switch, m, s, style, u,
-	    bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
-
-	  m = __webpack_require__(1);
-
-	  s = __webpack_require__(3);
-
-	  style = __webpack_require__(5);
-
-	  u = __webpack_require__(6);
-
-	  Switch = (function() {
-	    function Switch(arg) {
-	      var ref, ref1;
-	      this.enable = (ref = arg.enable) != null ? ref : true, this.onToggle = (ref1 = arg.onToggle) != null ? ref1 : (function() {});
-	      this.onToggleInternal = bind(this.onToggleInternal, this);
-	    }
-
-	    Switch.prototype.onToggleInternal = function(e) {
-	      this.enable = !this.enable;
-	      return this.onToggle(this.enable);
-	    };
-
-	    Switch.prototype.view = function() {
-	      return m('.Switch', {
-	        onclick: this.onToggleInternal,
-	        className: this.enable ? 'Enabled' : 'Disabled'
-	      }, m('.SwitchBtn'));
-	    };
-
-	    return Switch;
-
-	  })();
-
-	  Switch.mss = {
-	    '.Switch.Enabled': {
-	      width: '2em',
-	      height: '1em',
-	      borderRadius: '0.6em',
-	      padding: '0.1em',
-	      background: style.main[4]
-	    },
-	    '.Switch.Disabled': {
-	      width: '2em',
-	      height: '1em',
-	      borderRadius: '0.6em',
-	      padding: '0.1em',
-	      background: style.grey[4],
-	      $hover: {
-	        background: style.grey[5]
-	      },
-	      SwitchBtn: {
-	        left: '1em'
-	      }
-	    },
-	    Switch: {
-	      position: 'relative',
-	      $hover: {
-	        background: style.main[5],
-	        cursor: 'pointer'
-	      },
-	      SwitchBtn: {
-	        position: 'relative',
-	        width: '1em',
-	        height: '1em',
-	        borderRadius: '0.5em',
-	        background: '#fff',
-	        left: 0,
-	        transition: 'left 0.1s ease'
-	      }
-	    }
-	  };
-
-	  module.exports = Switch;
-
-	}).call(this);
-
-
-/***/ },
-/* 5 */
-/***/ function(module, exports) {
-
-	// Generated by CoffeeScript 1.10.0
-	(function() {
-	  var cyan, green, grey, magenta, orange, red;
-
-	  grey = ["#292929", "#525252", "#7a7a7a", "#a3a3a3", "#cccccc", "#d6d6d6", "#e0e0e0", "#ebebeb", "#f5f5f5"];
-
-	  red = ['#2d0404', '#5a0808', '#860d0d', '#b31111', '#e01515', '#e64444', '#ec7373', '#f3a1a1', '#f9d0d0'];
-
-	  green = ['#132608', '#264c10', '#3a7219', '#4d9821', '#60be29', '#80cb54', '#a0d87f', '#bfe5a9', '#dff2d4'];
-
-	  magenta = ['#2f0720', '#5d0f3f', '#8c165f', '#ba1e7e', '#e9259e', '#ed51b1', '#f27cc5', '#f6a8d8', '#fbd3ec'];
-
-	  orange = ['#331300', '#662700', '#993a00', '#cc4e00', '#ff6100', '#ff8133', '#ffa066', '#ffc099', '#ffdfcc'];
-
-	  cyan = ['#00252a', '#004a54', '#01707e', '#0195a8', '#01bad2', '#34c8db', '#67d6e4', '#99e3ed', '#ccf1f6'];
-
-	  module.exports = {
-	    text: grey,
-	    main: cyan,
-	    border: grey,
-	    warn: orange,
-	    modalBG: 'rgba(0,0,0,0.2)',
-	    grey: grey,
-	    red: red,
-	    green: green,
-	    magenta: magenta,
-	    orange: orange,
-	    cyan: cyan
-	  };
-
-	}).call(this);
-
-
-/***/ },
-/* 6 */
-/***/ function(module, exports) {
-
-	// Generated by CoffeeScript 1.10.0
-	(function() {
-	  var cancelBubble, clearDateHMS, formatDate, formatDateWithHMS, formatXX, getCurrentTargetData, getTarget, getTargetData, parseDateWithHMS, targetHasClass;
-
-	  getTarget = function(event) {
-	    var elem;
-	    return elem = event.target || event.srcElement;
-	  };
-
-	  getTargetData = function(event, dataStr) {
-	    var elem;
-	    elem = event.target || event.srcElement;
-	    if (elem.dataset != null) {
-	      return elem.dataset[dataStr];
-	    } else {
-	      return elem.getAttribute('data-' + dataStr);
-	    }
-	  };
-
-	  getCurrentTargetData = function(event, dataStr) {
-	    var elem;
-	    elem = event.currentTarget;
-	    if (elem.dataset != null) {
-	      return elem.dataset[dataStr];
-	    } else {
-	      return elem.getAttribute('data-' + dataStr);
-	    }
-	  };
-
-	  targetHasClass = function(elem, str) {
-	    return (elem.className.indexOf(str)) !== -1;
-	  };
-
-	  cancelBubble = function(e) {
-	    if (e.cancelBubble === false) {
-	      e.cancelBubble = true;
-	    }
-	    if (typeof e.stopPropagation === "function") {
-	      e.stopPropagation();
-	    }
-	    return false;
-	  };
-
-	  clearDateHMS = function(date) {
-	    date.setHours(0);
-	    date.setMinutes(0);
-	    date.setSeconds(0);
-	    return date;
-	  };
-
-	  formatDate = function(date) {
-	    var dd, mm, yyyy;
-	    yyyy = date.getFullYear();
-	    mm = date.getMonth() + 1;
-	    dd = date.getDate();
-	    return yyyy + '-' + (formatXX(mm)) + '-' + (formatXX(dd));
-	  };
-
-	  formatDateWithHMS = function(date) {
-	    var hh, mm, ss;
-	    hh = date.getHours();
-	    mm = date.getMinutes();
-	    ss = date.getSeconds();
-	    return (formatDate(date)) + ' ' + (formatXX(hh)) + ':' + (formatXX(mm)) + ':' + (formatXX(ss));
-	  };
-
-	  parseDateWithHMS = function(dateString) {
-	    var date, dateStr, hh, mm, ref, ref1, ss, timeStr;
-	    ref = dateString.split(' '), dateStr = ref[0], timeStr = ref[1];
-	    date = new Date(dateStr);
-	    if (timeStr != null) {
-	      ref1 = timeStr.split(':'), hh = ref1[0], mm = ref1[1], ss = ref1[2];
-	      date.setHours(parseInt(hh));
-	      date.setMinutes(parseInt(mm));
-	      date.setSeconds(parseInt(ss));
-	    }
-	    return date;
-	  };
-
-	  formatXX = function(x) {
-	    if (x < 10) {
-	      return '0' + x.toString();
-	    } else {
-	      return x.toString();
-	    }
-	  };
-
-	  module.exports = {
-	    getTarget: getTarget,
-	    getTargetData: getTargetData,
-	    getCurrentTargetData: getCurrentTargetData,
-	    targetHasClass: targetHasClass,
-	    cancelBubble: cancelBubble,
-	    clearDateHMS: clearDateHMS,
-	    formatXX: formatXX,
-	    formatDate: formatDate,
-	    formatDateWithHMS: formatDateWithHMS,
-	    parseDateWithHMS: parseDateWithHMS
-	  };
-
-	}).call(this);
-
-
-/***/ },
-/* 7 */
-/***/ function(module, exports, __webpack_require__) {
-
 	var m = __webpack_require__(1);
 	module.exports = m.trust('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>');
 
 
 /***/ },
-/* 8 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Generated by CoffeeScript 1.10.0
@@ -3100,9 +3033,9 @@
 
 	  s = __webpack_require__(3);
 
-	  style = __webpack_require__(5);
+	  style = __webpack_require__(6);
 
-	  u = __webpack_require__(6);
+	  u = __webpack_require__(7);
 
 	  Button = (function() {
 	    function Button(arg) {
@@ -3168,7 +3101,172 @@
 
 
 /***/ },
-/* 9 */
+/* 6 */
+/***/ function(module, exports) {
+
+	// Generated by CoffeeScript 1.10.0
+	(function() {
+	  var cyan, green, grey, magenta, orange, red;
+
+	  grey = ["#292929", "#525252", "#7a7a7a", "#a3a3a3", "#cccccc", "#d6d6d6", "#e0e0e0", "#ebebeb", "#f5f5f5"];
+
+	  red = ['#2d0404', '#5a0808', '#860d0d', '#b31111', '#e01515', '#e64444', '#ec7373', '#f3a1a1', '#f9d0d0'];
+
+	  green = ['#132608', '#264c10', '#3a7219', '#4d9821', '#60be29', '#80cb54', '#a0d87f', '#bfe5a9', '#dff2d4'];
+
+	  magenta = ['#2f0720', '#5d0f3f', '#8c165f', '#ba1e7e', '#e9259e', '#ed51b1', '#f27cc5', '#f6a8d8', '#fbd3ec'];
+
+	  orange = ['#331300', '#662700', '#993a00', '#cc4e00', '#ff6100', '#ff8133', '#ffa066', '#ffc099', '#ffdfcc'];
+
+	  cyan = ['#00252a', '#004a54', '#01707e', '#0195a8', '#01bad2', '#34c8db', '#67d6e4', '#99e3ed', '#ccf1f6'];
+
+	  module.exports = {
+	    text: grey,
+	    main: cyan,
+	    border: grey,
+	    warn: orange,
+	    modalBG: 'rgba(0,0,0,0.2)',
+	    grey: grey,
+	    red: red,
+	    green: green,
+	    magenta: magenta,
+	    orange: orange,
+	    cyan: cyan
+	  };
+
+	}).call(this);
+
+
+/***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+	// Generated by CoffeeScript 1.10.0
+	(function() {
+	  var cancelBubble, clearDateHMS, formatDate, formatDateWithHMS, formatXX, getCurrentTargetData, getTarget, getTargetData, parseDateWithHMS, removeFromArray, scrollToView, targetHasClass;
+
+	  getTarget = function(event) {
+	    var elem;
+	    return elem = event.target || event.srcElement;
+	  };
+
+	  getTargetData = function(event, dataStr) {
+	    var elem;
+	    elem = event.target || event.srcElement;
+	    if (elem.dataset != null) {
+	      return elem.dataset[dataStr];
+	    } else {
+	      return elem.getAttribute('data-' + dataStr);
+	    }
+	  };
+
+	  getCurrentTargetData = function(event, dataStr) {
+	    var elem;
+	    elem = event.currentTarget;
+	    if (elem.dataset != null) {
+	      return elem.dataset[dataStr];
+	    } else {
+	      return elem.getAttribute('data-' + dataStr);
+	    }
+	  };
+
+	  targetHasClass = function(elem, str) {
+	    return (elem.className.indexOf(str)) !== -1;
+	  };
+
+	  cancelBubble = function(e) {
+	    if (e.cancelBubble === false) {
+	      e.cancelBubble = true;
+	    }
+	    if (typeof e.stopPropagation === "function") {
+	      e.stopPropagation();
+	    }
+	    return false;
+	  };
+
+	  scrollToView = function(elem, afterInit) {
+	    var offsetTop;
+	    if (!afterInit) {
+	      if (targetHasClass(elem, 'Current')) {
+	        offsetTop = elem.offsetTop;
+	        return elem.parentNode.scrollTop = offsetTop;
+	      }
+	    }
+	  };
+
+	  clearDateHMS = function(date) {
+	    date.setHours(0);
+	    date.setMinutes(0);
+	    date.setSeconds(0);
+	    return date;
+	  };
+
+	  formatDate = function(date) {
+	    var dd, mm, yyyy;
+	    yyyy = date.getFullYear();
+	    mm = date.getMonth() + 1;
+	    dd = date.getDate();
+	    return yyyy + '-' + (formatXX(mm)) + '-' + (formatXX(dd));
+	  };
+
+	  formatDateWithHMS = function(date) {
+	    var hh, mm, ss;
+	    hh = date.getHours();
+	    mm = date.getMinutes();
+	    ss = date.getSeconds();
+	    return (formatDate(date)) + ' ' + (formatXX(hh)) + ':' + (formatXX(mm)) + ':' + (formatXX(ss));
+	  };
+
+	  parseDateWithHMS = function(dateString) {
+	    var date, dateStr, hh, mm, ref, ref1, ss, timeStr;
+	    ref = dateString.split(' '), dateStr = ref[0], timeStr = ref[1];
+	    date = new Date(dateStr);
+	    if (timeStr != null) {
+	      ref1 = timeStr.split(':'), hh = ref1[0], mm = ref1[1], ss = ref1[2];
+	      date.setHours(parseInt(hh));
+	      date.setMinutes(parseInt(mm));
+	      date.setSeconds(parseInt(ss));
+	    }
+	    return date;
+	  };
+
+	  formatXX = function(x) {
+	    if (x < 10) {
+	      return '0' + x.toString();
+	    } else {
+	      return x.toString();
+	    }
+	  };
+
+	  removeFromArray = function(arr, x) {
+	    var i;
+	    i = arr.indexOf(x);
+	    if (i !== -1) {
+	      arr.splice(i, 1);
+	    }
+	    return void 0;
+	  };
+
+	  module.exports = {
+	    getTarget: getTarget,
+	    getTargetData: getTargetData,
+	    getCurrentTargetData: getCurrentTargetData,
+	    targetHasClass: targetHasClass,
+	    cancelBubble: cancelBubble,
+	    scrollToView: scrollToView,
+	    clearDateHMS: clearDateHMS,
+	    formatXX: formatXX,
+	    formatDate: formatDate,
+	    formatDateWithHMS: formatDateWithHMS,
+	    parseDateWithHMS: parseDateWithHMS,
+	    removeFromArray: removeFromArray
+	  };
+
+	}).call(this);
+
+
+/***/ },
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Generated by CoffeeScript 1.10.0
@@ -3180,15 +3278,15 @@
 
 	  s = __webpack_require__(3);
 
-	  u = __webpack_require__(6);
+	  u = __webpack_require__(7);
 
-	  AutoHide = __webpack_require__(10);
+	  AutoHide = __webpack_require__(9);
 
-	  style = __webpack_require__(5);
+	  style = __webpack_require__(6);
 
-	  i18n = __webpack_require__(11);
+	  i18n = __webpack_require__(10);
 
-	  dateIcon = __webpack_require__(12);
+	  dateIcon = __webpack_require__(11);
 
 	  hourArray = (function() {
 	    var j, results;
@@ -3283,6 +3381,7 @@
 	                  for (i = j = 0, len = hourArray.length; j < len; i = ++j) {
 	                    hour = hourArray[i];
 	                    results.push(m('li', {
+	                      config: u.scrollToView,
 	                      key: i,
 	                      className: hour === u.formatXX(this.date.getHours()) ? 'Current' : '',
 	                      'data-hour': hour
@@ -3295,6 +3394,7 @@
 	                  for (i = j = 0, len = minuteArray.length; j < len; i = ++j) {
 	                    min = minuteArray[i];
 	                    results.push(m('li', {
+	                      config: u.scrollToView,
 	                      key: i,
 	                      className: min === u.formatXX(this.date.getMinutes()) ? 'Current' : '',
 	                      'data-min': min
@@ -3307,6 +3407,7 @@
 	                  for (i = j = 0, len = secondArray.length; j < len; i = ++j) {
 	                    second = secondArray[i];
 	                    results.push(m('li', {
+	                      config: u.scrollToView,
 	                      key: i,
 	                      className: second === u.formatXX(this.date.getSeconds()) ? 'Current' : '',
 	                      'data-second': second
@@ -3493,6 +3594,7 @@
 	        },
 	        TimeList: {
 	          HourList_MinuteList_SecondList: {
+	            position: 'relative',
 	            padding: 0,
 	            margin: 0,
 	            marginBottom: '8px',
@@ -3504,6 +3606,7 @@
 	            li: {
 	              fontSize: '0.9em',
 	              textAlign: 'center',
+	              margin: '0.2em',
 	              $hover: {
 	                color: style.text[8],
 	                background: style.main[5]
@@ -3525,7 +3628,7 @@
 
 
 /***/ },
-/* 10 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Generated by CoffeeScript 1.10.0
@@ -3591,7 +3694,7 @@
 
 
 /***/ },
-/* 11 */
+/* 10 */
 /***/ function(module, exports) {
 
 	// Generated by CoffeeScript 1.10.0
@@ -3618,11 +3721,95 @@
 
 
 /***/ },
-/* 12 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var m = __webpack_require__(1);
 	module.exports = m.trust('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>');
+
+
+/***/ },
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Generated by CoffeeScript 1.10.0
+	(function() {
+	  var Switch, m, s, style, u,
+	    bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+	  m = __webpack_require__(1);
+
+	  s = __webpack_require__(3);
+
+	  style = __webpack_require__(6);
+
+	  u = __webpack_require__(7);
+
+	  Switch = (function() {
+	    function Switch(arg) {
+	      var ref, ref1;
+	      this.enable = (ref = arg.enable) != null ? ref : true, this.onToggle = (ref1 = arg.onToggle) != null ? ref1 : (function() {});
+	      this.onToggleInternal = bind(this.onToggleInternal, this);
+	    }
+
+	    Switch.prototype.onToggleInternal = function(e) {
+	      this.enable = !this.enable;
+	      return this.onToggle(this.enable);
+	    };
+
+	    Switch.prototype.view = function() {
+	      return m('.Switch', {
+	        onclick: this.onToggleInternal,
+	        className: this.enable ? 'Enabled' : 'Disabled'
+	      }, m('.SwitchBtn'));
+	    };
+
+	    return Switch;
+
+	  })();
+
+	  Switch.mss = {
+	    '.Switch.Enabled': {
+	      width: '2em',
+	      height: '1em',
+	      borderRadius: '0.6em',
+	      padding: '0.1em',
+	      background: style.main[4]
+	    },
+	    '.Switch.Disabled': {
+	      width: '2em',
+	      height: '1em',
+	      borderRadius: '0.6em',
+	      padding: '0.1em',
+	      background: style.grey[4],
+	      $hover: {
+	        background: style.grey[5]
+	      },
+	      SwitchBtn: {
+	        left: '1em'
+	      }
+	    },
+	    Switch: {
+	      position: 'relative',
+	      $hover: {
+	        background: style.main[5],
+	        cursor: 'pointer'
+	      },
+	      SwitchBtn: {
+	        position: 'relative',
+	        width: '1em',
+	        height: '1em',
+	        borderRadius: '0.5em',
+	        background: '#fff',
+	        left: 0,
+	        transition: 'left 0.1s ease'
+	      }
+	    }
+	  };
+
+	  module.exports = Switch;
+
+	}).call(this);
 
 
 /***/ },
@@ -3638,16 +3825,16 @@
 
 	  s = __webpack_require__(3);
 
-	  style = __webpack_require__(5);
+	  style = __webpack_require__(6);
 
-	  u = __webpack_require__(6);
+	  u = __webpack_require__(7);
 
-	  AutoHide = __webpack_require__(10);
+	  AutoHide = __webpack_require__(9);
 
 	  Dropdown = (function() {
 	    function Dropdown(arg) {
-	      var ref, ref1;
-	      this.itemArray = arg.itemArray, this.currentIndex = arg.currentIndex, this.onSelect = (ref = arg.onSelect) != null ? ref : (function() {}), this.ifAvailable = (ref1 = arg.ifAvailable) != null ? ref1 : (function() {
+	      var ref, ref1, ref2;
+	      this.itemArray = arg.itemArray, this.currentIndex = arg.currentIndex, this.placeholder = (ref = arg.placeholder) != null ? ref : '', this.onSelect = (ref1 = arg.onSelect) != null ? ref1 : (function() {}), this.ifAvailable = (ref2 = arg.ifAvailable) != null ? ref2 : (function() {
 	        return true;
 	      });
 	      this.onSelectInternal = bind(this.onSelectInternal, this);
@@ -3666,13 +3853,14 @@
 	              return m('ul.DropdownList', {
 	                onclick: _this.onSelectInternal
 	              }, (function() {
-	                var j, len, ref2, results;
-	                ref2 = this.itemArray;
+	                var j, len, ref3, results;
+	                ref3 = this.itemArray;
 	                results = [];
-	                for (i = j = 0, len = ref2.length; j < len; i = ++j) {
-	                  item = ref2[i];
+	                for (i = j = 0, len = ref3.length; j < len; i = ++j) {
+	                  item = ref3[i];
 	                  if ((item.indexOf(this.filter)) !== -1) {
 	                    results.push(m('li.DropdownItem', {
+	                      config: u.scrollToView,
 	                      key: i,
 	                      className: (this.currentIndex === i ? 'Current ' : '') + (this.ifAvailable(item, i) ? 'Available' : ''),
 	                      'data-index': i,
@@ -3710,7 +3898,8 @@
 	      return m('.Dropdown', m('input.DropdownInput', {
 	        onchange: this.autoComplete,
 	        onclick: this.autoHideDropDown.show,
-	        value: this.filter ? this.filter : this.itemArray[this.currentIndex]
+	        placeholder: this.placeholder,
+	        value: this.filter ? this.filter : this.currentIndex != null ? this.itemArray[this.currentIndex] : ''
 	      }), this.autoHideDropDown.view());
 	    };
 
@@ -3756,6 +3945,10 @@
 	        }),
 	        Available: {
 	          color: style.text[0]
+	        },
+	        Current: {
+	          background: style.main[4],
+	          color: style.text[8]
 	        }
 	      }
 	    }
@@ -3779,9 +3972,9 @@
 
 	  s = __webpack_require__(3);
 
-	  u = __webpack_require__(6);
+	  u = __webpack_require__(7);
 
-	  style = __webpack_require__(5);
+	  style = __webpack_require__(6);
 
 	  Modal = (function() {
 	    function Modal(arg) {
@@ -3864,9 +4057,9 @@
 
 	  s = __webpack_require__(3);
 
-	  style = __webpack_require__(5);
+	  style = __webpack_require__(6);
 
-	  u = __webpack_require__(6);
+	  u = __webpack_require__(7);
 
 	  TextInput = (function() {
 	    function TextInput(arg) {
@@ -3948,6 +4141,135 @@
 	  module.exports = TextInput;
 
 	}).call(this);
+
+
+/***/ },
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Generated by CoffeeScript 1.10.0
+	(function() {
+	  var Collaspe, arrowDown, arrowRight, m, s, style, u,
+	    bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+	    indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+
+	  m = __webpack_require__(1);
+
+	  s = __webpack_require__(3);
+
+	  u = __webpack_require__(7);
+
+	  style = __webpack_require__(6);
+
+	  arrowRight = __webpack_require__(17);
+
+	  arrowDown = __webpack_require__(18);
+
+	  Collaspe = (function() {
+	    function Collaspe(arg) {
+	      var ref, ref1, ref2, ref3;
+	      this.titleArray = arg.titleArray, this.widgetArray = arg.widgetArray, this.autoCollaspe = (ref = arg.autoCollaspe) != null ? ref : false, this.expandedIndexArray = (ref1 = arg.expandedIndexArray) != null ? ref1 : [], this.onExpand = (ref2 = arg.onExpand) != null ? ref2 : (function() {}), this.onCollaspe = (ref3 = arg.onCollaspe) != null ? ref3 : (function() {});
+	      this.onFoldInternal = bind(this.onFoldInternal, this);
+	      this.showWidget = false;
+	    }
+
+	    Collaspe.prototype.onFoldInternal = function(e) {
+	      var i;
+	      i = parseInt(u.getCurrentTargetData(e, 'index'));
+	      if (this.autoCollaspe) {
+	        return this.expandedIndexArray = [i];
+	      } else if (indexOf.call(this.expandedIndexArray, i) >= 0) {
+	        return u.removeFromArray(this.expandedIndexArray, i);
+	      } else {
+	        return this.expandedIndexArray.push(i);
+	      }
+	    };
+
+	    Collaspe.prototype.view = function() {
+	      var expanded, i, self, title;
+	      self = this;
+	      return m('.Collaspe', (function() {
+	        var j, len, ref, results;
+	        ref = this.titleArray;
+	        results = [];
+	        for (i = j = 0, len = ref.length; j < len; i = ++j) {
+	          title = ref[i];
+	          expanded = indexOf.call(this.expandedIndexArray, i) >= 0;
+	          results.push([
+	            m('.CollaspeTitle', {
+	              key: 'title' + i,
+	              'data-index': i.toString(),
+	              onclick: this.onFoldInternal
+	            }, expanded ? arrowDown : arrowRight, m('span', title)), m('.CollaspeBody', {
+	              className: expanded ? 'Current' : '',
+	              key: 'body' + i,
+	              onclick: this.onFoldInternal
+	            }, expanded ? this.widgetArray[i].view() : void 0)
+	          ]);
+	        }
+	        return results;
+	      }).call(this));
+	    };
+
+	    return Collaspe;
+
+	  })();
+
+	  Collaspe.mss = {
+	    Collaspe: {
+	      CollaspeTitle: s.LineSize('2em', '1em')({
+	        color: style.text[8],
+	        background: style.main[4],
+	        border: '1px solid ' + style.main[4],
+	        padding: '0 0.4em',
+	        $hover: {
+	          cursor: 'pointer'
+	        },
+	        svg: {
+	          fill: style.text[8],
+	          height: '1.4em',
+	          width: '1.4em',
+	          padding: '0.3em',
+	          verticalAlign: 'middle'
+	        },
+	        span: {
+	          verticalAlign: 'middle'
+	        }
+	      }),
+	      CollaspeBody: {
+	        border: '1px solid ' + style.border[4],
+	        borderTop: 'none'
+	      }
+	    }
+	  };
+
+	  module.exports = Collaspe;
+
+	}).call(this);
+
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var m = __webpack_require__(1);
+	module.exports = m.trust('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"/></svg>');
+
+
+/***/ },
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var m = __webpack_require__(1);
+	module.exports = m.trust('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"/></svg>');
+
+
+/***/ },
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var m = __webpack_require__(1);
+	module.exports = m.trust('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>');
 
 
 /***/ }

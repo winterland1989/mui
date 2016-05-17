@@ -15,8 +15,8 @@
 
   Dropdown = (function() {
     function Dropdown(arg) {
-      var ref, ref1;
-      this.itemArray = arg.itemArray, this.currentIndex = arg.currentIndex, this.onSelect = (ref = arg.onSelect) != null ? ref : (function() {}), this.ifAvailable = (ref1 = arg.ifAvailable) != null ? ref1 : (function() {
+      var ref, ref1, ref2;
+      this.itemArray = arg.itemArray, this.currentIndex = arg.currentIndex, this.placeholder = (ref = arg.placeholder) != null ? ref : '', this.onSelect = (ref1 = arg.onSelect) != null ? ref1 : (function() {}), this.ifAvailable = (ref2 = arg.ifAvailable) != null ? ref2 : (function() {
         return true;
       });
       this.onSelectInternal = bind(this.onSelectInternal, this);
@@ -35,13 +35,14 @@
               return m('ul.DropdownList', {
                 onclick: _this.onSelectInternal
               }, (function() {
-                var j, len, ref2, results;
-                ref2 = this.itemArray;
+                var j, len, ref3, results;
+                ref3 = this.itemArray;
                 results = [];
-                for (i = j = 0, len = ref2.length; j < len; i = ++j) {
-                  item = ref2[i];
+                for (i = j = 0, len = ref3.length; j < len; i = ++j) {
+                  item = ref3[i];
                   if ((item.indexOf(this.filter)) !== -1) {
                     results.push(m('li.DropdownItem', {
+                      config: u.scrollToView,
                       key: i,
                       className: (this.currentIndex === i ? 'Current ' : '') + (this.ifAvailable(item, i) ? 'Available' : ''),
                       'data-index': i,
@@ -79,7 +80,8 @@
       return m('.Dropdown', m('input.DropdownInput', {
         onchange: this.autoComplete,
         onclick: this.autoHideDropDown.show,
-        value: this.filter ? this.filter : this.itemArray[this.currentIndex]
+        placeholder: this.placeholder,
+        value: this.filter ? this.filter : this.currentIndex != null ? this.itemArray[this.currentIndex] : ''
       }), this.autoHideDropDown.view());
     };
 
@@ -125,6 +127,10 @@
         }),
         Available: {
           color: style.text[0]
+        },
+        Current: {
+          background: style.main[4],
+          color: style.text[8]
         }
       }
     }

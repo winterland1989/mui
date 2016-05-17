@@ -110,6 +110,7 @@
                   for (i = j = 0, len = hourArray.length; j < len; i = ++j) {
                     hour = hourArray[i];
                     results.push(m('li', {
+                      config: u.scrollToView,
                       key: i,
                       className: hour === u.formatXX(this.date.getHours()) ? 'Current' : '',
                       'data-hour': hour
@@ -122,6 +123,7 @@
                   for (i = j = 0, len = minuteArray.length; j < len; i = ++j) {
                     min = minuteArray[i];
                     results.push(m('li', {
+                      config: u.scrollToView,
                       key: i,
                       className: min === u.formatXX(this.date.getMinutes()) ? 'Current' : '',
                       'data-min': min
@@ -134,6 +136,7 @@
                   for (i = j = 0, len = secondArray.length; j < len; i = ++j) {
                     second = secondArray[i];
                     results.push(m('li', {
+                      config: u.scrollToView,
                       key: i,
                       className: second === u.formatXX(this.date.getSeconds()) ? 'Current' : '',
                       'data-second': second
@@ -320,6 +323,7 @@
         },
         TimeList: {
           HourList_MinuteList_SecondList: {
+            position: 'relative',
             padding: 0,
             margin: 0,
             marginBottom: '8px',
@@ -331,6 +335,7 @@
             li: {
               fontSize: '0.9em',
               textAlign: 'center',
+              margin: '0.2em',
               $hover: {
                 color: style.text[8],
                 background: style.main[5]

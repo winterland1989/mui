@@ -83,18 +83,21 @@ class DatePicker
                         m '.TimeList', onclick: @setHMS,
                             m 'ul.HourList',
                                 for hour, i in hourArray then m 'li' ,
+                                        config: u.scrollToView
                                         key: i
                                         className: if hour == u.formatXX @date.getHours() then 'Current' else ''
                                         'data-hour': hour
                                     , hour
                             m 'ul.MinuteList',
                                 for min, i in minuteArray then m 'li' ,
+                                        config: u.scrollToView
                                         key: i
                                         className: if min == u.formatXX @date.getMinutes() then 'Current' else ''
                                         'data-min': min
                                     ,   min
                             m 'ul.SecondList',
                                 for second, i in secondArray then m 'li',
+                                        config: u.scrollToView
                                         key: i
                                         className: if second == u.formatXX @date.getSeconds() then 'Current' else ''
                                         'data-second': second
@@ -248,6 +251,7 @@ DatePicker.mss =
 
             TimeList:
                 HourList_MinuteList_SecondList:
+                    position: 'relative'
                     padding: 0
                     margin: 0
                     marginBottom: '8px'
@@ -259,6 +263,7 @@ DatePicker.mss =
                     li:
                         fontSize: '0.9em'
                         textAlign: 'center'
+                        margin: '0.2em'
                         $hover:
                             color: style.text[8]
                             background: style.main[5]

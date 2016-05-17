@@ -1,20 +1,16 @@
 mui
 ===
 
-A very simple ui library collection made by winter!
+A very simple ui library collection.
 
-Check this little lovely [demo page](http://winterland1989.github.io/mui/) first!
+For demo and document, please check this little [demo page](http://winterland1989.github.io/mui/).
 
-If you decide to use it, just read coffee source for document!
-
-If you find bugs or get confused, fill a issue please!
+If you find bugs or get confused, fill a issue please.
 
 usage
 -----
 
-+ run `npm i mui-js`.
-
-+ use `npm` install `mithril-js`、 `mmsvg` and `mss-js` to your project to get started.
++ use `npm` install `mui-js`, `mithril-js`, `mmsvg` and `mss-js` to your project.
 
 + use `webpack` as build tool.
 
@@ -48,7 +44,9 @@ index
 
 + AutoHide, add *hide on blur* to a widget (click anywhere outside will hide the widget).
 
-+ Button, button with attachable data, prefix/suffix icon
++ Button, button with attachable data, prefix/suffix icon.
+
++ Collaspe, aka. accordion widget.
 
 + DatePicker, a simple date picker w/wo time select.
 
@@ -71,4 +69,4 @@ This library is intended to use with customization if needed, just run `npm run 
 license
 -------
 
-Do whatever you want to do with this library : )
+Please do whatever you want to with this library : )

@@ -9,7 +9,8 @@ AutoHide = require './AutoHide'
 class Dropdown
     constructor: ({
         @itemArray               # [String]
-        @currentIndex            # Int
+    ,   @currentIndex            # Int | Undefined
+    ,   @placeholder  = ''       # String
     ,   @onSelect = (->)         # (String, Int) -> ...
     ,   @ifAvailable = (-> true)   # (String, Int) -> ture | false
     }) ->
@@ -21,6 +22,7 @@ class Dropdown
                     for item, i in @itemArray when ((item.indexOf @filter) != -1)
                         m 'li.DropdownItem'
                         ,
+                            config: u.scrollToView
                             key: i
                             className:
                                 (if @currentIndex == i then 'Current ' else '') +
@@ -49,7 +51,13 @@ class Dropdown
             ,
                 onchange: @autoComplete
                 onclick: @autoHideDropDown.show
-                value: if @filter then @filter else @itemArray[@currentIndex]
+                placeholder: @placeholder
+                value:
+                    if @filter
+                        @filter
+                    else if @currentIndex?
+                        @itemArray[@currentIndex]
+                    else ''
             @autoHideDropDown.view()
 
 Dropdown.mss =
@@ -88,5 +96,9 @@ Dropdown.mss =
 
             Available:
                 color: style.text[0]
+
+            Current:
+                background: style.main[4]
+                color: style.text[8]
 
 module.exports = Dropdown
