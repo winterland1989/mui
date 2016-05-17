@@ -19,8 +19,9 @@ Example usage:
 ```coffeescript
 m = require 'mithril'
 s = require 'mss-js'
-Modal = require 'mui/Modal'
+Modal = require 'mui-js/Modal'  # webpack support this requiring style!
 
+# we use coffee class instead of mithril controller here
 class Demo
     constructor: ->
         @modalElem = new Modal
@@ -33,7 +34,7 @@ class Demo
         @modalElem.view()
     ]
 
-
+# inject style into page before injecting dom
 s.tag Modal.mss
 
 m.mount main, new Demo()
