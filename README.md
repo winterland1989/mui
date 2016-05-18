@@ -59,6 +59,8 @@ index
 
 + TextInput, a text input with validation.
 
++ Notify, global notify group
+
 + i18n/style, feel free to modify.  utils, a helpers collection supporting this little library down to IE9.
 
 customization

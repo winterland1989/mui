@@ -13,16 +13,16 @@
 
   Button = (function() {
     function Button(arg) {
-      var data, ref;
-      this.text = arg.text, this.prefix = arg.prefix, this.suffix = arg.suffix, data = arg.data, this.onClick = (ref = arg.onClick) != null ? ref : (function() {});
+      var data, ref, ref1;
+      this.text = arg.text, this.prefix = arg.prefix, this.suffix = arg.suffix, data = (ref = arg.data) != null ? ref : null, this.onClick = (ref1 = arg.onClick) != null ? ref1 : (function() {});
       this.onClickInternal = bind(this.onClickInternal, this);
-      this.dataJSON = typeof date !== "undefined" && date !== null ? JSON.stringify(data) : '';
+      this.dataJSON = JSON.stringify(data);
     }
 
     Button.prototype.onClickInternal = function(e) {
       var data, json;
       json = u.getCurrentTargetData(e, 'json');
-      data = json ? JSON.parse(json) : void 0;
+      data = JSON.parse(json);
       return this.onClick(data);
     };
 

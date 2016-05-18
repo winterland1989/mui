@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Button, Collaspe, DatePicker, Demo, DropDown, Modal, Switch, TextInput, buildIcon, delIcon, m, s;
+	var Button, Collaspe, DatePicker, Demo, DropDown, Modal, Notify, Switch, TextInput, buildIcon, delIcon, infoIcon, m, msgIcon, s;
 
 	m = __webpack_require__(1);
 
@@ -52,21 +52,27 @@
 
 	buildIcon = __webpack_require__(4);
 
-	delIcon = __webpack_require__(19);
+	delIcon = __webpack_require__(5);
 
-	Button = __webpack_require__(5);
+	infoIcon = __webpack_require__(6);
 
-	DatePicker = __webpack_require__(8);
+	msgIcon = __webpack_require__(7);
 
-	Switch = __webpack_require__(12);
+	Button = __webpack_require__(8);
 
-	DropDown = __webpack_require__(13);
+	DatePicker = __webpack_require__(11);
 
-	Modal = __webpack_require__(14);
+	Switch = __webpack_require__(15);
 
-	TextInput = __webpack_require__(15);
+	DropDown = __webpack_require__(16);
 
-	Collaspe = __webpack_require__(16);
+	Modal = __webpack_require__(17);
+
+	TextInput = __webpack_require__(18);
+
+	Collaspe = __webpack_require__(19);
+
+	Notify = __webpack_require__(22);
 
 	Demo = (function() {
 	  function Demo() {
@@ -242,11 +248,51 @@
 	        }
 	      ]
 	    });
+	    this.demoNotify1 = new Notify({});
+	    this.demoNotifyOpenBtn1 = new Button({
+	      text: 'Open a notify',
+	      onClick: (function(_this) {
+	        return function() {
+	          return _this.demoNotify1.show(msgIcon, 'this is a notify');
+	        };
+	      })(this)
+	    });
+	    this.demoNotify2 = new Notify({
+	      onClick: (function(_this) {
+	        return function(arg) {
+	          var foo;
+	          foo = arg.foo;
+	          return alert(foo);
+	        };
+	      })(this)
+	    });
+	    this.demoNotifyOpenBtn2 = new Button({
+	      text: 'Open a notify',
+	      onClick: (function(_this) {
+	        return function() {
+	          return _this.demoNotify2.show(msgIcon, 'click me', {
+	            foo: 'bar'
+	          });
+	        };
+	      })(this)
+	    });
+	    this.demoNotifyDoc = new Collaspe({
+	      titleArray: ['Notify document'],
+	      widgetArray: [
+	        {
+	          view: function() {
+	            return m('textarea', {
+	              readonly: true
+	            }, "Notify = require 'mui/Notify'\n\ndemoNotify1 = new Notify {}\n\ndemoNotifyOpenBtn1 = new Button\n   text: 'Open a notify'\n   onClick: => @demoNotify1.show(msgIcon, 'this is a notify')\n\ndemoNotify2 = new Notify\n   onClick: ({foo}) => alert foo\n\ndemoNotifyOpenBtn2 = new Button\n   text: 'Open a notify'\n    onClick: => @demoNotify2.show(msgIcon, 'click me', foo: 'bar')\n\n###\n    duration = 3000        # Int\n    onClick = ( -> )       # data -> a\n    show                   # (icon :: mithril svg, content :: String, data :: HashMap) -> undefined\n###");
+	          }
+	        }
+	      ]
+	    });
 	  }
 
 	  Demo.prototype.view = function() {
 	    return [
-	      m('ul.Demo', m('li', this.demoButtonDoc.view()), m('li', this.demoButton1.view(), this.demoButton2.view(), this.demoButton3.view()), m('li', this.demoDatePickerDoc.view()), m('li', this.demoDatePicker1.view()), m('li', this.demoDatePicker2.view()), m('li', this.demoSwitchDoc.view()), m('li', this.demoSwitch.view()), m('li', this.demoDropDownDoc.view()), m('li', this.demoDropDown1.view()), m('li', this.demoDropDown2.view()), m('li', this.demoDropDown3.view()), m('li', this.demoModalDoc.view()), m('li', this.demoModalOpenBtn1.view(), this.demoModal1.view()), m('li', this.demoModalOpenBtn2.view(), this.demoModal2.view()), m('li', this.demoTextInputDoc.view()), m('li', this.demoTextInput.view()), m('li', this.demoCollaspeDoc.view()), m('li', this.demoCollaspe.view())), m('.Misc', m('span', 'Winter\'s ui collection'), m('a', {
+	      m('ul.Demo', m('li', this.demoButtonDoc.view()), m('li', this.demoButton1.view(), this.demoButton2.view(), this.demoButton3.view()), m('li', this.demoDatePickerDoc.view()), m('li', this.demoDatePicker1.view()), m('li', this.demoDatePicker2.view()), m('li', this.demoSwitchDoc.view()), m('li', this.demoSwitch.view()), m('li', this.demoDropDownDoc.view()), m('li', this.demoDropDown1.view()), m('li', this.demoDropDown2.view()), m('li', this.demoDropDown3.view()), m('li', this.demoModalDoc.view()), m('li', this.demoModalOpenBtn1.view(), this.demoModal1.view()), m('li', this.demoModalOpenBtn2.view(), this.demoModal2.view()), m('li', this.demoTextInputDoc.view()), m('li', this.demoTextInput.view()), m('li', this.demoCollaspeDoc.view()), m('li', this.demoCollaspe.view()), m('li', this.demoNotifyDoc.view()), m('li', this.demoNotify1.view(), this.demoNotify2.view()), m('li', this.demoNotifyOpenBtn1.view(), this.demoNotifyOpenBtn2.view())), m('.Misc', m('span', 'Winter\'s ui collection'), m('a', {
 	        href: 'https://github.com/winterland1989/mui'
 	      }, 'view code on github'), m('a', {
 	        href: 'https://github.com/winterland1989/mui/blob/gh-pages/demo/index.coffee'
@@ -259,7 +305,7 @@
 	})();
 
 	s.tag(s.merge([
-	  Button.mss, DatePicker.mss, Switch.mss, DropDown.mss, Modal.mss, TextInput.mss, Collaspe.mss, {
+	  Button.mss, DatePicker.mss, Switch.mss, DropDown.mss, Modal.mss, TextInput.mss, Collaspe.mss, Notify.mss, {
 	    Modal: {
 	      Button: {
 	        display: 'inline-block',
@@ -3024,6 +3070,30 @@
 /* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var m = __webpack_require__(1);
+	module.exports = m.trust('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>');
+
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var m = __webpack_require__(1);
+	module.exports = m.trust('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/></svg>');
+
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var m = __webpack_require__(1);
+	module.exports = m.trust('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>');
+
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// Generated by CoffeeScript 1.10.0
 	(function() {
 	  var Button, m, s, style, u,
@@ -3033,22 +3103,22 @@
 
 	  s = __webpack_require__(3);
 
-	  style = __webpack_require__(6);
+	  style = __webpack_require__(9);
 
-	  u = __webpack_require__(7);
+	  u = __webpack_require__(10);
 
 	  Button = (function() {
 	    function Button(arg) {
-	      var data, ref;
-	      this.text = arg.text, this.prefix = arg.prefix, this.suffix = arg.suffix, data = arg.data, this.onClick = (ref = arg.onClick) != null ? ref : (function() {});
+	      var data, ref, ref1;
+	      this.text = arg.text, this.prefix = arg.prefix, this.suffix = arg.suffix, data = (ref = arg.data) != null ? ref : null, this.onClick = (ref1 = arg.onClick) != null ? ref1 : (function() {});
 	      this.onClickInternal = bind(this.onClickInternal, this);
-	      this.dataJSON = typeof date !== "undefined" && date !== null ? JSON.stringify(data) : '';
+	      this.dataJSON = JSON.stringify(data);
 	    }
 
 	    Button.prototype.onClickInternal = function(e) {
 	      var data, json;
 	      json = u.getCurrentTargetData(e, 'json');
-	      data = json ? JSON.parse(json) : void 0;
+	      data = JSON.parse(json);
 	      return this.onClick(data);
 	    };
 
@@ -3101,7 +3171,7 @@
 
 
 /***/ },
-/* 6 */
+/* 9 */
 /***/ function(module, exports) {
 
 	// Generated by CoffeeScript 1.10.0
@@ -3138,7 +3208,7 @@
 
 
 /***/ },
-/* 7 */
+/* 10 */
 /***/ function(module, exports) {
 
 	// Generated by CoffeeScript 1.10.0
@@ -3266,7 +3336,7 @@
 
 
 /***/ },
-/* 8 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Generated by CoffeeScript 1.10.0
@@ -3278,15 +3348,15 @@
 
 	  s = __webpack_require__(3);
 
-	  u = __webpack_require__(7);
+	  u = __webpack_require__(10);
 
-	  AutoHide = __webpack_require__(9);
+	  AutoHide = __webpack_require__(12);
 
-	  style = __webpack_require__(6);
+	  style = __webpack_require__(9);
 
-	  i18n = __webpack_require__(10);
+	  i18n = __webpack_require__(13);
 
-	  dateIcon = __webpack_require__(11);
+	  dateIcon = __webpack_require__(14);
 
 	  hourArray = (function() {
 	    var j, results;
@@ -3628,7 +3698,7 @@
 
 
 /***/ },
-/* 9 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Generated by CoffeeScript 1.10.0
@@ -3694,7 +3764,7 @@
 
 
 /***/ },
-/* 10 */
+/* 13 */
 /***/ function(module, exports) {
 
 	// Generated by CoffeeScript 1.10.0
@@ -3721,7 +3791,7 @@
 
 
 /***/ },
-/* 11 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var m = __webpack_require__(1);
@@ -3729,7 +3799,7 @@
 
 
 /***/ },
-/* 12 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Generated by CoffeeScript 1.10.0
@@ -3741,9 +3811,9 @@
 
 	  s = __webpack_require__(3);
 
-	  style = __webpack_require__(6);
+	  style = __webpack_require__(9);
 
-	  u = __webpack_require__(7);
+	  u = __webpack_require__(10);
 
 	  Switch = (function() {
 	    function Switch(arg) {
@@ -3813,7 +3883,7 @@
 
 
 /***/ },
-/* 13 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Generated by CoffeeScript 1.10.0
@@ -3825,11 +3895,11 @@
 
 	  s = __webpack_require__(3);
 
-	  style = __webpack_require__(6);
+	  style = __webpack_require__(9);
 
-	  u = __webpack_require__(7);
+	  u = __webpack_require__(10);
 
-	  AutoHide = __webpack_require__(9);
+	  AutoHide = __webpack_require__(12);
 
 	  Dropdown = (function() {
 	    function Dropdown(arg) {
@@ -3960,7 +4030,7 @@
 
 
 /***/ },
-/* 14 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Generated by CoffeeScript 1.10.0
@@ -3972,9 +4042,9 @@
 
 	  s = __webpack_require__(3);
 
-	  u = __webpack_require__(7);
+	  u = __webpack_require__(10);
 
-	  style = __webpack_require__(6);
+	  style = __webpack_require__(9);
 
 	  Modal = (function() {
 	    function Modal(arg) {
@@ -4045,7 +4115,7 @@
 
 
 /***/ },
-/* 15 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Generated by CoffeeScript 1.10.0
@@ -4057,9 +4127,9 @@
 
 	  s = __webpack_require__(3);
 
-	  style = __webpack_require__(6);
+	  style = __webpack_require__(9);
 
-	  u = __webpack_require__(7);
+	  u = __webpack_require__(10);
 
 	  TextInput = (function() {
 	    function TextInput(arg) {
@@ -4144,7 +4214,7 @@
 
 
 /***/ },
-/* 16 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Generated by CoffeeScript 1.10.0
@@ -4157,13 +4227,13 @@
 
 	  s = __webpack_require__(3);
 
-	  u = __webpack_require__(7);
+	  u = __webpack_require__(10);
 
-	  style = __webpack_require__(6);
+	  style = __webpack_require__(9);
 
-	  arrowRight = __webpack_require__(17);
+	  arrowRight = __webpack_require__(20);
 
-	  arrowDown = __webpack_require__(18);
+	  arrowDown = __webpack_require__(21);
 
 	  Collaspe = (function() {
 	    function Collaspe(arg) {
@@ -4249,7 +4319,7 @@
 
 
 /***/ },
-/* 17 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var m = __webpack_require__(1);
@@ -4257,7 +4327,7 @@
 
 
 /***/ },
-/* 18 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var m = __webpack_require__(1);
@@ -4265,11 +4335,129 @@
 
 
 /***/ },
-/* 19 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var m = __webpack_require__(1);
-	module.exports = m.trust('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>');
+	// Generated by CoffeeScript 1.10.0
+	(function() {
+	  var Notify, contentArray, dataArray, iconArray, m, s, style, timerArray, u, uniqueCode,
+	    bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+	  m = __webpack_require__(1);
+
+	  s = __webpack_require__(3);
+
+	  u = __webpack_require__(10);
+
+	  style = __webpack_require__(9);
+
+	  contentArray = [];
+
+	  iconArray = [];
+
+	  dataArray = [];
+
+	  timerArray = [];
+
+	  uniqueCode = 0;
+
+	  Notify = (function() {
+	    function Notify(arg) {
+	      var ref, ref1;
+	      this.duration = (ref = arg.duration) != null ? ref : 3000, this.onClick = (ref1 = arg.onClick) != null ? ref1 : (function() {});
+	      this.hideInternal = bind(this.hideInternal, this);
+	      this.show = bind(this.show, this);
+	      this.onClickInternal = bind(this.onClickInternal, this);
+	      this.indexArray = [];
+	    }
+
+	    Notify.prototype.onClickInternal = function(e) {
+	      var data, index;
+	      index = parseInt(u.getCurrentTargetData(e, 'index'));
+	      data = JSON.parse(u.getCurrentTargetData(e, 'data'));
+	      this.hideInternal(index);
+	      return this.onClick(data);
+	    };
+
+	    Notify.prototype.show = function(icon, content, data) {
+	      if (data == null) {
+	        data = null;
+	      }
+	      contentArray.push({
+	        content: content,
+	        context: this
+	      });
+	      iconArray.push(icon);
+	      dataArray.push(data);
+	      return timerArray.push(setTimeout((function(_this) {
+	        return function() {
+	          return _this.hideInternal(0);
+	        };
+	      })(this), this.duration));
+	    };
+
+	    Notify.prototype.hideInternal = function(i) {
+	      iconArray.splice(i, 1);
+	      contentArray.splice(i, 1);
+	      dataArray.splice(i, 1);
+	      clearTimeout(timerArray[i]);
+	      timerArray.splice(i, 1);
+	      return m.redraw();
+	    };
+
+	    Notify.prototype.view = function() {
+	      var content, context, i, j, len, ref, results;
+	      results = [];
+	      for (i = j = 0, len = contentArray.length; j < len; i = ++j) {
+	        ref = contentArray[i], content = ref.content, context = ref.context;
+	        if (context === this) {
+	          results.push(m('.Notify', {
+	            'data-index': i,
+	            'data-data': JSON.stringify(dataArray[i]),
+	            onclick: this.onClickInternal,
+	            style: {
+	              right: '1em',
+	              top: (1 + 5 * i) + 'em'
+	            }
+	          }, m('.Icon', iconArray[i]), m('.Content', content)));
+	        }
+	      }
+	      return results;
+	    };
+
+	    return Notify;
+
+	  })();
+
+	  Notify.mss = {
+	    Notify: {
+	      width: '20em',
+	      height: '4em',
+	      position: 'fixed',
+	      right: '1em',
+	      background: '#fff',
+	      border: '1px solid ' + style.border[4],
+	      zIndex: 9999,
+	      Content: {
+	        width: '16em',
+	        textAlign: 'center',
+	        display: 'inline-block',
+	        verticalAlign: 'middle'
+	      },
+	      Icon_CloseBtn: {
+	        width: '4em',
+	        textAlign: 'center',
+	        display: 'inline-block',
+	        svg: s.LineSize('4em', '1em')({
+	          verticalAlign: 'middle'
+	        })
+	      }
+	    }
+	  };
+
+	  module.exports = Notify;
+
+	}).call(this);
 
 
 /***/ }

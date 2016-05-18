@@ -8,14 +8,14 @@ class Button
         @text               # String
     ,   @prefix             # mithril svg view
     ,   @suffix             # mithril svg view
-    ,   data                # HashMap
+    ,   data = null         # HashMap
     ,   @onClick = (->)     # (HashMap) -> a
     }) ->
-        @dataJSON = if date? then JSON.stringify data else ''
+        @dataJSON = JSON.stringify data
 
     onClickInternal: (e) =>
         json = u.getCurrentTargetData(e, 'json')
-        data = if json then JSON.parse json
+        data = JSON.parse json
         @onClick(data)
 
     view: ->

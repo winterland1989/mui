@@ -2,6 +2,8 @@ m = require 'mithril'
 s = require 'mss-js'
 buildIcon = require 'mmsvg/google/msvg/action/build'
 delIcon = require 'mmsvg/google/msvg/action/delete'
+infoIcon = require 'mmsvg/google/msvg/action/info-outline'
+msgIcon = require 'mmsvg/google/msvg/communication/message'
 
 Button = require '../Button'
 DatePicker = require '../DatePicker'
@@ -10,7 +12,7 @@ DropDown = require '../Dropdown'
 Modal = require '../Modal'
 TextInput = require '../TextInput'
 Collaspe = require '../Collaspe'
-
+Notify = require '../Notify'
 
 class Demo
     constructor: ->
@@ -245,6 +247,49 @@ class Demo
                     ###
                     """
             ]
+
+        @demoNotify1 = new Notify {}
+
+        @demoNotifyOpenBtn1 = new Button
+            text: 'Open a notify'
+            onClick: => @demoNotify1.show(msgIcon, 'this is a notify')
+
+        @demoNotify2 = new Notify
+            onClick: ({foo}) => alert foo
+
+        @demoNotifyOpenBtn2 = new Button
+            text: 'Open a notify'
+            onClick: => @demoNotify2.show(msgIcon, 'click me', foo: 'bar')
+
+        @demoNotifyDoc = new Collaspe
+            titleArray: ['Notify document']
+            widgetArray: [
+                view: ->
+                    m 'textarea', readonly: true,
+                    """
+                    Notify = require 'mui/Notify'
+
+                    demoNotify1 = new Notify {}
+
+                    demoNotifyOpenBtn1 = new Button
+                       text: 'Open a notify'
+                       onClick: => @demoNotify1.show(msgIcon, 'this is a notify')
+
+                    demoNotify2 = new Notify
+                       onClick: ({foo}) => alert foo
+
+                    demoNotifyOpenBtn2 = new Button
+                       text: 'Open a notify'
+                        onClick: => @demoNotify2.show(msgIcon, 'click me', foo: 'bar')
+
+                    ###
+                        duration = 3000        # Int
+                        onClick = ( -> )       # data -> a
+                        show                   # (icon :: mithril svg, content :: String, data :: HashMap) -> undefined
+                    ###
+                    """
+            ]
+
     view: -> [
 
         m 'ul.Demo',
@@ -276,6 +321,10 @@ class Demo
             m 'li', @demoCollaspeDoc.view()
             m 'li', @demoCollaspe.view()
 
+            m 'li', @demoNotifyDoc.view()
+            m 'li', @demoNotify1.view(), @demoNotify2.view()
+            m 'li', @demoNotifyOpenBtn1.view(), @demoNotifyOpenBtn2.view()
+
         m '.Misc',
             m 'span', 'Winter\'s ui collection'
             m 'a', href: 'https://github.com/winterland1989/mui', 'view code on github'
@@ -291,6 +340,8 @@ s.tag s.merge [
     Modal.mss
     TextInput.mss
     Collaspe.mss
+    Notify.mss
+
     Modal:
         Button:
             display: 'inline-block'
@@ -327,6 +378,7 @@ s.tag s.merge [
         span_a:
             display: 'block'
             margin: '14px'
+
 
 ]
 
