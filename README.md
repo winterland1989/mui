@@ -10,7 +10,7 @@ If you find bugs or get confused, fill a issue please.
 usage
 -----
 
-+ use `npm` install `mui-js`, `mithril-js`, `mmsvg` and `mss-js` to your project.
++ run `npm i --save mui-js mithril mmsvg mss-js`.
 
 + use `webpack` as build tool.
 
