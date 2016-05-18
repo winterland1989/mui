@@ -7,7 +7,7 @@ contentArray = []
 iconArray = []
 dataArray = []
 timerArray = []
-uniqueCode = 0
+keyCounter = 0
 
 class Notify
     constructor: ({
@@ -26,6 +26,7 @@ class Notify
         contentArray.push
             content: content
             context: @
+            key: keyCounter++
 
         iconArray.push icon
         dataArray.push data
@@ -43,39 +44,44 @@ class Notify
         m.redraw()
 
     view: ->
-        for {content, context}, i in contentArray when context == @
-            m '.Notify'
-            ,
-                'data-index': i
-                'data-data': JSON.stringify dataArray[i]
-                onclick: @onClickInternal
-                style:
-                    right:  '1em'
-                    top: (1 + 5 * i) + 'em'
-            ,
-                m '.Icon', iconArray[i]
-                m '.Content', content
+        m '.Notify',
+            for {key, content, context}, i in contentArray when context == @
+                m '.NotifyItem'
+                ,
+                    key: key
+                    'data-index': i
+                    'data-data': JSON.stringify dataArray[i]
+                    onclick: @onClickInternal
+                    style:
+                        right:  '1em'
+                        top: (1 + 5 * i) + 'em'
+                ,
+                    m '.Icon', iconArray[i]
+                    m '.Content', content
 
 Notify.mss =
     Notify:
-        width: '20em'
-        height: '4em'  # if you change this, please change in the view too
-        position: 'fixed'
-        right: '1em'
-        background: '#fff'
-        border: '1px solid ' + style.border[4]
-        zIndex: 9999
-        Content:
-            width: '16em'
-            textAlign: 'center'
-            display: 'inline-block'
-            verticalAlign: 'middle'
-        Icon_CloseBtn:
-            width: '4em'
-            textAlign: 'center'
-            display: 'inline-block'
-            svg: s.LineSize('4em', '1em')
+        NotifyItem:
+            width: '20em'
+            height: '4em'  # if you change this, please change in the view too
+            position: 'fixed'
+            right: '1em'
+            background: '#fff'
+            border: '1px solid ' + style.border[4]
+            zIndex: 9999
+            borderRadius: '0.4em'
+            transition: 'top 0.1s ease'
+            Content:
+                width: '16em'
+                textAlign: 'center'
+                display: 'inline-block'
                 verticalAlign: 'middle'
+            Icon_CloseBtn:
+                width: '4em'
+                textAlign: 'center'
+                display: 'inline-block'
+                svg: s.LineSize('4em', '1em')
+                    verticalAlign: 'middle'
 
 module.exports = Notify
 
