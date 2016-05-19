@@ -37,6 +37,7 @@ class Demo
                     """
                     Button = require 'mui/Button'
                     buildIcon = require 'mmsvg/google/msvg/action/build'
+                    u = require 'mui/utils'
 
                     demoButton = new Button
                         text: 'Build'

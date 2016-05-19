@@ -40,6 +40,8 @@ s.tag Modal.mss
 m.mount main, new Demo()
 ```
 
+These stateful components can keep your model out of toggle flag or clutter text, and mithril's whole diff engine keep your view sync with dom. so connect them as you wish, don't worried too much about data flow.
+
 index
 -----
 
