@@ -13,6 +13,8 @@ Modal = require '../Modal'
 TextInput = require '../TextInput'
 Collaspe = require '../Collaspe'
 Notify = require '../Notify'
+u = require '../utils'
+style = require '../style'
 
 class Demo
     constructor: ->
@@ -290,6 +292,24 @@ class Demo
                     """
             ]
 
+        @demoSpinnerDoc = new Collaspe
+            titleArray: ['Spinner document']
+            widgetArray: [
+                view: ->
+                    m 'textarea', readonly: true,
+                    """
+                    u = require '../utils'
+                    style = require '../style'
+
+                    # directly put this into view
+                    u.spinner style.main[4]
+
+                    ###
+                    utils.spinner(color, size = '1em', interval = '1s')
+                    ###
+                    """
+            ]
+
     view: -> [
 
         m 'ul.Demo',
@@ -324,6 +344,14 @@ class Demo
             m 'li', @demoNotifyDoc.view()
             m 'li', @demoNotify1.view(), @demoNotify2.view()
             m 'li', @demoNotifyOpenBtn1.view(), @demoNotifyOpenBtn2.view()
+
+
+            m 'li', @demoSpinnerDoc.view()
+            m 'li',
+                u.spinner style.main[4]
+                u.spinner style.main[4], '5em'
+                u.spinner style.main[4], '2em', '0.3s'
+                u.spinner style.text[4], '5em'
 
         m '.Misc',
             m 'span', 'Winter\'s ui collection'
