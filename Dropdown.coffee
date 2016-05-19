@@ -71,6 +71,8 @@ Dropdown.mss =
             width: '100%'
             textAlign: 'center'
             border: '1px solid ' + style.border[4]
+            WebkitAppearance: 'none'
+            borderRadius: 0
         DropdownList:
             position: 'absolute'
             top: '2em'

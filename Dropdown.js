@@ -99,7 +99,9 @@
         fontSize: '0.9em',
         width: '100%',
         textAlign: 'center',
-        border: '1px solid ' + style.border[4]
+        border: '1px solid ' + style.border[4],
+        WebkitAppearance: 'none',
+        borderRadius: 0
       },
       DropdownList: {
         position: 'absolute',

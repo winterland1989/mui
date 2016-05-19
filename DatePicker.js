@@ -216,7 +216,7 @@
         readonly: true,
         onclick: this.autoHideDatePicker.show,
         value: this.selectTime ? u.formatDateWithHMS(this.date) : u.formatDate(this.date)
-      }), m('span.DateIcon', dateIcon), this.autoHideDatePicker.view());
+      }), m('span.DateIcon', u.svg(dateIcon)), this.autoHideDatePicker.view());
     };
 
     return DatePicker;
@@ -233,7 +233,9 @@
         fontSize: '0.9em',
         width: '100%',
         textAlign: 'center',
-        border: '1px solid ' + style.border[4]
+        border: '1px solid ' + style.border[4],
+        WebkitAppearance: 'none',
+        borderRadius: 0
       },
       DateIcon: {
         position: 'absolute',

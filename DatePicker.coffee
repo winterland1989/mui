@@ -155,7 +155,7 @@ class DatePicker
                 readonly: true
                 onclick: @autoHideDatePicker.show
                 value: if @selectTime then u.formatDateWithHMS @date else u.formatDate @date
-            m 'span.DateIcon', dateIcon
+            m 'span.DateIcon', u.svg dateIcon
             @autoHideDatePicker.view()
 
 DatePicker.mss =
@@ -169,6 +169,8 @@ DatePicker.mss =
             width: '100%'
             textAlign: 'center'
             border: '1px solid ' + style.border[4]
+            WebkitAppearance: 'none'
+            borderRadius: 0
         DateIcon:
             position: 'absolute'
             svg:

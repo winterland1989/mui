@@ -1,5 +1,8 @@
 m = require 'mithril'
 
+fastclick = require 'fastclick'
+fastclick.attach document.body
+
 # get event's target
 getTarget = (event) -> elem = event.target || event.srcElement
 
@@ -78,8 +81,12 @@ removeFromArray = (arr, x) ->
     if i != -1 then arr.splice i, 1
     undefined
 
+svgCounter = 0
+svg = (svg) ->
+    m 'i', key: svgCounter++, svg
+
 spinner = (color, size = '2em', interval = '1s') ->
-    m.trust(
+    svg m.trust(
         """
         <svg version="1.1"
             xmlns="http://www.w3.org/2000/svg"
@@ -124,5 +131,6 @@ module.exports = {
 ,   parseDateWithHMS
 ,   removeFromArray
 
+,   svg
 ,   spinner
 }

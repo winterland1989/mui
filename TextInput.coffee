@@ -49,6 +49,8 @@ TextInput.mss =
             height: '100%'
             fontSize: '1em'
             padding: '0 0.4em'
+            WebkitAppearance: 'none'
+            borderRadius: 0
         ValidationMsg:
             background: style.warn[5]
             color: style.text[8]

@@ -1,8 +1,9 @@
 {
   "name": "mui-js",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "a ui library for mithril",
   "dependencies": {
+    "fastclick": "^1.0.6",
     "mithril": "^0.2.3",
     "mmsvg": "^1.1.1",
     "mss-js": "^0.3.2"

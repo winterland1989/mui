@@ -63,7 +63,9 @@
         width: '100%',
         height: '100%',
         fontSize: '1em',
-        padding: '0 0.4em'
+        padding: '0 0.4em',
+        WebkitAppearance: 'none',
+        borderRadius: 0
       },
       ValidationMsg: {
         background: style.warn[5],

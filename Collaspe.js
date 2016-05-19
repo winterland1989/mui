@@ -51,7 +51,7 @@
               key: 'title' + i,
               'data-index': i.toString(),
               onclick: this.onFoldInternal
-            }, expanded ? arrowDown : arrowRight, m('span', title)), m('.CollaspeBody', {
+            }, expanded ? u.svg(arrowDown) : u.svg(arrowRight), m('span', title)), m('.CollaspeBody', {
               className: expanded ? 'Current' : '',
               key: 'body' + i,
               onclick: this.onFoldInternal

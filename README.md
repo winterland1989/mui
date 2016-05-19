@@ -61,7 +61,15 @@ index
 
 + Notify, global notify group
 
-+ i18n/style, feel free to modify.  utils, a helpers collection supporting this little library down to IE9 and some widget function(spinner...).
++ i18n/style, feel free to modify. 
+
++ utils, a helpers collection:
+
+    + supporting this little library down to IE9
+
+    + use `utils.svg` to fix `m.trust` svg glitch.
+
+    + some widget function(spinner...).
 
 customization
 -------------

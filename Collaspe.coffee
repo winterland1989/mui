@@ -38,7 +38,7 @@ class Collaspe
                         'data-index': i.toString()
                         onclick: @onFoldInternal
                     ,
-                        if expanded then arrowDown else arrowRight
+                        if expanded then u.svg arrowDown else u.svg arrowRight
                         m 'span', title
 
                     m '.CollaspeBody'

@@ -23,11 +23,11 @@ class Demo
 
         @demoButton2 = new Button
             text: 'Build'
-            prefix: buildIcon
+            prefix: u.svg buildIcon
 
         @demoButton3 = new Button
             text: 'Delete'
-            suffix: delIcon
+            suffix: u.svg delIcon
 
         @demoButtonDoc = new Collaspe
             titleArray: ['Button document']
@@ -40,7 +40,7 @@ class Demo
 
                     demoButton = new Button
                         text: 'Build'
-                        prefix: buildIcon
+                        prefix: u.svg buildIcon
 
                     ###
                         text             # String
@@ -347,10 +347,11 @@ class Demo
 
 
             m 'li', @demoSpinnerDoc.view()
-            m 'li', u.spinner style.main[4]
-            m 'li', u.spinner style.main[4], '5em'
-            m 'li', u.spinner style.main[4], '2em', '0.3s'
-            m 'li', u.spinner style.text[4], '5em'
+            m 'li',
+                u.spinner style.main[4]
+                u.spinner style.main[4], '5em'
+                u.spinner style.main[4], '2em', '0.3s'
+                u.spinner style.text[4], '5em'
 
         m '.Misc',
             m 'span', 'Winter\'s ui collection'
