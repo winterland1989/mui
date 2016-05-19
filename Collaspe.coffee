@@ -21,10 +21,17 @@ class Collaspe
     onFoldInternal: (e) =>
         i = parseInt (u.getCurrentTargetData e, 'index')
         if @autoCollaspe
+            if (j = @expandedIndexArray[0])?
+                @onCollaspe j
             @expandedIndexArray = [i]
+            @onExpand i
+
         else if i in @expandedIndexArray
             u.removeFromArray @expandedIndexArray, i
-        else @expandedIndexArray.push i
+            @onCollaspe i
+        else
+            @expandedIndexArray.push i
+            @onExpand i
 
     view: ->
         self = @
