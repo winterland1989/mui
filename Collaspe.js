@@ -25,14 +25,20 @@
     }
 
     Collaspe.prototype.onFoldInternal = function(e) {
-      var i;
+      var i, j;
       i = parseInt(u.getCurrentTargetData(e, 'index'));
       if (this.autoCollaspe) {
-        return this.expandedIndexArray = [i];
+        if ((j = this.expandedIndexArray[0]) != null) {
+          this.onCollaspe(j);
+        }
+        this.expandedIndexArray = [i];
+        return this.onExpand(i);
       } else if (indexOf.call(this.expandedIndexArray, i) >= 0) {
-        return u.removeFromArray(this.expandedIndexArray, i);
+        u.removeFromArray(this.expandedIndexArray, i);
+        return this.onCollaspe(i);
       } else {
-        return this.expandedIndexArray.push(i);
+        this.expandedIndexArray.push(i);
+        return this.onExpand(i);
       }
     };
 
@@ -40,10 +46,10 @@
       var expanded, i, self, title;
       self = this;
       return m('.Collaspe', (function() {
-        var j, len, ref, results;
+        var k, len, ref, results;
         ref = this.titleArray;
         results = [];
-        for (i = j = 0, len = ref.length; j < len; i = ++j) {
+        for (i = k = 0, len = ref.length; k < len; i = ++k) {
           title = ref[i];
           expanded = indexOf.call(this.expandedIndexArray, i) >= 0;
           results.push([

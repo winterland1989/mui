@@ -141,7 +141,13 @@ class Demo
         @demoModal1 = new Modal
             clickToHide: true
             widget: view: ->
-                m 'h2', 'Close anywhere  else to close'
+                m 'h2'
+                ,
+                    style:
+                        width: '200px'
+                        margin: '0 auto'
+                        background: '#fff'
+                ,'Close anywhere  else to close'
 
         @demoModal2 = new Modal
             clickToHide: false
@@ -167,11 +173,18 @@ class Demo
                     m 'textarea', readonly: true,
                     """
                     Modal = require 'mui/Modal'
+                    # make sure widget inside is a block element
 
                     demoModal1 = new Modal
                         clickToHide: true
                         widget: view: ->
-                            m 'h2', 'Close anywhere  else to close'
+                            m 'h2'
+                            ,
+                                style:
+                                    width: '200px'
+                                    margin: '0 auto'
+                                    background: '#fff'
+                            ,'Close anywhere  else to close'
 
                     ###
                         widget                 # mithril view

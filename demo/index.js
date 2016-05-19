@@ -99,7 +99,7 @@
 	          view: function() {
 	            return m('textarea', {
 	              readonly: true
-	            }, "Button = require 'mui/Button'\nbuildIcon = require 'mmsvg/google/msvg/action/build'\n\ndemoButton = new Button\n    text: 'Build'\n    prefix: u.svg buildIcon\n\n###\n    text             # String\n    prefix           # mithril svg view\n    suffix           # mithril svg view\n    data             # HashMap\n    onClick = (->)   # (HashMap) -> a\n###");
+	            }, "Button = require 'mui/Button'\nbuildIcon = require 'mmsvg/google/msvg/action/build'\nu = require 'mui/utils'\n\ndemoButton = new Button\n    text: 'Build'\n    prefix: u.svg buildIcon\n\n###\n    text             # String\n    prefix           # mithril svg view\n    suffix           # mithril svg view\n    data             # HashMap\n    onClick = (->)   # (HashMap) -> a\n###");
 	          }
 	        }
 	      ]
@@ -173,7 +173,13 @@
 	      clickToHide: true,
 	      widget: {
 	        view: function() {
-	          return m('h2', 'Close anywhere  else to close');
+	          return m('h2', {
+	            style: {
+	              width: '200px',
+	              margin: '0 auto',
+	              background: '#fff'
+	            }
+	          }, 'Close anywhere  else to close');
 	        }
 	      }
 	    });
@@ -200,7 +206,7 @@
 	          view: function() {
 	            return m('textarea', {
 	              readonly: true
-	            }, "Modal = require 'mui/Modal'\n\ndemoModal1 = new Modal\n    clickToHide: true\n    widget: view: ->\n        m 'h2', 'Close anywhere  else to close'\n\n###\n    widget                 # mithril view\n    clickToHide = true     # Boolean\n    onHide = ( -> )        # () -> a\n###");
+	            }, "Modal = require 'mui/Modal'\n# make sure widget inside is a block element\n\ndemoModal1 = new Modal\n    clickToHide: true\n    widget: view: ->\n        m 'h2'\n        ,\n            style:\n                width: '200px'\n                margin: '0 auto'\n                background: '#fff'\n        ,'Close anywhere  else to close'\n\n###\n    widget                 # mithril view\n    clickToHide = true     # Boolean\n    onHide = ( -> )        # () -> a\n###");
 	          }
 	        }
 	      ]
@@ -4950,9 +4956,11 @@
 	    }
 
 	    Modal.prototype.onClickInternal = function(e) {
-	      if (this.clickToHide && (u.targetHasClass(u.getTarget(e), 'Modal'))) {
-	        this.showWidget = false;
-	        return this.onHide();
+	      var t;
+	      t = u.getTarget(e);
+	      console.log(u.targetHasClass(t, 'HVCenter'));
+	      if (this.clickToHide && ((u.targetHasClass(t, 'Modal')) || (u.targetHasClass(t, 'HVCenter')))) {
+	        return this.hide();
 	      }
 	    };
 
@@ -5139,14 +5147,20 @@
 	    }
 
 	    Collaspe.prototype.onFoldInternal = function(e) {
-	      var i;
+	      var i, j;
 	      i = parseInt(u.getCurrentTargetData(e, 'index'));
 	      if (this.autoCollaspe) {
-	        return this.expandedIndexArray = [i];
+	        if ((j = this.expandedIndexArray[0]) != null) {
+	          this.onCollaspe(j);
+	        }
+	        this.expandedIndexArray = [i];
+	        return this.onExpand(i);
 	      } else if (indexOf.call(this.expandedIndexArray, i) >= 0) {
-	        return u.removeFromArray(this.expandedIndexArray, i);
+	        u.removeFromArray(this.expandedIndexArray, i);
+	        return this.onCollaspe(i);
 	      } else {
-	        return this.expandedIndexArray.push(i);
+	        this.expandedIndexArray.push(i);
+	        return this.onExpand(i);
 	      }
 	    };
 
@@ -5154,10 +5168,10 @@
 	      var expanded, i, self, title;
 	      self = this;
 	      return m('.Collaspe', (function() {
-	        var j, len, ref, results;
+	        var k, len, ref, results;
 	        ref = this.titleArray;
 	        results = [];
-	        for (i = j = 0, len = ref.length; j < len; i = ++j) {
+	        for (i = k = 0, len = ref.length; k < len; i = ++k) {
 	          title = ref[i];
 	          expanded = indexOf.call(this.expandedIndexArray, i) >= 0;
 	          results.push([

@@ -12,9 +12,10 @@ class Modal
         @showWidget = false
 
     onClickInternal: (e) =>
-        if @clickToHide and (u.targetHasClass (u.getTarget e), 'Modal')
-            @showWidget = false
-            @onHide()
+        t = u.getTarget e
+        console.log u.targetHasClass t, 'HVCenter'
+        if @clickToHide and ((u.targetHasClass t, 'Modal') or (u.targetHasClass t, 'HVCenter'))
+            @hide()
 
     show: => @showWidget = true
 

@@ -22,9 +22,11 @@
     }
 
     Modal.prototype.onClickInternal = function(e) {
-      if (this.clickToHide && (u.targetHasClass(u.getTarget(e), 'Modal'))) {
-        this.showWidget = false;
-        return this.onHide();
+      var t;
+      t = u.getTarget(e);
+      console.log(u.targetHasClass(t, 'HVCenter'));
+      if (this.clickToHide && ((u.targetHasClass(t, 'Modal')) || (u.targetHasClass(t, 'HVCenter')))) {
+        return this.hide();
       }
     };
 
