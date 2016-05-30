@@ -13,8 +13,9 @@
 
   TextInput = (function() {
     function TextInput(arg) {
-      var ref, ref1, ref2, ref3;
-      this.content = (ref = arg.content) != null ? ref : '', this.disabled = (ref1 = arg.disabled) != null ? ref1 : false, this.placeholder = (ref2 = arg.placeholder) != null ? ref2 : '', this.onChange = (ref3 = arg.onChange) != null ? ref3 : (function() {});
+      var ref, ref1, ref2, ref3, ref4, ref5;
+      this.content = (ref = arg.content) != null ? ref : '', this.disabled = (ref1 = arg.disabled) != null ? ref1 : false, this.placeholder = (ref2 = arg.placeholder) != null ? ref2 : '', this.onChange = (ref3 = arg.onChange) != null ? ref3 : u.noOp, this.onKeyup = (ref4 = arg.onKeyup) != null ? ref4 : u.noOp, this.onEnter = (ref5 = arg.onEnter) != null ? ref5 : u.noOp;
+      this.onkeyupInternal = bind(this.onkeyupInternal, this);
       this.onChangeInternal = bind(this.onChangeInternal, this);
       this.validationMsg = '';
     }
@@ -30,20 +31,41 @@
     TextInput.prototype.validateInternal = function(c) {};
 
     TextInput.prototype.onChangeInternal = function(e) {
-      var c;
+      var c, err;
       c = (u.getTarget(e)).value;
-      e = this.onChange(c);
+      err = this.onChange(c);
       this.validationMsg = '';
-      if (e instanceof Error) {
-        this.validationMsg = e.message;
+      if (err instanceof Error) {
+        this.validationMsg = err.message;
       }
       return this.content = c;
+    };
+
+    TextInput.prototype.onkeyupInternal = function(e) {
+      var c, err;
+      c = (u.getTarget(e)).value;
+      this.content = c;
+      if (e.keyCode === 13 || e.key === "Enter") {
+        if (this.validationMsg === '') {
+          err = this.onEnter(this.content);
+          if (err instanceof Error) {
+            return this.validationMsg = err.message;
+          }
+        }
+      } else {
+        err = this.onKeyup(c);
+        this.validationMsg = '';
+        if (err instanceof Error) {
+          return this.validationMsg = err.message;
+        }
+      }
     };
 
     TextInput.prototype.view = function() {
       return m('.TextInput', m('input.Input', {
         disabled: this.disabled,
         onchange: this.onChangeInternal,
+        onkeyup: this.onkeyupInternal,
         value: this.content,
         placeholder: this.placeholder
       }), this.validationMsg !== '' ? m('.ValidationMsg', this.validationMsg) : void 0);

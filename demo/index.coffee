@@ -194,10 +194,21 @@ class Demo
                     """
             ]
 
-        @demoTextInput = new TextInput
+        @demoTextInput1 = new TextInput
+            placeholder: 'type something...'
             onChange: (str) ->
                 if str != 'ya!'
                     new Error 'please input "ya!"'
+
+        @demoTextInput2 = new TextInput
+            placeholder: 'type digits and enter!'
+            onChange: (str) ->
+                unless (/^\d+$/).test str
+                    new Error 'please input some digits'
+            onEnter: (str) ->
+                unless (/^\d+$/).test str
+                    new Error 'please input some digits'
+                else alert str
 
         @demoTextInputDoc = new Collaspe
             titleArray: ['TextInput document']
@@ -216,7 +227,12 @@ class Demo
                         content = ''           # String
                         disabled = false       # Boolean
                         placeholder = ''       # String
-                        onChange = ( -> )      # (String) -> a | Error
+                        onChange = u.noOp      # (String) -> a | Error
+                                               # triggered on Blur or user stroke Enter
+                        onKeyup  = u.noOp      # (String) -> a | Error
+                                               # triggered when user stroke non-Enters
+                        onEnter  = u.noOp      # (String) -> a | Error
+                                               # triggered when user stroke Enter
                     ###
                     """
             ]
@@ -350,7 +366,8 @@ class Demo
             m 'li', @demoModalOpenBtn2.view(), @demoModal2.view()
 
             m 'li', @demoTextInputDoc.view()
-            m 'li', @demoTextInput.view()
+            m 'li', @demoTextInput1.view()
+            m 'li', @demoTextInput2.view()
 
             m 'li', @demoCollaspeDoc.view()
             m 'li', @demoCollaspe.view()

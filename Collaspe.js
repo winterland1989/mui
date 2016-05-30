@@ -19,7 +19,7 @@
   Collaspe = (function() {
     function Collaspe(arg) {
       var ref, ref1, ref2, ref3;
-      this.titleArray = arg.titleArray, this.widgetArray = arg.widgetArray, this.autoCollaspe = (ref = arg.autoCollaspe) != null ? ref : false, this.expandedIndexArray = (ref1 = arg.expandedIndexArray) != null ? ref1 : [], this.onExpand = (ref2 = arg.onExpand) != null ? ref2 : (function() {}), this.onCollaspe = (ref3 = arg.onCollaspe) != null ? ref3 : (function() {});
+      this.titleArray = arg.titleArray, this.widgetArray = arg.widgetArray, this.autoCollaspe = (ref = arg.autoCollaspe) != null ? ref : false, this.expandedIndexArray = (ref1 = arg.expandedIndexArray) != null ? ref1 : [], this.onExpand = (ref2 = arg.onExpand) != null ? ref2 : u.noOp, this.onCollaspe = (ref3 = arg.onCollaspe) != null ? ref3 : u.noOp;
       this.onFoldInternal = bind(this.onFoldInternal, this);
       this.showWidget = false;
     }

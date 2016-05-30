@@ -7,7 +7,7 @@ u = require './utils'
 class Switch
     constructor: ({
         @enable = true       # Boolean
-    ,   @onToggle = ( -> )   # (Boolean) -> a
+    ,   @onToggle = u.noOp   # (Boolean) -> a
     }) ->
 
     onToggleInternal: (e) =>

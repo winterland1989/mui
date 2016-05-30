@@ -11,7 +11,7 @@ class Dropdown
         @itemArray               # [String]
     ,   @currentIndex            # Int | Undefined
     ,   @placeholder  = ''       # String
-    ,   @onSelect = (->)         # (String, Int) -> ...
+    ,   @onSelect = u.noOp         # (String, Int) -> ...
     ,   @ifAvailable = (-> true)   # (String, Int) -> ture | false
     }) ->
         @filter = ''

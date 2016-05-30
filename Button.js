@@ -14,7 +14,7 @@
   Button = (function() {
     function Button(arg) {
       var data, ref, ref1;
-      this.text = arg.text, this.prefix = arg.prefix, this.suffix = arg.suffix, data = (ref = arg.data) != null ? ref : null, this.onClick = (ref1 = arg.onClick) != null ? ref1 : (function() {});
+      this.text = arg.text, this.prefix = arg.prefix, this.suffix = arg.suffix, data = (ref = arg.data) != null ? ref : null, this.onClick = (ref1 = arg.onClick) != null ? ref1 : u.noOp;
       this.onClickInternal = bind(this.onClickInternal, this);
       this.dataJSON = JSON.stringify(data);
     }

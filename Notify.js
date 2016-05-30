@@ -24,7 +24,7 @@
   Notify = (function() {
     function Notify(arg) {
       var ref, ref1;
-      this.duration = (ref = arg.duration) != null ? ref : 3000, this.onClick = (ref1 = arg.onClick) != null ? ref1 : (function() {});
+      this.duration = (ref = arg.duration) != null ? ref : 3000, this.onClick = (ref1 = arg.onClick) != null ? ref1 : u.noOp;
       this.hideInternal = bind(this.hideInternal, this);
       this.show = bind(this.show, this);
       this.onClickInternal = bind(this.onClickInternal, this);

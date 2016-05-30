@@ -1,9 +1,10 @@
 m = require 'mithril'
+u = require './utils'
 
 class AutoHide
     constructor: ({
         @widget             # mithril view
-    ,   @onHide = (->)      # () -> a
+    ,   @onHide = u.noOp    # () -> a
     }) ->
         @showWidget = false # Boolean
 

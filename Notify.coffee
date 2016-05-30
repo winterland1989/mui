@@ -12,7 +12,7 @@ keyCounter = 0
 class Notify
     constructor: ({
     ,   @duration = 3000        # Int
-    ,   @onClick = ( -> )       # data -> a
+    ,   @onClick = u.noOp       # data -> a
     }) ->
         @indexArray = []
 

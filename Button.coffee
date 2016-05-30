@@ -9,7 +9,7 @@ class Button
     ,   @prefix             # mithril svg view
     ,   @suffix             # mithril svg view
     ,   data = null         # HashMap
-    ,   @onClick = (->)     # (HashMap) -> a
+    ,   @onClick = u.noOp   # (HashMap) -> a
     }) ->
         @dataJSON = JSON.stringify data
 

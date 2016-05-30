@@ -16,7 +16,7 @@ class DatePicker
         date                          # Date
     ,   @selectTime                   # Boolean
     ,   @ifDateAvailable = (-> true)  # (Date) -> Boolean
-    ,   @onSelect = (->)              # (Date) -> a
+    ,   @onSelect = u.noOp            # (Date) -> a
     }) ->
         @displayDate = new Date date
         @date = new Date date

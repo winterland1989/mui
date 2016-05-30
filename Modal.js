@@ -14,7 +14,7 @@
   Modal = (function() {
     function Modal(arg) {
       var ref, ref1;
-      this.widget = arg.widget, this.clickToHide = (ref = arg.clickToHide) != null ? ref : true, this.onHide = (ref1 = arg.onHide) != null ? ref1 : (function() {});
+      this.widget = arg.widget, this.clickToHide = (ref = arg.clickToHide) != null ? ref : true, this.onHide = (ref1 = arg.onHide) != null ? ref1 : u.noOp;
       this.hide = bind(this.hide, this);
       this.show = bind(this.show, this);
       this.onClickInternal = bind(this.onClickInternal, this);

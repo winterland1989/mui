@@ -130,6 +130,7 @@ module.exports = {
 ,   formatDateWithHMS
 ,   parseDateWithHMS
 ,   removeFromArray
+,   noOp: (->)
 
 ,   svg
 ,   spinner

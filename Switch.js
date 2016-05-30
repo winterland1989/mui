@@ -14,7 +14,7 @@
   Switch = (function() {
     function Switch(arg) {
       var ref, ref1;
-      this.enable = (ref = arg.enable) != null ? ref : true, this.onToggle = (ref1 = arg.onToggle) != null ? ref1 : (function() {});
+      this.enable = (ref = arg.enable) != null ? ref : true, this.onToggle = (ref1 = arg.onToggle) != null ? ref1 : u.noOp;
       this.onToggleInternal = bind(this.onToggleInternal, this);
     }
 

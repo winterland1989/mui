@@ -8,7 +8,13 @@ class TextInput
         @content = ''           # String
     ,   @disabled = false       # Boolean
     ,   @placeholder = ''       # String
-    ,   @onChange = ( -> )      # (String) -> a | Error
+    ,   @onChange = u.noOp      # (String) -> a | Error
+                                # triggered on Blur or user stroke Enter
+    ,   @onKeyup  = u.noOp      # (String) -> a | Error
+                                # triggered when user stroke non-Enters
+    ,   @onEnter  = u.noOp      # (String) -> a | Error
+                                # triggered when user stroke Enter
+
     }) ->
 
         @validationMsg = ''     # String
@@ -21,20 +27,34 @@ class TextInput
 
     onChangeInternal: (e) =>
         c = (u.getTarget e).value
-        e = @onChange c
+        err = @onChange c
         @validationMsg = ''
-        if e instanceof Error
-            @validationMsg = e.message
+        if err instanceof Error
+            @validationMsg = err.message
         @content = c
+
+    onkeyupInternal: (e) =>
+        c = (u.getTarget e).value
+        @content = c
+        if (e.keyCode == 13 or e.key == "Enter")
+            if @validationMsg == ''
+                err = @onEnter (@content)
+                if err instanceof Error
+                    @validationMsg = err.message
+        else
+            err = @onKeyup c
+            @validationMsg = ''
+            if err instanceof Error
+                @validationMsg = err.message
 
     view: ->
         m '.TextInput',
             m 'input.Input',
                 disabled: @disabled
                 onchange: @onChangeInternal
+                onkeyup: @onkeyupInternal
                 value: @content
                 placeholder: @placeholder
-
             if @validationMsg != ''
                 m '.ValidationMsg', @validationMsg
 

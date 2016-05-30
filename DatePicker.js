@@ -49,7 +49,7 @@
       var date, ref, ref1;
       date = arg.date, this.selectTime = arg.selectTime, this.ifDateAvailable = (ref = arg.ifDateAvailable) != null ? ref : (function() {
         return true;
-      }), this.onSelect = (ref1 = arg.onSelect) != null ? ref1 : (function() {});
+      }), this.onSelect = (ref1 = arg.onSelect) != null ? ref1 : u.noOp;
       this.setHMS = bind(this.setHMS, this);
       this.selectDate = bind(this.selectDate, this);
       this.nextYear = bind(this.nextYear, this);

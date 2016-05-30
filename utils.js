@@ -141,6 +141,7 @@
     formatDateWithHMS: formatDateWithHMS,
     parseDateWithHMS: parseDateWithHMS,
     removeFromArray: removeFromArray,
+    noOp: (function() {}),
     svg: svg,
     spinner: spinner
   };

@@ -16,7 +16,7 @@
   Dropdown = (function() {
     function Dropdown(arg) {
       var ref, ref1, ref2;
-      this.itemArray = arg.itemArray, this.currentIndex = arg.currentIndex, this.placeholder = (ref = arg.placeholder) != null ? ref : '', this.onSelect = (ref1 = arg.onSelect) != null ? ref1 : (function() {}), this.ifAvailable = (ref2 = arg.ifAvailable) != null ? ref2 : (function() {
+      this.itemArray = arg.itemArray, this.currentIndex = arg.currentIndex, this.placeholder = (ref = arg.placeholder) != null ? ref : '', this.onSelect = (ref1 = arg.onSelect) != null ? ref1 : u.noOp, this.ifAvailable = (ref2 = arg.ifAvailable) != null ? ref2 : (function() {
         return true;
       });
       this.onSelectInternal = bind(this.onSelectInternal, this);

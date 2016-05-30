@@ -7,7 +7,7 @@ class Modal
     constructor: ({
         @widget                 # mithril view
     ,   @clickToHide = true     # Boolean
-    ,   @onHide = ( -> )        # () -> a
+    ,   @onHide = u.noOp        # () -> a
     }) ->
         @showWidget = false
 

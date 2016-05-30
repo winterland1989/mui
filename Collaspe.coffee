@@ -13,8 +13,8 @@ class Collaspe
     ,   @widgetArray               # [mithril widget]
     ,   @autoCollaspe = false      # Boolean
     ,   @expandedIndexArray = []   # [Int]
-    ,   @onExpand   = (->)         # Int -> a
-    ,   @onCollaspe = (->)         # Int -> a
+    ,   @onExpand   = u.noOp       # Int -> a
+    ,   @onCollaspe = u.noOp       # Int -> a
     }) ->
         @showWidget = false # Boolean
 

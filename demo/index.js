@@ -211,10 +211,26 @@
 	        }
 	      ]
 	    });
-	    this.demoTextInput = new TextInput({
+	    this.demoTextInput1 = new TextInput({
+	      placeholder: 'type something...',
 	      onChange: function(str) {
 	        if (str !== 'ya!') {
 	          return new Error('please input "ya!"');
+	        }
+	      }
+	    });
+	    this.demoTextInput2 = new TextInput({
+	      placeholder: 'type digits and enter!',
+	      onChange: function(str) {
+	        if (!/^\d+$/.test(str)) {
+	          return new Error('please input some digits');
+	        }
+	      },
+	      onEnter: function(str) {
+	        if (!/^\d+$/.test(str)) {
+	          return new Error('please input some digits');
+	        } else {
+	          return alert(str);
 	        }
 	      }
 	    });
@@ -225,7 +241,7 @@
 	          view: function() {
 	            return m('textarea', {
 	              readonly: true
-	            }, "TextInput = require 'mui/TextInput'\n\ndemoTextInput = new TextInput\n    onChange: (str) ->\n        if str != 'ya!'\n            new Error 'please input \"ya!\"'\n\n###\n    content = ''           # String\n    disabled = false       # Boolean\n    placeholder = ''       # String\n    onChange = ( -> )      # (String) -> a | Error\n###");
+	            }, "TextInput = require 'mui/TextInput'\n\ndemoTextInput = new TextInput\n    onChange: (str) ->\n        if str != 'ya!'\n            new Error 'please input \"ya!\"'\n\n###\n    content = ''           # String\n    disabled = false       # Boolean\n    placeholder = ''       # String\n    onChange = u.noOp      # (String) -> a | Error\n                           # triggered on Blur or user stroke Enter\n    onKeyup  = u.noOp      # (String) -> a | Error\n                           # triggered when user stroke non-Enters\n    onEnter  = u.noOp      # (String) -> a | Error\n                           # triggered when user stroke Enter\n###");
 	          }
 	        }
 	      ]
@@ -314,7 +330,7 @@
 
 	  Demo.prototype.view = function() {
 	    return [
-	      m('ul.Demo', m('li', this.demoButtonDoc.view()), m('li', this.demoButton1.view(), this.demoButton2.view(), this.demoButton3.view()), m('li', this.demoDatePickerDoc.view()), m('li', this.demoDatePicker1.view()), m('li', this.demoDatePicker2.view()), m('li', this.demoSwitchDoc.view()), m('li', this.demoSwitch.view()), m('li', this.demoDropDownDoc.view()), m('li', this.demoDropDown1.view()), m('li', this.demoDropDown2.view()), m('li', this.demoDropDown3.view()), m('li', this.demoModalDoc.view()), m('li', this.demoModalOpenBtn1.view(), this.demoModal1.view()), m('li', this.demoModalOpenBtn2.view(), this.demoModal2.view()), m('li', this.demoTextInputDoc.view()), m('li', this.demoTextInput.view()), m('li', this.demoCollaspeDoc.view()), m('li', this.demoCollaspe.view()), m('li', this.demoNotifyDoc.view()), m('li', this.demoNotify1.view(), this.demoNotify2.view()), m('li', this.demoNotifyOpenBtn1.view(), this.demoNotifyOpenBtn2.view()), m('li', this.demoSpinnerDoc.view()), m('li', u.spinner(style.main[4]), u.spinner(style.main[4], '5em'), u.spinner(style.main[4], '2em', '0.3s'), u.spinner(style.text[4], '5em'))), m('.Misc', m('span', 'Winter\'s ui collection'), m('a', {
+	      m('ul.Demo', m('li', this.demoButtonDoc.view()), m('li', this.demoButton1.view(), this.demoButton2.view(), this.demoButton3.view()), m('li', this.demoDatePickerDoc.view()), m('li', this.demoDatePicker1.view()), m('li', this.demoDatePicker2.view()), m('li', this.demoSwitchDoc.view()), m('li', this.demoSwitch.view()), m('li', this.demoDropDownDoc.view()), m('li', this.demoDropDown1.view()), m('li', this.demoDropDown2.view()), m('li', this.demoDropDown3.view()), m('li', this.demoModalDoc.view()), m('li', this.demoModalOpenBtn1.view(), this.demoModal1.view()), m('li', this.demoModalOpenBtn2.view(), this.demoModal2.view()), m('li', this.demoTextInputDoc.view()), m('li', this.demoTextInput1.view()), m('li', this.demoTextInput2.view()), m('li', this.demoCollaspeDoc.view()), m('li', this.demoCollaspe.view()), m('li', this.demoNotifyDoc.view()), m('li', this.demoNotify1.view(), this.demoNotify2.view()), m('li', this.demoNotifyOpenBtn1.view(), this.demoNotifyOpenBtn2.view()), m('li', this.demoSpinnerDoc.view()), m('li', u.spinner(style.main[4]), u.spinner(style.main[4], '5em'), u.spinner(style.main[4], '2em', '0.3s'), u.spinner(style.text[4], '5em'))), m('.Misc', m('span', 'Winter\'s ui collection'), m('a', {
 	        href: 'https://github.com/winterland1989/mui'
 	      }, 'view code on github'), m('a', {
 	        href: 'https://github.com/winterland1989/mui/blob/gh-pages/demo/index.coffee'
@@ -3132,7 +3148,7 @@
 	  Button = (function() {
 	    function Button(arg) {
 	      var data, ref, ref1;
-	      this.text = arg.text, this.prefix = arg.prefix, this.suffix = arg.suffix, data = (ref = arg.data) != null ? ref : null, this.onClick = (ref1 = arg.onClick) != null ? ref1 : (function() {});
+	      this.text = arg.text, this.prefix = arg.prefix, this.suffix = arg.suffix, data = (ref = arg.data) != null ? ref : null, this.onClick = (ref1 = arg.onClick) != null ? ref1 : u.noOp;
 	      this.onClickInternal = bind(this.onClickInternal, this);
 	      this.dataJSON = JSON.stringify(data);
 	    }
@@ -3376,6 +3392,7 @@
 	    formatDateWithHMS: formatDateWithHMS,
 	    parseDateWithHMS: parseDateWithHMS,
 	    removeFromArray: removeFromArray,
+	    noOp: (function() {}),
 	    svg: svg,
 	    spinner: spinner
 	  };
@@ -4285,7 +4302,7 @@
 	      var date, ref, ref1;
 	      date = arg.date, this.selectTime = arg.selectTime, this.ifDateAvailable = (ref = arg.ifDateAvailable) != null ? ref : (function() {
 	        return true;
-	      }), this.onSelect = (ref1 = arg.onSelect) != null ? ref1 : (function() {});
+	      }), this.onSelect = (ref1 = arg.onSelect) != null ? ref1 : u.noOp;
 	      this.setHMS = bind(this.setHMS, this);
 	      this.selectDate = bind(this.selectDate, this);
 	      this.nextYear = bind(this.nextYear, this);
@@ -4600,15 +4617,17 @@
 
 	// Generated by CoffeeScript 1.10.0
 	(function() {
-	  var AutoHide, m,
+	  var AutoHide, m, u,
 	    bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 	  m = __webpack_require__(1);
 
+	  u = __webpack_require__(10);
+
 	  AutoHide = (function() {
 	    function AutoHide(arg) {
 	      var ref;
-	      this.widget = arg.widget, this.onHide = (ref = arg.onHide) != null ? ref : (function() {});
+	      this.widget = arg.widget, this.onHide = (ref = arg.onHide) != null ? ref : u.noOp;
 	      this.hide = bind(this.hide, this);
 	      this.show = bind(this.show, this);
 	      this.showWidget = false;
@@ -4715,7 +4734,7 @@
 	  Switch = (function() {
 	    function Switch(arg) {
 	      var ref, ref1;
-	      this.enable = (ref = arg.enable) != null ? ref : true, this.onToggle = (ref1 = arg.onToggle) != null ? ref1 : (function() {});
+	      this.enable = (ref = arg.enable) != null ? ref : true, this.onToggle = (ref1 = arg.onToggle) != null ? ref1 : u.noOp;
 	      this.onToggleInternal = bind(this.onToggleInternal, this);
 	    }
 
@@ -4801,7 +4820,7 @@
 	  Dropdown = (function() {
 	    function Dropdown(arg) {
 	      var ref, ref1, ref2;
-	      this.itemArray = arg.itemArray, this.currentIndex = arg.currentIndex, this.placeholder = (ref = arg.placeholder) != null ? ref : '', this.onSelect = (ref1 = arg.onSelect) != null ? ref1 : (function() {}), this.ifAvailable = (ref2 = arg.ifAvailable) != null ? ref2 : (function() {
+	      this.itemArray = arg.itemArray, this.currentIndex = arg.currentIndex, this.placeholder = (ref = arg.placeholder) != null ? ref : '', this.onSelect = (ref1 = arg.onSelect) != null ? ref1 : u.noOp, this.ifAvailable = (ref2 = arg.ifAvailable) != null ? ref2 : (function() {
 	        return true;
 	      });
 	      this.onSelectInternal = bind(this.onSelectInternal, this);
@@ -4948,7 +4967,7 @@
 	  Modal = (function() {
 	    function Modal(arg) {
 	      var ref, ref1;
-	      this.widget = arg.widget, this.clickToHide = (ref = arg.clickToHide) != null ? ref : true, this.onHide = (ref1 = arg.onHide) != null ? ref1 : (function() {});
+	      this.widget = arg.widget, this.clickToHide = (ref = arg.clickToHide) != null ? ref : true, this.onHide = (ref1 = arg.onHide) != null ? ref1 : u.noOp;
 	      this.hide = bind(this.hide, this);
 	      this.show = bind(this.show, this);
 	      this.onClickInternal = bind(this.onClickInternal, this);
@@ -5034,8 +5053,9 @@
 
 	  TextInput = (function() {
 	    function TextInput(arg) {
-	      var ref, ref1, ref2, ref3;
-	      this.content = (ref = arg.content) != null ? ref : '', this.disabled = (ref1 = arg.disabled) != null ? ref1 : false, this.placeholder = (ref2 = arg.placeholder) != null ? ref2 : '', this.onChange = (ref3 = arg.onChange) != null ? ref3 : (function() {});
+	      var ref, ref1, ref2, ref3, ref4, ref5;
+	      this.content = (ref = arg.content) != null ? ref : '', this.disabled = (ref1 = arg.disabled) != null ? ref1 : false, this.placeholder = (ref2 = arg.placeholder) != null ? ref2 : '', this.onChange = (ref3 = arg.onChange) != null ? ref3 : u.noOp, this.onKeyup = (ref4 = arg.onKeyup) != null ? ref4 : u.noOp, this.onEnter = (ref5 = arg.onEnter) != null ? ref5 : u.noOp;
+	      this.onkeyupInternal = bind(this.onkeyupInternal, this);
 	      this.onChangeInternal = bind(this.onChangeInternal, this);
 	      this.validationMsg = '';
 	    }
@@ -5051,20 +5071,41 @@
 	    TextInput.prototype.validateInternal = function(c) {};
 
 	    TextInput.prototype.onChangeInternal = function(e) {
-	      var c;
+	      var c, err;
 	      c = (u.getTarget(e)).value;
-	      e = this.onChange(c);
+	      err = this.onChange(c);
 	      this.validationMsg = '';
-	      if (e instanceof Error) {
-	        this.validationMsg = e.message;
+	      if (err instanceof Error) {
+	        this.validationMsg = err.message;
 	      }
 	      return this.content = c;
+	    };
+
+	    TextInput.prototype.onkeyupInternal = function(e) {
+	      var c, err;
+	      c = (u.getTarget(e)).value;
+	      this.content = c;
+	      if (e.keyCode === 13 || e.key === "Enter") {
+	        if (this.validationMsg === '') {
+	          err = this.onEnter(this.content);
+	          if (err instanceof Error) {
+	            return this.validationMsg = err.message;
+	          }
+	        }
+	      } else {
+	        err = this.onKeyup(c);
+	        this.validationMsg = '';
+	        if (err instanceof Error) {
+	          return this.validationMsg = err.message;
+	        }
+	      }
 	    };
 
 	    TextInput.prototype.view = function() {
 	      return m('.TextInput', m('input.Input', {
 	        disabled: this.disabled,
 	        onchange: this.onChangeInternal,
+	        onkeyup: this.onkeyupInternal,
 	        value: this.content,
 	        placeholder: this.placeholder
 	      }), this.validationMsg !== '' ? m('.ValidationMsg', this.validationMsg) : void 0);
@@ -5141,7 +5182,7 @@
 	  Collaspe = (function() {
 	    function Collaspe(arg) {
 	      var ref, ref1, ref2, ref3;
-	      this.titleArray = arg.titleArray, this.widgetArray = arg.widgetArray, this.autoCollaspe = (ref = arg.autoCollaspe) != null ? ref : false, this.expandedIndexArray = (ref1 = arg.expandedIndexArray) != null ? ref1 : [], this.onExpand = (ref2 = arg.onExpand) != null ? ref2 : (function() {}), this.onCollaspe = (ref3 = arg.onCollaspe) != null ? ref3 : (function() {});
+	      this.titleArray = arg.titleArray, this.widgetArray = arg.widgetArray, this.autoCollaspe = (ref = arg.autoCollaspe) != null ? ref : false, this.expandedIndexArray = (ref1 = arg.expandedIndexArray) != null ? ref1 : [], this.onExpand = (ref2 = arg.onExpand) != null ? ref2 : u.noOp, this.onCollaspe = (ref3 = arg.onCollaspe) != null ? ref3 : u.noOp;
 	      this.onFoldInternal = bind(this.onFoldInternal, this);
 	      this.showWidget = false;
 	    }
@@ -5273,7 +5314,7 @@
 	  Notify = (function() {
 	    function Notify(arg) {
 	      var ref, ref1;
-	      this.duration = (ref = arg.duration) != null ? ref : 3000, this.onClick = (ref1 = arg.onClick) != null ? ref1 : (function() {});
+	      this.duration = (ref = arg.duration) != null ? ref : 3000, this.onClick = (ref1 = arg.onClick) != null ? ref1 : u.noOp;
 	      this.hideInternal = bind(this.hideInternal, this);
 	      this.show = bind(this.show, this);
 	      this.onClickInternal = bind(this.onClickInternal, this);
