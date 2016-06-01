@@ -139,7 +139,6 @@ class Demo
 
 
         @demoModal1 = new Modal
-            clickToHide: true
             widget: view: ->
                 m 'h2'
                 ,
@@ -151,6 +150,7 @@ class Demo
 
         @demoModal2 = new Modal
             clickToHide: false
+            escToHide: false
 
         @demoModalOpenBtn1 = new Button
             text: 'Open a modal'
@@ -189,6 +189,7 @@ class Demo
                     ###
                         widget                 # mithril view
                         clickToHide = true     # Boolean
+                        escToHide = true       # Boolean
                         onHide = ( -> )        # () -> a
                     ###
                     """

@@ -7,15 +7,22 @@ class Modal
     constructor: ({
         @widget                 # mithril view
     ,   @clickToHide = true     # Boolean
+    ,   @escToHide   = true     # Boolean
     ,   @onHide = u.noOp        # () -> a
     }) ->
         @showWidget = false
 
     onClickInternal: (e) =>
         t = u.getTarget e
-        console.log u.targetHasClass t, 'HVCenter'
         if @clickToHide and ((u.targetHasClass t, 'Modal') or (u.targetHasClass t, 'HVCenter'))
             @hide()
+
+    onEscInternal: (e) =>
+        # esc key
+        if (e.key == 'Escape' or e.keyCode == 27) and @escToHide
+            @showWidget = false
+            m.redraw()
+            true
 
     show: => @showWidget = true
 
@@ -24,9 +31,18 @@ class Modal
         @onHide()
 
     view: ->
+        self = @
         if @showWidget
-            m '.Modal', onclick: @onClickInternal,
-                m '.HVCenter', @widget.view()
+            m '.Modal'
+            ,
+                onclick: @onClickInternal
+                config: (elem, afterInit, context) ->
+                    unless afterInit
+                        window.addEventListener 'keyup', self.onEscInternal, true
+                        context.onunload = ->
+                            window.removeEventListener 'keyup', self.onEscInternal, true
+
+            ,   m '.HVCenter', @widget.view()
 
 Modal.mss =
     Modal:

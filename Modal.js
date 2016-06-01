@@ -13,10 +13,11 @@
 
   Modal = (function() {
     function Modal(arg) {
-      var ref, ref1;
-      this.widget = arg.widget, this.clickToHide = (ref = arg.clickToHide) != null ? ref : true, this.onHide = (ref1 = arg.onHide) != null ? ref1 : u.noOp;
+      var ref, ref1, ref2;
+      this.widget = arg.widget, this.clickToHide = (ref = arg.clickToHide) != null ? ref : true, this.escToHide = (ref1 = arg.escToHide) != null ? ref1 : true, this.onHide = (ref2 = arg.onHide) != null ? ref2 : u.noOp;
       this.hide = bind(this.hide, this);
       this.show = bind(this.show, this);
+      this.onEscInternal = bind(this.onEscInternal, this);
       this.onClickInternal = bind(this.onClickInternal, this);
       this.showWidget = false;
     }
@@ -24,9 +25,16 @@
     Modal.prototype.onClickInternal = function(e) {
       var t;
       t = u.getTarget(e);
-      console.log(u.targetHasClass(t, 'HVCenter'));
       if (this.clickToHide && ((u.targetHasClass(t, 'Modal')) || (u.targetHasClass(t, 'HVCenter')))) {
         return this.hide();
+      }
+    };
+
+    Modal.prototype.onEscInternal = function(e) {
+      if ((e.key === 'Escape' || e.keyCode === 27) && this.escToHide) {
+        this.showWidget = false;
+        m.redraw();
+        return true;
       }
     };
 
@@ -40,9 +48,19 @@
     };
 
     Modal.prototype.view = function() {
+      var self;
+      self = this;
       if (this.showWidget) {
         return m('.Modal', {
-          onclick: this.onClickInternal
+          onclick: this.onClickInternal,
+          config: function(elem, afterInit, context) {
+            if (!afterInit) {
+              window.addEventListener('keyup', self.onEscInternal, true);
+              return context.onunload = function() {
+                return window.removeEventListener('keyup', self.onEscInternal, true);
+              };
+            }
+          }
         }, m('.HVCenter', this.widget.view()));
       }
     };

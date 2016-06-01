@@ -52,13 +52,20 @@ formatDate = (date) ->
 
     yyyy + '-' + (formatXX mm) + '-' + (formatXX dd)
 
+# format Date to yyyy-mm-dd
+formatHMS = (date) ->
+    hh = date.getHours()
+    mm = date.getMinutes()
+    ss = date.getSeconds()
+    (formatXX hh) + ':' + (formatXX mm) + ':' + (formatXX ss)
+
 # format Date to yyyy-mm-dd hh:mm:ss
 formatDateWithHMS = (date) ->
     hh = date.getHours()
     mm = date.getMinutes()
     ss = date.getSeconds()
 
-    (formatDate date) + ' ' + (formatXX hh) + ':' + (formatXX mm) + ':' + (formatXX ss)
+    (formatDate date) + ' ' + (formatHMS date)
 
 # parse yyyy-mm-dd hh:mm:ss
 # parse yyyy-mm-dd
@@ -127,6 +134,7 @@ module.exports = {
 ,   clearDateHMS
 ,   formatXX
 ,   formatDate
+,   formatHMS
 ,   formatDateWithHMS
 ,   parseDateWithHMS
 ,   removeFromArray
