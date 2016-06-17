@@ -124,6 +124,33 @@ spinner = (color, size = '2em', interval = '1s') ->
         """
     )
 
+debounce = (fn, delay, leading = false) ->
+    pending = false
+
+    if leading
+        ->
+            unless pending
+                fn.apply this, arguments
+                pending = true
+                setTimeout (-> pending = false), delay
+
+    else
+        args = undefined
+        ->
+            args = arguments
+            self = this
+            unless pending
+                pending = true
+                setTimeout(
+                    ->
+                        pending = false
+                        fn.apply self, args
+                ,   delay
+                )
+
+
+
+
 module.exports = {
     getTarget
 ,   getTargetData
@@ -142,4 +169,6 @@ module.exports = {
 
 ,   svg
 ,   spinner
+
+,   debounce
 }

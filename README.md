@@ -73,6 +73,8 @@ index
 
     + some widget function(spinner...).
 
+    + `debounce` with leading/trailing trigger.
+
 customization
 -------------
 

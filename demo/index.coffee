@@ -287,6 +287,19 @@ class Demo
             text: 'Open a notify'
             onClick: => @demoNotify1.show(msgIcon, 'this is a notify')
 
+        @demoNotifyOpenBtn1D = new Button
+            text: 'Debounce'
+            onClick: u.debounce(
+                => @demoNotify1.show(msgIcon, 'notify per 1 seconds')
+            ,   1000)
+
+        @demoNotifyOpenBtn1D2 = new Button
+            text: 'Debounce leading'
+            onClick: u.debounce(
+                => @demoNotify1.show(msgIcon, 'notify per 1 seconds')
+            ,   1000
+            ,   true)
+
         @demoNotify2 = new Notify
             onClick: ({foo}) => alert foo
 
@@ -375,7 +388,12 @@ class Demo
 
             m 'li', @demoNotifyDoc.view()
             m 'li', @demoNotify1.view(), @demoNotify2.view()
-            m 'li', @demoNotifyOpenBtn1.view(), @demoNotifyOpenBtn2.view()
+            m 'li'
+            ,   {className: 'NotifyBtnGroup'}
+            ,   @demoNotifyOpenBtn1.view()
+            ,   @demoNotifyOpenBtn1D.view()
+            ,   @demoNotifyOpenBtn1D2.view()
+            ,   @demoNotifyOpenBtn2.view()
 
 
             m 'li', @demoSpinnerDoc.view()
@@ -420,6 +438,10 @@ s.tag s.merge [
     Button:
         display: 'inline-block'
         marginRight: '14px'
+
+    NotifyBtnGroup:
+        Button:
+            width: '200px'
 
     Collaspe:
         width: '480px'
