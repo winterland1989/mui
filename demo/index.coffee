@@ -64,14 +64,13 @@ class Demo
 
                     demoBtnGroup = new ButtonGroup
                         textArray: ['foo', 'bar', 'qux']
-                        enabledArray: []
                         onChange: (enabledArray) => ...
 
                     ###
-                        textArray        # [String]
-                        enabledArray     # [String]
-                        multiSelection   # Boolean
-                        onChange = ->    # ([String]) -> a
+                        textArray         # [String]
+                        enabledIndexArray # [Int]
+                        multiSelection    # Boolean
+                        onChange = ->     # ([Int]) -> a
                     ###
                     """
             ]

@@ -7,29 +7,28 @@ doneIcon = require 'mmsvg/google/msvg/action/done'
 
 class ButtonGroup
     constructor: ({
-        @textArray          # Array
-    ,   @enableArray = []   # Array
+        @textArray                # [String]
+    ,   @enabledIndexArray = []   # [Int]
     ,   @multiSelection = true # Boolean
-    ,   @onChange = u.noOp  # (Array) -> a
+    ,   @onChange = u.noOp  # ([Int]) -> a
     }) ->
 
     onClickInternal: (e) =>
         i = parseInt u.getCurrentTargetData e, 'index'
-        t = @textArray[i]
 
         if @multiSelection
-            i2 = @enableArray.indexOf t
+            i2 = @enabledIndexArray.indexOf i
             if i2 == -1
-                @enableArray.push t
-            else @enableArray.splice i2, 1
-        else @enableArray = [t]
+                @enabledIndexArray.push i
+            else @enabledIndexArray.splice i2, 1
+        else @enabledIndexArray = [i]
 
-        @onChange @enableArray
+        @onChange @enabledIndexArray
 
     view: ->
         m 'ul.ButtonGroup',
             for t, i in @textArray
-                if t in @enableArray
+                if i in @enabledIndexArray
                     m 'li.EnabledBtn', {'data-index': i, onclick: @onClickInternal},
                         u.svg doneIcon
                         m 'span', t

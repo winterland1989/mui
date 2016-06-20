@@ -113,7 +113,7 @@
 	          view: function() {
 	            return m('textarea', {
 	              readonly: true
-	            }, "ButtonGroup = require 'mui/ButtonGroup'\n\ndemoBtnGroup = new ButtonGroup\n    textArray: ['foo', 'bar', 'qux']\n    enabledArray: []\n    onChange: (enabledArray) => ...\n\n###\n    textArray        # [String]\n    enabledArray     # [String]\n    multiSelection   # Boolean\n    onChange = ->    # ([String]) -> a\n###");
+	            }, "ButtonGroup = require 'mui/ButtonGroup'\n\ndemoBtnGroup = new ButtonGroup\n    textArray: ['foo', 'bar', 'qux']\n    onChange: (enabledArray) => ...\n\n###\n    textArray         # [String]\n    enabledIndexArray # [Int]\n    multiSelection    # Boolean\n    onChange = ->     # ([Int]) -> a\n###");
 	          }
 	        }
 	      ]
@@ -4369,25 +4369,24 @@
 	  ButtonGroup = (function() {
 	    function ButtonGroup(arg) {
 	      var ref, ref1, ref2;
-	      this.textArray = arg.textArray, this.enableArray = (ref = arg.enableArray) != null ? ref : [], this.multiSelection = (ref1 = arg.multiSelection) != null ? ref1 : true, this.onChange = (ref2 = arg.onChange) != null ? ref2 : u.noOp;
+	      this.textArray = arg.textArray, this.enabledIndexArray = (ref = arg.enabledIndexArray) != null ? ref : [], this.multiSelection = (ref1 = arg.multiSelection) != null ? ref1 : true, this.onChange = (ref2 = arg.onChange) != null ? ref2 : u.noOp;
 	      this.onClickInternal = bind(this.onClickInternal, this);
 	    }
 
 	    ButtonGroup.prototype.onClickInternal = function(e) {
-	      var i, i2, t;
+	      var i, i2;
 	      i = parseInt(u.getCurrentTargetData(e, 'index'));
-	      t = this.textArray[i];
 	      if (this.multiSelection) {
-	        i2 = this.enableArray.indexOf(t);
+	        i2 = this.enabledIndexArray.indexOf(i);
 	        if (i2 === -1) {
-	          this.enableArray.push(t);
+	          this.enabledIndexArray.push(i);
 	        } else {
-	          this.enableArray.splice(i2, 1);
+	          this.enabledIndexArray.splice(i2, 1);
 	        }
 	      } else {
-	        this.enableArray = [t];
+	        this.enabledIndexArray = [i];
 	      }
-	      return this.onChange(this.enableArray);
+	      return this.onChange(this.enabledIndexArray);
 	    };
 
 	    ButtonGroup.prototype.view = function() {
@@ -4398,7 +4397,7 @@
 	        results = [];
 	        for (i = j = 0, len = ref.length; j < len; i = ++j) {
 	          t = ref[i];
-	          if (indexOf.call(this.enableArray, t) >= 0) {
+	          if (indexOf.call(this.enabledIndexArray, i) >= 0) {
 	            results.push(m('li.EnabledBtn', {
 	              'data-index': i,
 	              onclick: this.onClickInternal
