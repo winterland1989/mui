@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Button, Collaspe, DatePicker, Demo, DropDown, Modal, Notify, Switch, TextInput, buildIcon, delIcon, infoIcon, m, msgIcon, s, style, u;
+	var Button, ButtonGroup, Collaspe, DatePicker, Demo, DropDown, Modal, Notify, Switch, TextInput, buildIcon, delIcon, infoIcon, m, msgIcon, s, style, u;
 
 	m = __webpack_require__(1);
 
@@ -60,19 +60,21 @@
 
 	Button = __webpack_require__(8);
 
-	DatePicker = __webpack_require__(12);
+	ButtonGroup = __webpack_require__(12);
 
-	Switch = __webpack_require__(16);
+	DatePicker = __webpack_require__(14);
 
-	DropDown = __webpack_require__(17);
+	Switch = __webpack_require__(18);
 
-	Modal = __webpack_require__(18);
+	DropDown = __webpack_require__(19);
 
-	TextInput = __webpack_require__(19);
+	Modal = __webpack_require__(20);
 
-	Collaspe = __webpack_require__(20);
+	TextInput = __webpack_require__(21);
 
-	Notify = __webpack_require__(23);
+	Collaspe = __webpack_require__(22);
+
+	Notify = __webpack_require__(25);
 
 	u = __webpack_require__(10);
 
@@ -103,6 +105,35 @@
 	          }
 	        }
 	      ]
+	    });
+	    this.demoBtnGroupDoc = new Collaspe({
+	      titleArray: ['ButtonGroup document'],
+	      widgetArray: [
+	        {
+	          view: function() {
+	            return m('textarea', {
+	              readonly: true
+	            }, "ButtonGroup = require 'mui/ButtonGroup'\n\ndemoBtnGroup = new ButtonGroup\n    textArray: ['foo', 'bar', 'qux']\n    enabledArray: []\n    onChange: (enabledArray) => ...\n\n###\n    textArray        # [String]\n    enabledArray     # [String]\n    multiSelection   # Boolean\n    onChange = ->    # ([String]) -> a\n###");
+	          }
+	        }
+	      ]
+	    });
+	    this.demoBtnGroup = new ButtonGroup({
+	      textArray: ['foo', 'bar', 'qux'],
+	      onChange: (function(_this) {
+	        return function(enabledArray) {
+	          return _this.demoNotify1.show(msgIcon, JSON.stringify(enabledArray));
+	        };
+	      })(this)
+	    });
+	    this.demoBtnGroup2 = new ButtonGroup({
+	      textArray: ['foo', 'bar', 'qux'],
+	      multiSelection: false,
+	      onChange: (function(_this) {
+	        return function(enabledArray) {
+	          return _this.demoNotify1.show(msgIcon, JSON.stringify(enabledArray));
+	        };
+	      })(this)
 	    });
 	    this.demoDatePicker1 = new DatePicker({
 	      date: new Date()
@@ -346,7 +377,7 @@
 
 	  Demo.prototype.view = function() {
 	    return [
-	      m('ul.Demo', m('li', this.demoButtonDoc.view()), m('li', this.demoButton1.view(), this.demoButton2.view(), this.demoButton3.view()), m('li', this.demoDatePickerDoc.view()), m('li', this.demoDatePicker1.view()), m('li', this.demoDatePicker2.view()), m('li', this.demoSwitchDoc.view()), m('li', this.demoSwitch.view()), m('li', this.demoDropDownDoc.view()), m('li', this.demoDropDown1.view()), m('li', this.demoDropDown2.view()), m('li', this.demoDropDown3.view()), m('li', this.demoModalDoc.view()), m('li', this.demoModalOpenBtn1.view(), this.demoModal1.view()), m('li', this.demoModalOpenBtn2.view(), this.demoModal2.view()), m('li', this.demoTextInputDoc.view()), m('li', this.demoTextInput1.view()), m('li', this.demoTextInput2.view()), m('li', this.demoCollaspeDoc.view()), m('li', this.demoCollaspe.view()), m('li', this.demoNotifyDoc.view()), m('li', this.demoNotify1.view(), this.demoNotify2.view()), m('li', {
+	      m('ul.Demo', m('li', this.demoButtonDoc.view()), m('li', this.demoButton1.view(), this.demoButton2.view(), this.demoButton3.view()), m('li', this.demoBtnGroupDoc.view()), m('li', this.demoBtnGroup.view()), m('li', this.demoBtnGroup2.view()), m('li', this.demoDatePickerDoc.view()), m('li', this.demoDatePicker1.view()), m('li', this.demoDatePicker2.view()), m('li', this.demoSwitchDoc.view()), m('li', this.demoSwitch.view()), m('li', this.demoDropDownDoc.view()), m('li', this.demoDropDown1.view()), m('li', this.demoDropDown2.view()), m('li', this.demoDropDown3.view()), m('li', this.demoModalDoc.view()), m('li', this.demoModalOpenBtn1.view(), this.demoModal1.view()), m('li', this.demoModalOpenBtn2.view(), this.demoModal2.view()), m('li', this.demoTextInputDoc.view()), m('li', this.demoTextInput1.view()), m('li', this.demoTextInput2.view()), m('li', this.demoCollaspeDoc.view()), m('li', this.demoCollaspe.view()), m('li', this.demoNotifyDoc.view()), m('li', this.demoNotify1.view(), this.demoNotify2.view()), m('li', {
 	        className: 'NotifyBtnGroup'
 	      }, this.demoNotifyOpenBtn1.view(), this.demoNotifyOpenBtn1D.view(), this.demoNotifyOpenBtn1D2.view(), this.demoNotifyOpenBtn2.view()), m('li', this.demoSpinnerDoc.view()), m('li', u.spinner(style.main[4]), u.spinner(style.main[4], '5em'), u.spinner(style.main[4], '2em', '0.3s'), u.spinner(style.text[4], '5em'))), m('.Misc', m('span', 'Winter\'s ui collection'), m('a', {
 	        href: 'https://github.com/winterland1989/mui'
@@ -361,7 +392,7 @@
 	})();
 
 	s.tag(s.merge([
-	  Button.mss, DatePicker.mss, Switch.mss, DropDown.mss, Modal.mss, TextInput.mss, Collaspe.mss, Notify.mss, {
+	  Button.mss, ButtonGroup.mss, DatePicker.mss, Switch.mss, DropDown.mss, Modal.mss, TextInput.mss, Collaspe.mss, Notify.mss, {
 	    Modal: {
 	      Button: {
 	        display: 'inline-block',
@@ -4319,6 +4350,132 @@
 
 	// Generated by CoffeeScript 1.10.0
 	(function() {
+	  var Button, ButtonGroup, doneIcon, m, s, style, u,
+	    bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+	    indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+
+	  m = __webpack_require__(1);
+
+	  s = __webpack_require__(3);
+
+	  style = __webpack_require__(9);
+
+	  u = __webpack_require__(10);
+
+	  Button = __webpack_require__(8);
+
+	  doneIcon = __webpack_require__(13);
+
+	  ButtonGroup = (function() {
+	    function ButtonGroup(arg) {
+	      var ref, ref1, ref2;
+	      this.textArray = arg.textArray, this.enableArray = (ref = arg.enableArray) != null ? ref : [], this.multiSelection = (ref1 = arg.multiSelection) != null ? ref1 : true, this.onChange = (ref2 = arg.onChange) != null ? ref2 : u.noOp;
+	      this.onClickInternal = bind(this.onClickInternal, this);
+	    }
+
+	    ButtonGroup.prototype.onClickInternal = function(e) {
+	      var i, i2, t;
+	      i = parseInt(u.getCurrentTargetData(e, 'index'));
+	      t = this.textArray[i];
+	      if (this.multiSelection) {
+	        i2 = this.enableArray.indexOf(t);
+	        if (i2 === -1) {
+	          this.enableArray.push(t);
+	        } else {
+	          this.enableArray.splice(i2, 1);
+	        }
+	      } else {
+	        this.enableArray = [t];
+	      }
+	      return this.onChange(this.enableArray);
+	    };
+
+	    ButtonGroup.prototype.view = function() {
+	      var i, t;
+	      return m('ul.ButtonGroup', (function() {
+	        var j, len, ref, results;
+	        ref = this.textArray;
+	        results = [];
+	        for (i = j = 0, len = ref.length; j < len; i = ++j) {
+	          t = ref[i];
+	          if (indexOf.call(this.enableArray, t) >= 0) {
+	            results.push(m('li.EnabledBtn', {
+	              'data-index': i,
+	              onclick: this.onClickInternal
+	            }, u.svg(doneIcon), m('span', t)));
+	          } else {
+	            results.push(m('li.DisabledBtn', {
+	              'data-index': i,
+	              onclick: this.onClickInternal
+	            }, t));
+	          }
+	        }
+	        return results;
+	      }).call(this));
+	    };
+
+	    return ButtonGroup;
+
+	  })();
+
+	  ButtonGroup.mss = {
+	    ButtonGroup: {
+	      margin: 0,
+	      padding: 0,
+	      EnabledBtn_DisabledBtn: s.LineSize('2em', '1em')({
+	        position: 'relative',
+	        display: 'inline-block',
+	        margin: 0,
+	        marginRight: '1em',
+	        width: '100px',
+	        textAlign: 'center',
+	        listStyle: 'none',
+	        outline: '1px solid ' + style.main[4],
+	        $hover: {
+	          cursor: 'pointer',
+	          background: style.main[5],
+	          outline: '1px solid ' + style.main[5],
+	          color: style.text[8]
+	        },
+	        svg: {
+	          left: '0.3em',
+	          top: '0.3em',
+	          position: 'absolute',
+	          fill: style.text[8],
+	          height: '1.4em',
+	          width: '1.4em'
+	        }
+	      }),
+	      EnabledBtn: {
+	        color: style.text[8],
+	        background: style.main[4]
+	      },
+	      DisabledBtn: {
+	        color: style.main[4],
+	        background: '#fff'
+	      }
+	    }
+	  };
+
+	  module.exports = ButtonGroup;
+
+	}).call(this);
+
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var m = __webpack_require__(1);
+	module.exports = m.trust('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>');
+
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Generated by CoffeeScript 1.10.0
+	(function() {
 	  var AutoHide, DatePicker, dateIcon, hourArray, i18n, m, minuteArray, s, secondArray, style, u, x,
 	    bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
@@ -4328,13 +4485,13 @@
 
 	  u = __webpack_require__(10);
 
-	  AutoHide = __webpack_require__(13);
+	  AutoHide = __webpack_require__(15);
 
 	  style = __webpack_require__(9);
 
-	  i18n = __webpack_require__(14);
+	  i18n = __webpack_require__(16);
 
-	  dateIcon = __webpack_require__(15);
+	  dateIcon = __webpack_require__(17);
 
 	  hourArray = (function() {
 	    var j, results;
@@ -4678,7 +4835,7 @@
 
 
 /***/ },
-/* 13 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Generated by CoffeeScript 1.10.0
@@ -4746,7 +4903,7 @@
 
 
 /***/ },
-/* 14 */
+/* 16 */
 /***/ function(module, exports) {
 
 	// Generated by CoffeeScript 1.10.0
@@ -4773,7 +4930,7 @@
 
 
 /***/ },
-/* 15 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var m = __webpack_require__(1);
@@ -4781,7 +4938,7 @@
 
 
 /***/ },
-/* 16 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Generated by CoffeeScript 1.10.0
@@ -4865,7 +5022,7 @@
 
 
 /***/ },
-/* 17 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Generated by CoffeeScript 1.10.0
@@ -4881,7 +5038,7 @@
 
 	  u = __webpack_require__(10);
 
-	  AutoHide = __webpack_require__(13);
+	  AutoHide = __webpack_require__(15);
 
 	  Dropdown = (function() {
 	    function Dropdown(arg) {
@@ -5014,7 +5171,7 @@
 
 
 /***/ },
-/* 18 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Generated by CoffeeScript 1.10.0
@@ -5119,7 +5276,7 @@
 
 
 /***/ },
-/* 19 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Generated by CoffeeScript 1.10.0
@@ -5242,7 +5399,7 @@
 
 
 /***/ },
-/* 20 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Generated by CoffeeScript 1.10.0
@@ -5259,9 +5416,9 @@
 
 	  style = __webpack_require__(9);
 
-	  arrowRight = __webpack_require__(21);
+	  arrowRight = __webpack_require__(23);
 
-	  arrowDown = __webpack_require__(22);
+	  arrowDown = __webpack_require__(24);
 
 	  Collaspe = (function() {
 	    function Collaspe(arg) {
@@ -5353,7 +5510,7 @@
 
 
 /***/ },
-/* 21 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var m = __webpack_require__(1);
@@ -5361,7 +5518,7 @@
 
 
 /***/ },
-/* 22 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var m = __webpack_require__(1);
@@ -5369,7 +5526,7 @@
 
 
 /***/ },
-/* 23 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Generated by CoffeeScript 1.10.0

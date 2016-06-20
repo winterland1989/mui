@@ -49,6 +49,8 @@ index
 
 + Button, button with attachable data, prefix/suffix icon.
 
++ Button, button group with multiple selection by default.
+
 + Collaspe, aka. accordion widget.
 
 + DatePicker, a simple date picker w/wo time select.

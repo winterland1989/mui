@@ -6,6 +6,7 @@ infoIcon = require 'mmsvg/google/msvg/action/info-outline'
 msgIcon = require 'mmsvg/google/msvg/communication/message'
 
 Button = require '../Button'
+ButtonGroup = require '../ButtonGroup'
 DatePicker = require '../DatePicker'
 Switch = require '../Switch'
 DropDown = require '../Dropdown'
@@ -52,6 +53,40 @@ class Demo
                     ###
                     """
             ]
+
+        @demoBtnGroupDoc = new Collaspe
+            titleArray: ['ButtonGroup document']
+            widgetArray: [
+                view: ->
+                    m 'textarea', readonly: true,
+                    """
+                    ButtonGroup = require 'mui/ButtonGroup'
+
+                    demoBtnGroup = new ButtonGroup
+                        textArray: ['foo', 'bar', 'qux']
+                        enabledArray: []
+                        onChange: (enabledArray) => ...
+
+                    ###
+                        textArray        # [String]
+                        enabledArray     # [String]
+                        multiSelection   # Boolean
+                        onChange = ->    # ([String]) -> a
+                    ###
+                    """
+            ]
+
+
+        @demoBtnGroup = new ButtonGroup
+            textArray: ['foo', 'bar', 'qux']
+            onChange: (enabledArray) =>
+                @demoNotify1.show(msgIcon, JSON.stringify enabledArray)
+
+        @demoBtnGroup2 = new ButtonGroup
+            textArray: ['foo', 'bar', 'qux']
+            multiSelection: false
+            onChange: (enabledArray) =>
+                @demoNotify1.show(msgIcon, JSON.stringify enabledArray)
 
         @demoDatePicker1 = new DatePicker
             date: new Date()
@@ -363,6 +398,10 @@ class Demo
                 @demoButton2.view()
                 @demoButton3.view()
 
+            m 'li', @demoBtnGroupDoc.view()
+            m 'li', @demoBtnGroup.view()
+            m 'li', @demoBtnGroup2.view()
+
             m 'li', @demoDatePickerDoc.view()
             m 'li', @demoDatePicker1.view()
             m 'li', @demoDatePicker2.view()
@@ -412,6 +451,7 @@ class Demo
 
 s.tag s.merge [
     Button.mss
+    ButtonGroup.mss
     DatePicker.mss
     Switch.mss
     DropDown.mss
