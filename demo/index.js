@@ -4707,6 +4707,7 @@
 	        display: 'block',
 	        fontSize: '0.9em',
 	        width: '100%',
+	        padding: 0,
 	        textAlign: 'center',
 	        border: '1px solid ' + style.border[4],
 	        WebkitAppearance: 'none',
@@ -5124,6 +5125,7 @@
 	        lineHeight: '2em',
 	        fontSize: '0.9em',
 	        width: '100%',
+	        padding: 0,
 	        textAlign: 'center',
 	        border: '1px solid ' + style.border[4],
 	        WebkitAppearance: 'none',
@@ -5356,7 +5358,7 @@
 	  })();
 
 	  TextInput.mss = {
-	    TextInput: s.LineSize('2em', '1em')({
+	    TextInput: s.LineSize('1.93em', '1em')({
 	      width: '200px',
 	      position: 'relative',
 	      Input: {

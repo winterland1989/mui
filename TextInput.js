@@ -76,7 +76,7 @@
   })();
 
   TextInput.mss = {
-    TextInput: s.LineSize('2em', '1em')({
+    TextInput: s.LineSize('1.93em', '1em')({
       width: '200px',
       position: 'relative',
       Input: {

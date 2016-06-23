@@ -59,7 +59,9 @@ class TextInput
                 m '.ValidationMsg', @validationMsg
 
 TextInput.mss =
-    TextInput: s.LineSize('2em', '1em')
+    TextInput: s.LineSize('1.93em', '1em')
+        # why 1.93em you may ask?
+        # because it will align Dropdown, TextInput and anyother things nicely
         width: '200px'
         position: 'relative'
         Input:

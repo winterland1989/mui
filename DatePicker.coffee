@@ -167,6 +167,7 @@ DatePicker.mss =
             display: 'block'
             fontSize: '0.9em'
             width: '100%'
+            padding: 0
             textAlign: 'center'
             border: '1px solid ' + style.border[4]
             WebkitAppearance: 'none'
