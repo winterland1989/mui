@@ -76,7 +76,7 @@ Dropdown.mss =
             borderRadius: 0
         DropdownList:
             position: 'absolute'
-            top: '2em'
+            top: '1.9em'
             border: '1px solid #ccc'
             width: '198px'
             height: '200px'

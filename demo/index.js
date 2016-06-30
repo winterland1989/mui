@@ -4726,7 +4726,7 @@
 	      },
 	      DatePickerWidget: {
 	        position: 'absolute',
-	        top: '2em',
+	        top: '1.9em',
 	        left: 0,
 	        border: '1px solid ' + style.border[4],
 	        width: '248px',
@@ -5133,7 +5133,7 @@
 	      },
 	      DropdownList: {
 	        position: 'absolute',
-	        top: '2em',
+	        top: '1.9em',
 	        border: '1px solid #ccc',
 	        width: '198px',
 	        height: '200px',

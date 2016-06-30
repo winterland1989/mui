@@ -183,7 +183,7 @@ DatePicker.mss =
             left: 0
         DatePickerWidget:
             position: 'absolute'
-            top: '2em'
+            top: '1.9em'
             left: 0
             border: '1px solid ' + style.border[4]
             width: '248px'
