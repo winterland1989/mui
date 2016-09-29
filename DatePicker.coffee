@@ -142,12 +142,11 @@ class DatePicker
     setHMS: (e) =>
         hour = parseInt (u.getTargetData(e, 'hour'))
         unless isNaN hour then @date.setHours hour
-
         min = parseInt (u.getTargetData(e, 'min'))
         unless isNaN min then @date.setMinutes min
-
         second = parseInt (u.getTargetData(e, 'second'))
         unless isNaN second then @date.setSeconds second
+        @onSelect @date
 
     view: ->
         m '.DatePicker',

@@ -207,8 +207,9 @@
       }
       second = parseInt(u.getTargetData(e, 'second'));
       if (!isNaN(second)) {
-        return this.date.setSeconds(second);
+        this.date.setSeconds(second);
       }
+      return this.onSelect(this.date);
     };
 
     DatePicker.prototype.view = function() {
