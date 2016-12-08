@@ -1,6 +1,6 @@
 {
   "name": "mui-js",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "a ui library for mithril",
   "dependencies": {
     "fastclick": "^1.0.6",

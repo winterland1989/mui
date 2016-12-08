@@ -82,6 +82,11 @@ parseDateWithHMS = (dateString) ->
 # helper to format number to 2 digit
 formatXX = (x) -> if x < 10 then '0' + x.toString() else x.toString()
 
+# find first Error in Array
+firstErrorInArray = (arr) ->
+    for x in arr
+        if x instanceof Error then return x
+
 # remove an element from array and return it, return undefined if not in array
 removeFromArray = (arr, x) ->
     i = arr.indexOf x
