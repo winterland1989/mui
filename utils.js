@@ -192,6 +192,7 @@
     formatHMS: formatHMS,
     formatDateWithHMS: formatDateWithHMS,
     parseDateWithHMS: parseDateWithHMS,
+    firstErrorInArray: firstErrorInArray,
     removeFromArray: removeFromArray,
     noOp: (function() {}),
     svg: svg,

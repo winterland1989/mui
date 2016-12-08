@@ -169,6 +169,7 @@ module.exports = {
 ,   formatHMS
 ,   formatDateWithHMS
 ,   parseDateWithHMS
+,   firstErrorInArray
 ,   removeFromArray
 ,   noOp: (->)
 
