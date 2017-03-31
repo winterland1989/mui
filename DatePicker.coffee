@@ -109,9 +109,7 @@ class DatePicker
         d.setDate(0)
         @startDay = d.getDay()
         # how many days in this month?
-        d = new Date(@displayDate)
-        d.setMonth(@displayDate.getMonth() + 1)
-        d.setDate(0)
+        d = new Date(@displayDate.getFullYear(), @displayDate.getMonth() + 1, 0)
         @totalDay = d.getDate()
 
     preMonth: (e) =>

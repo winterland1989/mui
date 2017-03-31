@@ -156,9 +156,7 @@
       d = new Date(this.displayDate);
       d.setDate(0);
       this.startDay = d.getDay();
-      d = new Date(this.displayDate);
-      d.setMonth(this.displayDate.getMonth() + 1);
-      d.setDate(0);
+      d = new Date(this.displayDate.getFullYear(), this.displayDate.getMonth() + 1, 0);
       return this.totalDay = d.getDate();
     };
 
