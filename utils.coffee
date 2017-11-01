@@ -30,12 +30,6 @@ cancelBubble = (e) ->
     e.stopPropagation?()
     false
 
-# a mithril config function to scroll a Current element into view
-scrollToView = (elem, afterInit) ->
-    unless afterInit
-        if targetHasClass elem, 'Current'
-            offsetTop = elem.offsetTop
-            elem.parentNode.scrollTop = offsetTop
 
 # clear Date's hour minute and second
 clearDateHMS = (date) ->
@@ -162,7 +156,6 @@ module.exports = {
 ,   getCurrentTargetData
 ,   targetHasClass
 ,   cancelBubble
-,   scrollToView
 ,   clearDateHMS
 ,   formatXX
 ,   formatDate

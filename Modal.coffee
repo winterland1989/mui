@@ -36,11 +36,10 @@ class Modal
             m '.Modal'
             ,
                 onclick: @onClickInternal
-                config: (elem, afterInit, context) ->
-                    unless afterInit
-                        window.addEventListener 'keyup', self.onEscInternal, true
-                        context.onunload = ->
-                            window.removeEventListener 'keyup', self.onEscInternal, true
+                oncreate: ->
+                    window.addEventListener 'keyup', self.onEscInternal, true
+                onremove: ->
+                    window.removeEventListener 'keyup', self.onEscInternal, true
 
             ,   m '.HVCenter', @widget.view()
 

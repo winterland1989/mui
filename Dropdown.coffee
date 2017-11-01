@@ -22,7 +22,7 @@ class Dropdown
                     for item, i in @itemArray when ((item.indexOf @filter) != -1)
                         m 'li.DropdownItem'
                         ,
-                            config: u.scrollToView
+                            oncreate: u.scrollToView
                             key: i
                             className:
                                 (if @currentIndex == i then 'Current ' else '') +

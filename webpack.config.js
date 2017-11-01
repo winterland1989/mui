@@ -6,7 +6,7 @@
     },
     output: {
       filename: '[name].js',
-      path: './demo'
+      path: __dirname + '/demo'
     },
     module: {
       loaders: [

@@ -83,21 +83,21 @@ class DatePicker
                         m '.TimeList', onclick: @setHMS,
                             m 'ul.HourList',
                                 for hour, i in hourArray then m 'li' ,
-                                        config: u.scrollToView
+                                        oncreate: @scrollToView
                                         key: i
                                         className: if hour == u.formatXX @date.getHours() then 'Current' else ''
                                         'data-hour': hour
                                     , hour
                             m 'ul.MinuteList',
                                 for min, i in minuteArray then m 'li' ,
-                                        config: u.scrollToView
+                                        oncreate: @scrollToView
                                         key: i
                                         className: if min == u.formatXX @date.getMinutes() then 'Current' else ''
                                         'data-min': min
                                     ,   min
                             m 'ul.SecondList',
                                 for second, i in secondArray then m 'li',
-                                        config: u.scrollToView
+                                        oncreate: @scrollToView
                                         key: i
                                         className: if second == u.formatXX @date.getSeconds() then 'Current' else ''
                                         'data-second': second
@@ -111,6 +111,13 @@ class DatePicker
         # how many days in this month?
         d = new Date(@displayDate.getFullYear(), @displayDate.getMonth() + 1, 0)
         @totalDay = d.getDate()
+
+
+    scrollToView: (vnode) ->
+        elem = vnode.dom
+        if u.targetHasClass elem, 'Current'
+            offsetTop = elem.offsetTop
+            elem.parentNode.scrollTop = offsetTop
 
     preMonth: (e) =>
         @displayDate.setMonth(@displayDate.getMonth() - 1)

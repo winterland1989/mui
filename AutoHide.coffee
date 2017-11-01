@@ -25,11 +25,10 @@ class AutoHide
         self = @
         m '.HideOnBlur'
         ,
-            config: (elem, afterInit, context) ->
-                unless afterInit
-                    window.addEventListener 'click', self.onHideInternal(elem), true
-                    context.onunload = ->
-                        window.removeEventListener 'click', self.onHideInternal(elem), true
+            oncreate: (vnode) ->
+                window.addEventListener 'click', self.onHideInternal(vnode.dom), true
+            onremove: ->
+                window.removeEventListener 'click', self.onHideInternal(vnode.dom), true
 
         ,   if @showWidget then @widget.view()
 
