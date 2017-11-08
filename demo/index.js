@@ -2217,7 +2217,7 @@ module.exports = g;
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Button, ButtonGroup, Collaspe, DatePicker, Demo, DropDown, Modal, Notify, Switch, TextInput, buildIcon, delIcon, infoIcon, m, msgIcon, s, style, u;
+var Button, ButtonGroup, Collaspe, DatePicker, Demo, DropDown, Modal, Notify, Switch, TextArea, TextInput, buildIcon, delIcon, infoIcon, m, msgIcon, s, style, u;
 
 m = __webpack_require__(0);
 
@@ -2244,6 +2244,8 @@ DropDown = __webpack_require__(23);
 Modal = __webpack_require__(24);
 
 TextInput = __webpack_require__(25);
+
+TextArea = __webpack_require__(30);
 
 Collaspe = __webpack_require__(26);
 
@@ -2274,7 +2276,7 @@ Demo = (function() {
           view: function() {
             return m('textarea', {
               readonly: true
-            }, "Button = require 'mui/Button'\nbuildIcon = require 'mmsvg/google/msvg/action/build'\nu = require 'mui/utils'\n\ndemoButton = new Button\n    text: 'Build'\n    prefix: u.svg buildIcon\n\n###\n    text             # String\n    prefix           # mithril svg view\n    suffix           # mithril svg view\n    data             # HashMap\n    onClick = (->)   # (HashMap) -> a\n###");
+            }, "Button = require 'mui-js/Button'\nbuildIcon = require 'mmsvg/google/msvg/action/build'\nu = require 'mui-js/utils'\n\ndemoButton = new Button\n    text: 'Build'\n    prefix: u.svg buildIcon\n\n###\n    text             # String\n    prefix           # mithril svg view\n    suffix           # mithril svg view\n    data             # HashMap\n    onClick = (->)   # (HashMap) -> a\n###");
           }
         }
       ]
@@ -2286,7 +2288,7 @@ Demo = (function() {
           view: function() {
             return m('textarea', {
               readonly: true
-            }, "ButtonGroup = require 'mui/ButtonGroup'\n\ndemoBtnGroup = new ButtonGroup\n    textArray: ['foo', 'bar', 'qux']\n    onChange: (enabledArray) => ...\n\n###\n    textArray         # [String]\n    enabledIndexArray # [Int]\n    multiSelection    # Boolean\n    onChange = ->     # ([Int]) -> a\n###");
+            }, "ButtonGroup = require 'mui-js/ButtonGroup'\n\ndemoBtnGroup = new ButtonGroup\n    textArray: ['foo', 'bar', 'qux']\n    onChange: (enabledArray) => ...\n\n###\n    textArray         # [String]\n    enabledIndexArray # [Int]\n    multiSelection    # Boolean\n    onChange = ->     # ([Int]) -> a\n###");
           }
         }
       ]
@@ -2322,7 +2324,7 @@ Demo = (function() {
           view: function() {
             return m('textarea', {
               readonly: true
-            }, "# modify i18n before use\nDatePicker = require 'mui/DatePicker'\n\ndemoDatePicker2 = new DatePicker\n    date: new Date()\n    selectTime: true\n\n###\n    date                         # Date\n    selectTime                   # Boolean\n    ifDateAvailable = (-> true)  # (Date) -> Boolean\n    onSelect = (->)              # (Date) -> a\n###");
+            }, "# modify i18n before use\nDatePicker = require 'mui-js/DatePicker'\n\ndemoDatePicker2 = new DatePicker\n    date: new Date()\n    selectTime: true\n\n###\n    date                         # Date\n    selectTime                   # Boolean\n    ifDateAvailable = (-> true)  # (Date) -> Boolean\n    onSelect = (->)              # (Date) -> a\n###");
           }
         }
       ]
@@ -2337,7 +2339,7 @@ Demo = (function() {
           view: function() {
             return m('textarea', {
               readonly: true
-            }, "Switch = require 'mui/Switch'\n\ndemoSwitch = new Switch\n    enable: true\n\n###\n    enable = true       # Boolean\n    onToggle = ( -> )   # (Boolean) -> a\n###");
+            }, "Switch = require 'mui-js/Switch'\n\ndemoSwitch = new Switch\n    enable: true\n\n###\n    enable = true       # Boolean\n    onToggle = ( -> )   # (Boolean) -> a\n###");
           }
         }
       ]
@@ -2368,7 +2370,7 @@ Demo = (function() {
           view: function() {
             return m('textarea', {
               readonly: true
-            }, "DropDown = require 'mui/Dropdown'\n\ndemoDropDown3 = new DropDown\n    itemArray: (i.toString() for i in [1..100])\n    currentIndex: 20\n\n###\n    itemArray               # [String]\n    currentIndex            # Int | Undefined\n    placeholder  = ''       # String\n    onSelect = (->)         # (String, Int) -> ...\n    ifAvailable = (-> true) # (String, Int) -> ture | false\n###");
+            }, "DropDown = require 'mui-js/Dropdown'\n\ndemoDropDown3 = new DropDown\n    itemArray: (i.toString() for i in [1..100])\n    currentIndex: 20\n\n###\n    itemArray               # [String]\n    currentIndex            # Int | Undefined\n    placeholder  = ''       # String\n    onSelect = (->)         # (String, Int) -> ...\n    ifAvailable = (-> true) # (String, Int) -> ture | false\n###");
           }
         }
       ]
@@ -2410,7 +2412,7 @@ Demo = (function() {
           view: function() {
             return m('textarea', {
               readonly: true
-            }, "Modal = require 'mui/Modal'\n# make sure widget inside is a block element\n\ndemoModal1 = new Modal\n    clickToHide: true\n    widget: view: ->\n        m 'h2'\n        ,\n            style:\n                width: '200px'\n                margin: '0 auto'\n                background: '#fff'\n        ,'Close anywhere  else to close'\n\n###\n    widget                 # mithril view\n    clickToHide = true     # Boolean\n    escToHide = true       # Boolean\n    onHide = ( -> )        # () -> a\n###");
+            }, "Modal = require 'mui-js/Modal'\n# make sure widget inside is a block element\n\ndemoModal1 = new Modal\n    clickToHide: true\n    widget: view: ->\n        m 'h2'\n        ,\n            style:\n                width: '200px'\n                margin: '0 auto'\n                background: '#fff'\n        ,'Close anywhere  else to close'\n\n###\n    widget                 # mithril view\n    clickToHide = true     # Boolean\n    escToHide = true       # Boolean\n    onHide = ( -> )        # () -> a\n###");
           }
         }
       ]
@@ -2445,7 +2447,27 @@ Demo = (function() {
           view: function() {
             return m('textarea', {
               readonly: true
-            }, "TextInput = require 'mui/TextInput'\n\ndemoTextInput = new TextInput\n    onChange: (str) ->\n        if str != 'ya!'\n            new Error 'please input \"ya!\"'\n\n###\n    content = ''           # String\n    disabled = false       # Boolean\n    placeholder = ''       # String\n    onChange = u.noOp      # (String) -> a | Error\n                           # triggered on Blur or user stroke Enter\n    onKeyup  = u.noOp      # (String) -> a | Error\n                           # triggered when user stroke non-Enters\n    onEnter  = u.noOp      # (String) -> a | Error\n                           # triggered when user stroke Enter\n###");
+            }, "TextInput = require 'mui-js/TextInput'\n\ndemoTextInput = new TextInput\n    onChange: (str) ->\n        if str != 'ya!'\n            new Error 'please input \"ya!\"'\n\n###\n    content = ''           # String\n    disabled = false       # Boolean\n    placeholder = ''       # String\n    onChange = u.noOp      # (String) -> a | Error\n                           # triggered on Blur or user stroke Enter\n    onKeyup  = u.noOp      # (String) -> a | Error\n                           # triggered when user stroke non-Enters\n    onEnter  = u.noOp      # (String) -> a | Error\n                           # triggered when user stroke Enter\n###");
+          }
+        }
+      ]
+    });
+    this.demoTextArea = new TextArea({
+      placeholder: 'type digits and enter!',
+      onChange: function(str) {
+        if (!/^\d+$/.test(str)) {
+          return new Error('please input some digits');
+        }
+      }
+    });
+    this.demoTextAreaDoc = new Collaspe({
+      titleArray: ['TextArea document'],
+      widgetArray: [
+        {
+          view: function() {
+            return m('textarea', {
+              readonly: true
+            }, "TextArea = require 'mui-js/TextArea'\n\ndemoTextArea = new TextArea\n    onChange: (str) ->\n        if str != 'ya!'\n            new Error 'please input \"ya!\"'\n\n###\n    content = ''           # String\n    disabled = false       # Boolean\n    placeholder = ''       # String\n    onChange = u.noOp      # (String) -> a | Error\n                           # triggered on Blur or user stroke Enter\n    onKeyup  = u.noOp      # (String) -> a | Error\n                           # triggered when user stroke non-Enters\n    resize = 'none'        # none | both | horizontal | vertical\n                           # textarea resize attribute\n    rows = 5               # Number\n                           # an easier way to control height instead of inject MSS\n###");
           }
         }
       ]
@@ -2473,7 +2495,7 @@ Demo = (function() {
           view: function() {
             return m('textarea', {
               readonly: true
-            }, "Collaspe = require 'mui/Collaspe'\n\ndemoCollaspe = new Collaspe\n    titleArray: ['Hello', 'Byte']\n    expandedIndexArray: [1]\n    autoCollaspe: true\n    widgetArray: [\n        view: ->\n            m 'span', 'hello world'\n    ,\n        view: ->\n            m 'span', 'bye world'\n    ]\n\n###\n    titleArray                # [String]\n    widgetArray               # [mithril widget]\n    autoCollaspe = false      # Boolean\n    expandedIndexArray = []   # [Int]\n    onExpand   = (->)         # Int -> a\n    onCollaspe = (->)         # Int -> a\n###");
+            }, "Collaspe = require 'mui-js/Collaspe'\n\ndemoCollaspe = new Collaspe\n    titleArray: ['Hello', 'Byte']\n    expandedIndexArray: [1]\n    autoCollaspe: true\n    widgetArray: [\n        view: ->\n            m 'span', 'hello world'\n    ,\n        view: ->\n            m 'span', 'bye world'\n    ]\n\n###\n    titleArray                # [String]\n    widgetArray               # [mithril widget]\n    autoCollaspe = false      # Boolean\n    expandedIndexArray = []   # [Int]\n    onExpand   = (->)         # Int -> a\n    onCollaspe = (->)         # Int -> a\n###");
           }
         }
       ]
@@ -2529,7 +2551,7 @@ Demo = (function() {
           view: function() {
             return m('textarea', {
               readonly: true
-            }, "Notify = require 'mui/Notify'\n\ndemoNotify1 = new Notify {}\n\ndemoNotifyOpenBtn1 = new Button\n   text: 'Open a notify'\n   onClick: => @demoNotify1.show(msgIcon, 'this is a notify')\n\ndemoNotify2 = new Notify\n   onClick: ({foo}) => alert foo\n\ndemoNotifyOpenBtn2 = new Button\n   text: 'Open a notify'\n    onClick: => @demoNotify2.show(msgIcon, 'click me', foo: 'bar')\n\n###\n    duration = 3000        # Int\n    onClick = ( -> )       # data -> a\n    show                   # (icon :: mithril svg, content :: String, data :: HashMap) -> undefined\n###");
+            }, "Notify = require 'mui-js/Notify'\n\ndemoNotify1 = new Notify {}\n\ndemoNotifyOpenBtn1 = new Button\n   text: 'Open a notify'\n   onClick: => @demoNotify1.show(msgIcon, 'this is a notify')\n\ndemoNotify2 = new Notify\n   onClick: ({foo}) => alert foo\n\ndemoNotifyOpenBtn2 = new Button\n   text: 'Open a notify'\n    onClick: => @demoNotify2.show(msgIcon, 'click me', foo: 'bar')\n\n###\n    duration = 3000        # Int\n    onClick = ( -> )       # data -> a\n    show                   # (icon :: mithril svg, content :: String, data :: HashMap) -> undefined\n###");
           }
         }
       ]
@@ -2550,7 +2572,7 @@ Demo = (function() {
 
   Demo.prototype.view = function() {
     return [
-      m('ul.Demo', m('li', this.demoButtonDoc.view()), m('li', this.demoButton1.view(), this.demoButton2.view(), this.demoButton3.view()), m('li', this.demoBtnGroupDoc.view()), m('li', this.demoBtnGroup.view()), m('li', this.demoBtnGroup2.view()), m('li', this.demoDatePickerDoc.view()), m('li', this.demoDatePicker1.view()), m('li', this.demoDatePicker2.view()), m('li', this.demoSwitchDoc.view()), m('li', this.demoSwitch.view()), m('li', this.demoDropDownDoc.view()), m('li', this.demoDropDown1.view()), m('li', this.demoDropDown2.view()), m('li', this.demoDropDown3.view()), m('li', this.demoModalDoc.view()), m('li', this.demoModalOpenBtn1.view(), this.demoModal1.view()), m('li', this.demoModalOpenBtn2.view(), this.demoModal2.view()), m('li', this.demoTextInputDoc.view()), m('li', this.demoTextInput1.view()), m('li', this.demoTextInput2.view()), m('li', this.demoCollaspeDoc.view()), m('li', this.demoCollaspe.view()), m('li', this.demoNotifyDoc.view()), m('li', this.demoNotify1.view(), this.demoNotify2.view()), m('li', {
+      m('ul.Demo', m('li', this.demoButtonDoc.view()), m('li', this.demoButton1.view(), this.demoButton2.view(), this.demoButton3.view()), m('li', this.demoBtnGroupDoc.view()), m('li', this.demoBtnGroup.view()), m('li', this.demoBtnGroup2.view()), m('li', this.demoDatePickerDoc.view()), m('li', this.demoDatePicker1.view()), m('li', this.demoDatePicker2.view()), m('li', this.demoSwitchDoc.view()), m('li', this.demoSwitch.view()), m('li', this.demoDropDownDoc.view()), m('li', this.demoDropDown1.view()), m('li', this.demoDropDown2.view()), m('li', this.demoDropDown3.view()), m('li', this.demoModalDoc.view()), m('li', this.demoModalOpenBtn1.view(), this.demoModal1.view()), m('li', this.demoModalOpenBtn2.view(), this.demoModal2.view()), m('li', this.demoTextInputDoc.view()), m('li', this.demoTextInput1.view()), m('li', this.demoTextInput2.view()), m('li', this.demoTextAreaDoc.view()), m('li', this.demoTextArea.view()), m('li', this.demoCollaspeDoc.view()), m('li', this.demoCollaspe.view()), m('li', this.demoNotifyDoc.view()), m('li', this.demoNotify1.view(), this.demoNotify2.view()), m('li', {
         className: 'NotifyBtnGroup'
       }, this.demoNotifyOpenBtn1.view(), this.demoNotifyOpenBtn1D.view(), this.demoNotifyOpenBtn1D2.view(), this.demoNotifyOpenBtn2.view()), m('li', this.demoSpinnerDoc.view()), m('li', u.spinner(style.main[4]), u.spinner(style.main[4], '5em'), u.spinner(style.main[4], '2em', '0.3s'), u.spinner(style.text[4], '5em'))), m('.Misc', m('span', 'Winter\'s ui collection'), m('a', {
         href: 'https://github.com/winterland1989/mui'
@@ -2565,7 +2587,7 @@ Demo = (function() {
 })();
 
 s.tag(s.merge([
-  Button.mss, ButtonGroup.mss, DatePicker.mss, Switch.mss, DropDown.mss, Modal.mss, TextInput.mss, Collaspe.mss, Notify.mss, {
+  Button.mss, ButtonGroup.mss, DatePicker.mss, Switch.mss, DropDown.mss, Modal.mss, TextInput.mss, TextArea.mss, Collaspe.mss, Notify.mss, {
     Modal: {
       Button: {
         display: 'inline-block',
@@ -5219,6 +5241,113 @@ module.exports = m.trust('<svg xmlns="http://www.w3.org/2000/svg" width="24" hei
   };
 
   module.exports = Notify;
+
+}).call(this);
+
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Generated by CoffeeScript 1.12.7
+(function() {
+  var TextArea, m, s, style, u,
+    bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+  m = __webpack_require__(0);
+
+  s = __webpack_require__(2);
+
+  style = __webpack_require__(3);
+
+  u = __webpack_require__(1);
+
+  TextArea = (function() {
+    function TextArea(arg) {
+      var ref, ref1, ref2, ref3, ref4, ref5, ref6;
+      this.content = (ref = arg.content) != null ? ref : '', this.disabled = (ref1 = arg.disabled) != null ? ref1 : false, this.placeholder = (ref2 = arg.placeholder) != null ? ref2 : '', this.onChange = (ref3 = arg.onChange) != null ? ref3 : u.noOp, this.onKeyup = (ref4 = arg.onKeyup) != null ? ref4 : u.noOp, this.resize = (ref5 = arg.resize) != null ? ref5 : 'none', this.rows = (ref6 = arg.rows) != null ? ref6 : 5;
+      this.onkeyupInternal = bind(this.onkeyupInternal, this);
+      this.onChangeInternal = bind(this.onChangeInternal, this);
+      this.validationMsg = '';
+    }
+
+    TextArea.prototype.submit = function() {
+      if (this.validationMsg === '') {
+        return this.content;
+      } else {
+        return new Error(this.validationMsg);
+      }
+    };
+
+    TextArea.prototype.validateInternal = function(c) {};
+
+    TextArea.prototype.onChangeInternal = function(e) {
+      var c, err;
+      c = (u.getTarget(e)).value;
+      err = this.onChange(c);
+      this.validationMsg = '';
+      if (err instanceof Error) {
+        this.validationMsg = err.message;
+      }
+      return this.content = c;
+    };
+
+    TextArea.prototype.onkeyupInternal = function(e) {
+      var c, err;
+      c = (u.getTarget(e)).value;
+      this.content = c;
+      err = this.onKeyup(c);
+      this.validationMsg = '';
+      if (err instanceof Error) {
+        return this.validationMsg = err.message;
+      }
+    };
+
+    TextArea.prototype.view = function() {
+      return m('.TextArea', m('textarea.Input', {
+        disabled: this.disabled,
+        onchange: this.onChangeInternal,
+        onkeyup: this.onkeyupInternal,
+        value: this.content,
+        placeholder: this.placeholder,
+        rows: this.rows,
+        style: {
+          resize: this.resize
+        }
+      }), this.validationMsg !== '' ? m('.ValidationMsg', this.validationMsg) : void 0);
+    };
+
+    return TextArea;
+
+  })();
+
+  TextArea.mss = {
+    TextArea: {
+      position: 'relative',
+      width: '400px',
+      Input: {
+        display: 'block',
+        border: '1px solid ' + style.border[4],
+        fontSize: '1em',
+        padding: '0 0.4em',
+        WebkitAppearance: 'none',
+        borderRadius: 0,
+        width: '100%'
+      },
+      ValidationMsg: s.LineSize('1.93em', '1em')({
+        background: style.warn[5],
+        color: style.text[8],
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        textAlign: 'center',
+        zIndex: 99,
+        width: '100%'
+      })
+    }
+  };
+
+  module.exports = TextArea;
 
 }).call(this);
 

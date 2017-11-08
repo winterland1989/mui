@@ -12,6 +12,7 @@ Switch = require '../Switch'
 DropDown = require '../Dropdown'
 Modal = require '../Modal'
 TextInput = require '../TextInput'
+TextArea = require '../TextArea'
 Collaspe = require '../Collaspe'
 Notify = require '../Notify'
 u = require '../utils'
@@ -36,9 +37,9 @@ class Demo
                 view: ->
                     m 'textarea', readonly: true,
                     """
-                    Button = require 'mui/Button'
+                    Button = require 'mui-js/Button'
                     buildIcon = require 'mmsvg/google/msvg/action/build'
-                    u = require 'mui/utils'
+                    u = require 'mui-js/utils'
 
                     demoButton = new Button
                         text: 'Build'
@@ -60,7 +61,7 @@ class Demo
                 view: ->
                     m 'textarea', readonly: true,
                     """
-                    ButtonGroup = require 'mui/ButtonGroup'
+                    ButtonGroup = require 'mui-js/ButtonGroup'
 
                     demoBtnGroup = new ButtonGroup
                         textArray: ['foo', 'bar', 'qux']
@@ -101,7 +102,7 @@ class Demo
                     m 'textarea', readonly: true,
                     """
                     # modify i18n before use
-                    DatePicker = require 'mui/DatePicker'
+                    DatePicker = require 'mui-js/DatePicker'
 
                     demoDatePicker2 = new DatePicker
                         date: new Date()
@@ -125,7 +126,7 @@ class Demo
                 view: ->
                     m 'textarea', readonly: true,
                     """
-                    Switch = require 'mui/Switch'
+                    Switch = require 'mui-js/Switch'
 
                     demoSwitch = new Switch
                         enable: true
@@ -155,7 +156,7 @@ class Demo
                 view: ->
                     m 'textarea', readonly: true,
                     """
-                    DropDown = require 'mui/Dropdown'
+                    DropDown = require 'mui-js/Dropdown'
 
                     demoDropDown3 = new DropDown
                         itemArray: (i.toString() for i in [1..100])
@@ -206,7 +207,7 @@ class Demo
                 view: ->
                     m 'textarea', readonly: true,
                     """
-                    Modal = require 'mui/Modal'
+                    Modal = require 'mui-js/Modal'
                     # make sure widget inside is a block element
 
                     demoModal1 = new Modal
@@ -251,7 +252,7 @@ class Demo
                 view: ->
                     m 'textarea', readonly: true,
                     """
-                    TextInput = require 'mui/TextInput'
+                    TextInput = require 'mui-js/TextInput'
 
                     demoTextInput = new TextInput
                         onChange: (str) ->
@@ -268,6 +269,41 @@ class Demo
                                                # triggered when user stroke non-Enters
                         onEnter  = u.noOp      # (String) -> a | Error
                                                # triggered when user stroke Enter
+                    ###
+                    """
+            ]
+
+        @demoTextArea = new TextArea
+            placeholder: 'type digits and enter!'
+            onChange: (str) ->
+                unless (/^\d+$/).test str
+                    new Error 'please input some digits'
+
+        @demoTextAreaDoc = new Collaspe
+            titleArray: ['TextArea document']
+            widgetArray: [
+                view: ->
+                    m 'textarea', readonly: true,
+                    """
+                    TextArea = require 'mui-js/TextArea'
+
+                    demoTextArea = new TextArea
+                        onChange: (str) ->
+                            if str != 'ya!'
+                                new Error 'please input "ya!"'
+
+                    ###
+                        content = ''           # String
+                        disabled = false       # Boolean
+                        placeholder = ''       # String
+                        onChange = u.noOp      # (String) -> a | Error
+                                               # triggered on Blur or user stroke Enter
+                        onKeyup  = u.noOp      # (String) -> a | Error
+                                               # triggered when user stroke non-Enters
+                        resize = 'none'        # none | both | horizontal | vertical
+                                               # textarea resize attribute
+                        rows = 5               # Number
+                                               # an easier way to control height instead of inject MSS
                     ###
                     """
             ]
@@ -290,7 +326,7 @@ class Demo
                 view: ->
                     m 'textarea', readonly: true,
                     """
-                    Collaspe = require 'mui/Collaspe'
+                    Collaspe = require 'mui-js/Collaspe'
 
                     demoCollaspe = new Collaspe
                         titleArray: ['Hello', 'Byte']
@@ -347,7 +383,7 @@ class Demo
                 view: ->
                     m 'textarea', readonly: true,
                     """
-                    Notify = require 'mui/Notify'
+                    Notify = require 'mui-js/Notify'
 
                     demoNotify1 = new Notify {}
 
@@ -421,6 +457,9 @@ class Demo
             m 'li', @demoTextInput1.view()
             m 'li', @demoTextInput2.view()
 
+            m 'li', @demoTextAreaDoc.view()
+            m 'li', @demoTextArea.view()
+
             m 'li', @demoCollaspeDoc.view()
             m 'li', @demoCollaspe.view()
 
@@ -456,6 +495,7 @@ s.tag s.merge [
     DropDown.mss
     Modal.mss
     TextInput.mss
+    TextArea.mss
     Collaspe.mss
     Notify.mss
 
