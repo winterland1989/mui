@@ -10,8 +10,12 @@ class TextArea
     ,   @placeholder = ''       # String
     ,   @onChange = u.noOp      # (String) -> a | Error
                                 # triggered on Blur or user stroke Enter
+    ,   @onKeydown = u.noOp     # (String) -> a | Error
+                                # triggered when user press key
     ,   @onKeyup  = u.noOp      # (String) -> a | Error
-                                # triggered when user stroke non-Enters
+                                # triggered when user release key
+    ,   @allowTab = false       # Boolean
+                                # allow user input `\t` with tab key
     ,   @resize = 'none'        # none | both | horizontal | vertical
                                 # textarea resize attribute
     ,   @rows = 5               # Number
@@ -42,12 +46,32 @@ class TextArea
         if err instanceof Error
             @validationMsg = err.message
 
+    onkeydownInternal: (e) =>
+        c = (u.getTarget e).value
+        if @allowTab
+            keyCode = e.keyCode || e.which
+            if (keyCode == 9)
+                e.preventDefault()
+                target = u.getTarget e
+                start = target.selectionStart
+                end = target.selectionEnd
+                @content = c.substring(0, start) + '\t' + c.substring(end)
+                target.selectionStart =
+                target.selectionEnd = start + 1
+        else
+            @content = c
+        err = @onKeydown @content
+        @validationMsg = ''
+        if err instanceof Error
+            @validationMsg = err.message
+
     view: ->
         m '.TextArea',
             m 'textarea.Input',
                 disabled: @disabled
                 onchange: @onChangeInternal
                 onkeyup: @onkeyupInternal
+                onkeydown: @onkeydownInternal
                 value: @content
                 placeholder: @placeholder
                 rows: @rows

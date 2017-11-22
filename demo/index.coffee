@@ -279,6 +279,10 @@ class Demo
                 unless (/^\d+$/).test str
                     new Error 'please input some digits'
 
+        @demoTextArea2 = new TextArea
+            placeholder: 'this textarea allow tab key'
+            allowTab: true
+
         @demoTextAreaDoc = new Collaspe
             titleArray: ['TextArea document']
             widgetArray: [
@@ -459,6 +463,7 @@ class Demo
 
             m 'li', @demoTextAreaDoc.view()
             m 'li', @demoTextArea.view()
+            m 'li', @demoTextArea2.view()
 
             m 'li', @demoCollaspeDoc.view()
             m 'li', @demoCollaspe.view()
