@@ -17,6 +17,7 @@ Collaspe = require '../Collaspe'
 Notify = require '../Notify'
 u = require '../utils'
 style = require '../style'
+tableView = require '../tableView'
 
 class Demo
     constructor: ->
@@ -260,15 +261,21 @@ class Demo
                                 new Error 'please input "ya!"'
 
                     ###
-                        content = ''           # String
-                        disabled = false       # Boolean
-                        placeholder = ''       # String
-                        onChange = u.noOp      # (String) -> a | Error
-                                               # triggered on Blur or user stroke Enter
-                        onKeyup  = u.noOp      # (String) -> a | Error
-                                               # triggered when user stroke non-Enters
-                        onEnter  = u.noOp      # (String) -> a | Error
-                                               # triggered when user stroke Enter
+                        @content = ''           # String
+                        @disabled = false       # Boolean
+                        @placeholder = ''       # String
+                        @onChange = u.noOp      # (String) -> a | Error
+                                                # triggered on Blur or user stroke Enter
+                        @onKeydown = u.noOp     # (String) -> a | Error
+                                                # triggered when user press key
+                        @onKeyup  = u.noOp      # (String) -> a | Error
+                                                # triggered when user release key
+                        @allowTab = false       # Boolean
+                                                # allow user input `\t` with tab key
+                        @resize = 'none'        # none | both | horizontal | vertical
+                                                # textarea resize attribute
+                        @rows = 5               # Number
+                                                # an easier way to control height instead of inject MSS
                     ###
                     """
             ]
@@ -308,6 +315,46 @@ class Demo
                                                # textarea resize attribute
                         rows = 5               # Number
                                                # an easier way to control height instead of inject MSS
+                    ###
+                    """
+            ]
+
+        @demoTableViewColMap =
+            name: '名称'
+            age: '年龄'
+            salary: '工资'
+
+        @demoTableViewData =
+            [ {name: 'Joe', age: 24, salary: 10000}
+            , {name: 'Kia', age: 13, salary: 20000}
+            , {name: 'Lee', age: 14, salary: 40000}
+            ]
+
+        @demoTableViewDoc = new Collaspe
+            titleArray: ['tableView document']
+            widgetArray: [
+                view: ->
+                    m 'textarea', readonly: true,
+                    """
+                    tableView = require 'mui-js/tableView'
+
+                    demoTableViewColMap =
+                        name: '名称'
+                        age: '年龄'
+                        salary: '工资'
+
+                    demoTableViewData =
+                        [ {name: 'Joe', age: 24, salary: 10000}
+                        , {name: 'Kia', age: 13, salary: 20000}
+                        , {name: 'Lee', age: 14, salary: 40000}
+                        ]
+
+                    tableView(demoTableViewColMap, demoTableViewData)
+                    ###
+                        colMap                 # HashMap
+                                               # map key to column label
+                        data                   # Array of HashMap
+                                               # array of table data
                     ###
                     """
             ]
@@ -465,6 +512,10 @@ class Demo
             m 'li', @demoTextArea.view()
             m 'li', @demoTextArea2.view()
 
+
+            m 'li', @demoTableViewDoc.view()
+            m 'li', tableView(@demoTableViewColMap, @demoTableViewData)
+
             m 'li', @demoCollaspeDoc.view()
             m 'li', @demoCollaspe.view()
 
@@ -503,6 +554,7 @@ s.tag s.merge [
     TextArea.mss
     Collaspe.mss
     Notify.mss
+    tableView.mss
 
     Modal:
         Button:
