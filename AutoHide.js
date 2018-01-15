@@ -45,7 +45,7 @@
         oncreate: function(vnode) {
           return window.addEventListener('click', self.onHideInternal(vnode.dom), true);
         },
-        onremove: function() {
+        onremove: function(vnode) {
           return window.removeEventListener('click', self.onHideInternal(vnode.dom), true);
         }
       }, this.showWidget ? this.widget.view() : void 0);

@@ -27,7 +27,7 @@ class AutoHide
         ,
             oncreate: (vnode) ->
                 window.addEventListener 'click', self.onHideInternal(vnode.dom), true
-            onremove: ->
+            onremove: (vnode) ->
                 window.removeEventListener 'click', self.onHideInternal(vnode.dom), true
 
         ,   if @showWidget then @widget.view()
