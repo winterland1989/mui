@@ -1,8 +1,5 @@
 m = require 'mithril'
 
-fastclick = require 'fastclick'
-fastclick.attach document.body
-
 # get event's target
 getTarget = (event) -> elem = event.target || event.srcElement
 
