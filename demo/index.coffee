@@ -12,9 +12,11 @@ Switch = require '../Switch'
 DropDown = require '../Dropdown'
 Modal = require '../Modal'
 TextInput = require '../TextInput'
+TagInput  =require '../TagInput'
 TextArea = require '../TextArea'
 Collaspe = require '../Collaspe'
 Notify = require '../Notify'
+
 u = require '../utils'
 style = require '../style'
 tableView = require '../tableView'
@@ -265,20 +267,37 @@ class Demo
                         @disabled = false       # Boolean
                         @placeholder = ''       # String
                         @onChange = u.noOp      # (String) -> a | Error
-                                                # triggered on Blur or user stroke Enter
-                        @onKeydown = u.noOp     # (String) -> a | Error
-                                                # triggered when user press key
+                                                # triggered on Blur
+                        @onEnter = u.noOp       # (String) -> a | Error
+                                                # triggered when user release Enter
                         @onKeyup  = u.noOp      # (String) -> a | Error
                                                 # triggered when user release key
-                        @allowTab = false       # Boolean
-                                                # allow user input `\t` with tab key
-                        @resize = 'none'        # none | both | horizontal | vertical
-                                                # textarea resize attribute
-                        @rows = 5               # Number
-                                                # an easier way to control height instead of inject MSS
                     ###
                     """
             ]
+
+        @demoTagInputDoc = new Collaspe
+            titleArray: ['TagInput document']
+            widgetArray: [
+                view: ->
+                    m 'textarea', readonly: true,
+                    """
+                    TagInput = require 'mui-js/TagInput'
+
+                    @demoTagInput = new TagInput
+                        tagList: ['foo', 'bar', 'qux']
+
+                    ###
+                        @tagList = []         # List of String
+                        placeholder = ''      # String, placeholder of tag input
+                        @onAdd = u.noOp       # (String) -> a, triggered on tag adding
+                        @onDel = u.noOp       # (Int) -> a, triggered on tag deleting
+                    ###
+                    """
+            ]
+
+        @demoTagInput = new TagInput
+            tagList: ['foo', 'bar', 'qux']
 
         @demoTextArea = new TextArea
             placeholder: 'type digits and enter!'
@@ -508,6 +527,9 @@ class Demo
             m 'li', @demoTextInput1.view()
             m 'li', @demoTextInput2.view()
 
+            m 'li', @demoTagInputDoc.view()
+            m 'li', @demoTagInput.view()
+
             m 'li', @demoTextAreaDoc.view()
             m 'li', @demoTextArea.view()
             m 'li', @demoTextArea2.view()
@@ -551,6 +573,7 @@ s.tag s.merge [
     DropDown.mss
     Modal.mss
     TextInput.mss
+    TagInput.mss
     TextArea.mss
     Collaspe.mss
     Notify.mss
