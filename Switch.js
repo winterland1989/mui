@@ -56,6 +56,7 @@
       }
     },
     Switch: {
+      display: 'inline-block',
       position: 'relative',
       $hover: {
         background: style.main[5],

@@ -42,6 +42,7 @@ Switch.mss =
             left: '1em'
 
     Switch:
+        display: 'inline-block'
         position: 'relative'
         $hover:
             background: style.main[5]

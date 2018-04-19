@@ -9,6 +9,7 @@ Button = require '../Button'
 ButtonGroup = require '../ButtonGroup'
 DatePicker = require '../DatePicker'
 Switch = require '../Switch'
+CheckBox  =require '../CheckBox'
 DropDown = require '../Dropdown'
 Modal = require '../Modal'
 TextInput = require '../TextInput'
@@ -132,6 +133,27 @@ class Demo
                     Switch = require 'mui-js/Switch'
 
                     demoSwitch = new Switch
+                        enable: true
+
+                    ###
+                        enable = true       # Boolean
+                        onToggle = ( -> )   # (Boolean) -> a
+                    ###
+                    """
+            ]
+
+        @demoCheckBox = new CheckBox
+            enable: true
+
+        @demoCheckBoxDoc = new Collaspe
+            titleArray: ['CheckBox document']
+            widgetArray: [
+                view: ->
+                    m 'textarea', readonly: true,
+                    """
+                    CheckBox = require 'mui-js/CheckBox'
+
+                    demoCheckBox = new CheckBox
                         enable: true
 
                     ###
@@ -514,6 +536,9 @@ class Demo
             m 'li', @demoSwitchDoc.view()
             m 'li', @demoSwitch.view()
 
+            m 'li', @demoCheckBoxDoc.view()
+            m 'li', @demoCheckBox.view()
+
             m 'li', @demoDropDownDoc.view()
             m 'li', @demoDropDown1.view()
             m 'li', @demoDropDown2.view()
@@ -570,6 +595,7 @@ s.tag s.merge [
     ButtonGroup.mss
     DatePicker.mss
     Switch.mss
+    CheckBox.mss
     DropDown.mss
     Modal.mss
     TextInput.mss
