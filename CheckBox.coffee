@@ -24,15 +24,16 @@ class CheckBox
 CheckBox.mss =
     CheckBox:
         display: 'inline-block'
-        width: '1.1em'
-        height: '1.1em'
-        lineHeight: '1.1em'
+        width: '1em'
+        height: '1em'
+        lineHeight: '1em'
         textAlign: 'center'
         cursor: 'pointer'
         border: '1px solid ' + style.main[4]
         color: style.main[4]
         borderRadius: '0.2em'
         verticalAlign: 'middle'
+        userSelect: 'none'
 
     '.CheckBox.Enabled':
         background: style.main[4]

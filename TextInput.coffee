@@ -14,6 +14,8 @@ class TextInput
                                 # triggered when user stroke non-Enters
     ,   @onEnter  = u.noOp      # (String) -> a | Error
                                 # triggered when user stroke Enter
+    ,   @onClick = u.noOp       # () -> a
+                                # triggered when user click the input
 
     }) ->
 
@@ -55,6 +57,7 @@ class TextInput
                 onkeyup: @onkeyupInternal
                 value: @content
                 placeholder: @placeholder
+                onclick: @onClick
             if @validationMsg != ''
                 m '.ValidationMsg', @validationMsg
 

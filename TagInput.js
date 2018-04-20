@@ -29,7 +29,8 @@
     TagInput.prototype.addTag = function(tag) {
       if (this.tagList.indexOf(tag) === -1) {
         this.tagList.push(tag);
-        return this.onAdd(tag);
+        this.onAdd(tag);
+        return this.tagInput.content = '';
       }
     };
 

@@ -13,8 +13,8 @@
 
   TextInput = (function() {
     function TextInput(arg) {
-      var ref, ref1, ref2, ref3, ref4, ref5;
-      this.content = (ref = arg.content) != null ? ref : '', this.disabled = (ref1 = arg.disabled) != null ? ref1 : false, this.placeholder = (ref2 = arg.placeholder) != null ? ref2 : '', this.onChange = (ref3 = arg.onChange) != null ? ref3 : u.noOp, this.onKeyup = (ref4 = arg.onKeyup) != null ? ref4 : u.noOp, this.onEnter = (ref5 = arg.onEnter) != null ? ref5 : u.noOp;
+      var ref, ref1, ref2, ref3, ref4, ref5, ref6;
+      this.content = (ref = arg.content) != null ? ref : '', this.disabled = (ref1 = arg.disabled) != null ? ref1 : false, this.placeholder = (ref2 = arg.placeholder) != null ? ref2 : '', this.onChange = (ref3 = arg.onChange) != null ? ref3 : u.noOp, this.onKeyup = (ref4 = arg.onKeyup) != null ? ref4 : u.noOp, this.onEnter = (ref5 = arg.onEnter) != null ? ref5 : u.noOp, this.onClick = (ref6 = arg.onClick) != null ? ref6 : u.noOp;
       this.onkeyupInternal = bind(this.onkeyupInternal, this);
       this.onChangeInternal = bind(this.onChangeInternal, this);
       this.validationMsg = '';
@@ -67,7 +67,8 @@
         onchange: this.onChangeInternal,
         onkeyup: this.onkeyupInternal,
         value: this.content,
-        placeholder: this.placeholder
+        placeholder: this.placeholder,
+        onclick: this.onClick
       }), this.validationMsg !== '' ? m('.ValidationMsg', this.validationMsg) : void 0);
     };
 

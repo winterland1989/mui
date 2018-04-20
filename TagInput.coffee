@@ -20,6 +20,7 @@ class TagInput
         if @tagList.indexOf(tag) == -1
             @tagList.push tag
             @onAdd(tag)
+            @tagInput.content = ''
 
     delTag: (e) =>
         tag = u.getTargetData(e, 'tag')
