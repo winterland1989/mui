@@ -15,12 +15,15 @@
 
   Dropdown = (function() {
     function Dropdown(arg) {
-      var ref, ref1, ref2;
+      var ref, ref1, ref2, ref3;
       this.itemArray = arg.itemArray, this.currentIndex = arg.currentIndex, this.placeholder = (ref = arg.placeholder) != null ? ref : '', this.onSelect = (ref1 = arg.onSelect) != null ? ref1 : u.noOp, this.ifAvailable = (ref2 = arg.ifAvailable) != null ? ref2 : (function() {
         return true;
-      });
+      }), this.allowEmptySelect = (ref3 = arg.allowEmptySelect) != null ? ref3 : true;
       this.onSelectInternal = bind(this.onSelectInternal, this);
       this.autoComplete = bind(this.autoComplete, this);
+      if ((this.allowEmptySelect === false) && !this.itemArray[this.currentIndex]) {
+        throw "currentIndex is illegal";
+      }
       this.filter = '';
       this.autoHideDropDown = new AutoHide({
         onHide: (function(_this) {
@@ -35,11 +38,11 @@
               return m('ul.DropdownList', {
                 onclick: _this.onSelectInternal
               }, (function() {
-                var j, len, ref3, results;
-                ref3 = this.itemArray;
+                var j, len, ref4, results;
+                ref4 = this.itemArray;
                 results = [];
-                for (i = j = 0, len = ref3.length; j < len; i = ++j) {
-                  item = ref3[i];
+                for (i = j = 0, len = ref4.length; j < len; i = ++j) {
+                  item = ref4[i];
                   if ((item.indexOf(this.filter)) !== -1) {
                     results.push(m('li.DropdownItem', {
                       oncreate: u.scrollToView,
@@ -59,7 +62,10 @@
     }
 
     Dropdown.prototype.autoComplete = function(e) {
-      return this.filter = (u.getTarget(e)).value;
+      this.filter = (u.getTarget(e)).value;
+      if (this.filter === '') {
+        return this.currentIndex = void 0;
+      }
     };
 
     Dropdown.prototype.onSelectInternal = function(e) {
@@ -71,15 +77,18 @@
           this.currentIndex = index;
           this.filter = '';
           this.autoHideDropDown.hide();
-          return this.onSelect(content, index);
+          this.onSelect(content, index);
         }
       }
+      return u.cancelBubble(e);
     };
 
     Dropdown.prototype.view = function() {
-      return m('.Dropdown', m('input.DropdownInput', {
-        onchange: this.autoComplete,
-        onclick: this.autoHideDropDown.show,
+      return m('.Dropdown', {
+        onclick: this.autoHideDropDown.show
+      }, m('input.DropdownInput', {
+        disabled: this.allowEmptySelect ? '' : 'true',
+        onkeyup: this.autoComplete,
         placeholder: this.placeholder,
         value: this.filter ? this.filter : this.currentIndex != null ? this.itemArray[this.currentIndex] : ''
       }), this.autoHideDropDown.view());
@@ -103,6 +112,9 @@
         border: '1px solid ' + style.border[4],
         WebkitAppearance: 'none',
         borderRadius: 0
+      },
+      'DropdownInput[disabled]': {
+        cursor: 'pointer'
       },
       DropdownList: {
         position: 'absolute',

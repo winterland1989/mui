@@ -174,6 +174,7 @@ class Demo
         @demoDropDown3 = new DropDown
             itemArray: (i.toString() for i in [1..100])
             currentIndex: 20
+            allowEmptySelect: false
 
         @demoDropDownDoc = new Collaspe
             titleArray: ['DropDown document']
@@ -193,6 +194,7 @@ class Demo
                         placeholder  = ''       # String
                         onSelect = (->)         # (String, Int) -> ...
                         ifAvailable = (-> true) # (String, Int) -> ture | false
+                        allowEmptySelect = true # Bool
                     ###
                     """
             ]

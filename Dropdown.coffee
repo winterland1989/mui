@@ -13,7 +13,12 @@ class Dropdown
     ,   @placeholder  = ''       # String
     ,   @onSelect = u.noOp         # (String, Int) -> ...
     ,   @ifAvailable = (-> true)   # (String, Int) -> ture | false
+    ,   @allowEmptySelect = true   # Bool
     }) ->
+
+        if (@allowEmptySelect == false) and !@itemArray[@currentIndex]
+            throw "currentIndex is illegal"
+
         @filter = ''
         @autoHideDropDown = new AutoHide
             onHide: => @filter = ''
@@ -33,6 +38,7 @@ class Dropdown
 
     autoComplete: (e) =>
         @filter = (u.getTarget e).value
+        if @filter == '' then @currentIndex = undefined
 
 
     onSelectInternal: (e) =>
@@ -44,13 +50,14 @@ class Dropdown
                 @filter = ''
                 @autoHideDropDown.hide()
                 @onSelect(content, index)
+        u.cancelBubble e
 
     view: ->
-        m '.Dropdown',
+        m '.Dropdown', onclick: @autoHideDropDown.show,
             m 'input.DropdownInput'
             ,
-                onchange: @autoComplete
-                onclick: @autoHideDropDown.show
+                disabled: if @allowEmptySelect then '' else 'true'
+                onkeyup: @autoComplete
                 placeholder: @placeholder
                 value:
                     if @filter
@@ -74,6 +81,9 @@ Dropdown.mss =
             border: '1px solid ' + style.border[4]
             WebkitAppearance: 'none'
             borderRadius: 0
+        'DropdownInput[disabled]':
+            cursor: 'pointer'
+
         DropdownList:
             position: 'absolute'
             top: '1.9em'
