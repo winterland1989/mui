@@ -27,7 +27,7 @@
     }
 
     TagInput.prototype.addTag = function(tag) {
-      if (this.tagList.indexOf(tag) === -1) {
+      if ((this.tagList.indexOf(tag) === -1) && (tag !== '')) {
         this.tagList.push(tag);
         this.onAdd(tag);
         return this.tagInput.content = '';

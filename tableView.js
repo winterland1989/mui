@@ -10,34 +10,57 @@
 
   style = require('./style');
 
-  tableView = function(colMap, rowArray) {
+  tableView = function(colMap, rowArray, verticalHeader) {
     var d, i, k, v;
-    return m('table.TableView', m('thead', m('tr', (function() {
-      var results;
-      results = [];
-      for (k in colMap) {
-        v = colMap[k];
-        results.push(m('th', v));
-      }
-      return results;
-    })())), m('tbody', (function() {
-      var j, len, results;
-      results = [];
-      for (i = j = 0, len = rowArray.length; j < len; i = ++j) {
-        d = rowArray[i];
-        results.push(m('tr', {
-          key: i
-        }, (function() {
-          var results1;
-          results1 = [];
-          for (k in colMap) {
-            results1.push(m('td', d[k] != null ? m.trust(d[k].toString()) : ''));
-          }
-          return results1;
-        })()));
-      }
-      return results;
-    })()));
+    if (verticalHeader == null) {
+      verticalHeader = false;
+    }
+    if (verticalHeader) {
+      return m('table.TableView', (function() {
+        var results;
+        results = [];
+        for (k in colMap) {
+          v = colMap[k];
+          results.push(m('tr', m('th', v), (function() {
+            var j, len, results1;
+            results1 = [];
+            for (i = j = 0, len = rowArray.length; j < len; i = ++j) {
+              d = rowArray[i];
+              results1.push(m('td', d[k] != null ? m.trust(d[k].toString()) : ''));
+            }
+            return results1;
+          })()));
+        }
+        return results;
+      })());
+    } else {
+      return m('table.TableView', m('thead', m('tr', (function() {
+        var results;
+        results = [];
+        for (k in colMap) {
+          v = colMap[k];
+          results.push(m('th', v));
+        }
+        return results;
+      })())), m('tbody', (function() {
+        var j, len, results;
+        results = [];
+        for (i = j = 0, len = rowArray.length; j < len; i = ++j) {
+          d = rowArray[i];
+          results.push(m('tr', {
+            key: i
+          }, (function() {
+            var results1;
+            results1 = [];
+            for (k in colMap) {
+              results1.push(m('td', d[k] != null ? m.trust(d[k].toString()) : ''));
+            }
+            return results1;
+          })()));
+        }
+        return results;
+      })()));
+    }
   };
 
   tableView.mss = {

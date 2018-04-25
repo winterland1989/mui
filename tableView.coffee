@@ -4,18 +4,27 @@ s = require 'mss-js'
 u = require './utils'
 style = require './style'
 
-tableView = (colMap, rowArray) ->
-    m 'table.TableView',
-        m 'thead',
-            m 'tr',
-                for k, v of colMap then m 'th', v
-
-        m 'tbody',
-            for d, i in rowArray
-                m 'tr', key: i,
-                    for k of colMap
-
+tableView = (colMap, rowArray, verticalHeader = false) ->
+    if verticalHeader
+        m 'table.TableView',
+            for k, v of colMap
+                m 'tr',
+                    m 'th', v
+                    for d, i in rowArray
                         m 'td', if d[k]? then m.trust d[k].toString() else ''
+
+    else
+        m 'table.TableView',
+            m 'thead',
+                m 'tr',
+                    for k, v of colMap then m 'th', v
+
+            m 'tbody',
+                for d, i in rowArray
+                    m 'tr', key: i,
+                        for k of colMap
+
+                            m 'td', if d[k]? then m.trust d[k].toString() else ''
 
 tableView.mss =
     TableView:

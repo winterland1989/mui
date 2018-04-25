@@ -17,7 +17,7 @@ class TagInput
             onEnter: @addTag
 
     addTag: (tag) =>
-        if @tagList.indexOf(tag) == -1
+        if (@tagList.indexOf(tag) == -1) and (tag != '')
             @tagList.push tag
             @onAdd(tag)
             @tagInput.content = ''

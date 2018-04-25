@@ -398,6 +398,7 @@ class Demo
                                                # map key to column label
                         data                   # Array of HashMap
                                                # array of table data
+                        verticalHeader = false # show header at left
                     ###
                     """
             ]
@@ -564,6 +565,7 @@ class Demo
 
             m 'li', @demoTableViewDoc.view()
             m 'li', tableView(@demoTableViewColMap, @demoTableViewData)
+            m 'li', tableView(@demoTableViewColMap, @demoTableViewData, true)
 
             m 'li', @demoCollaspeDoc.view()
             m 'li', @demoCollaspe.view()
