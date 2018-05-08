@@ -19,7 +19,7 @@ class CheckBox
         ,
             onclick: @onToggleInternal
             className:  if @enable then 'Enabled' else 'Disabled'
-        ,  '✓'
+        ,  '✔'
 
 CheckBox.mss =
     CheckBox:
@@ -31,9 +31,10 @@ CheckBox.mss =
         cursor: 'pointer'
         border: '1px solid ' + style.main[4]
         color: style.main[4]
-        borderRadius: '0.2em'
+        borderRadius: '0.1em'
         verticalAlign: 'middle'
         userSelect: 'none'
+        padding: '0.2em 0.1em 0 0.1em'
 
     '.CheckBox.Enabled':
         background: style.main[4]
@@ -41,7 +42,7 @@ CheckBox.mss =
 
     '.CheckBox.Disabled':
         background: 'none'
-        color: style.main[6]
+        color: style.main[4]
 
 module.exports = CheckBox
 

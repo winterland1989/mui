@@ -36,6 +36,7 @@ Button.mss =
         textAlign: 'center'
         background: style.main[4]
         color: style.text[8]
+        borderRadius: '0.1em'
         Prefix_Suffix:
             position: 'absolute'
             svg:
