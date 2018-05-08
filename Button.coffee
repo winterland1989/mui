@@ -9,14 +9,16 @@ class Button
     ,   @prefix             # mithril svg view
     ,   @suffix             # mithril svg view
     ,   data = null         # HashMap
+    ,   @disabled = false
     ,   @onClick = u.noOp   # (HashMap) -> a
     }) ->
         @dataJSON = JSON.stringify data
 
     onClickInternal: (e) =>
-        json = u.getCurrentTargetData(e, 'json')
-        data = JSON.parse json
-        @onClick(data)
+        unless @disabled
+            json = u.getCurrentTargetData(e, 'json')
+            data = JSON.parse json
+            @onClick(data)
 
     view: ->
         self = @
@@ -24,6 +26,7 @@ class Button
             ,
                 onclick: @onClickInternal
                 'data-json': @dataJSON
+                className: if @disabled then 'Disabled' else ''
             ,
                 m '.Prefix', @prefix
                 m 'span', @text
@@ -50,9 +53,14 @@ Button.mss =
             right: '0.3em'
             top: '0.3em'
 
+        cursor: 'pointer'
         $hover:
-            cursor: 'pointer'
             background: style.main[5]
+
+    '.Button.Disabled':
+        background: style.border[4]
+        cursor: 'not-allowed'
+
 
 module.exports = Button
 

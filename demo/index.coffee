@@ -35,6 +35,10 @@ class Demo
             text: 'Delete'
             suffix: u.svg delIcon
 
+        @demoButton4 = new Button
+            text: 'Disabled'
+            disabled: true
+
         @demoButtonDoc = new Collaspe
             titleArray: ['Button document']
             widgetArray: [
@@ -54,6 +58,7 @@ class Demo
                         prefix           # mithril svg view
                         suffix           # mithril svg view
                         data             # HashMap
+                        disabled         # Boolean
                         onClick = (->)   # (HashMap) -> a
                     ###
                     """
@@ -527,6 +532,7 @@ class Demo
                 @demoButton1.view()
                 @demoButton2.view()
                 @demoButton3.view()
+                @demoButton4.view()
 
             m 'li', @demoBtnGroupDoc.view()
             m 'li', @demoBtnGroup.view()
