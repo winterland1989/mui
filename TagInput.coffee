@@ -19,7 +19,6 @@ class TagInput
             onKeyup: @onKeyup
 
     onKeyup: (c) =>
-        console.log(c)
         if @separators.indexOf(c) != -1
             @addTag @tagInput.content.substring(0, @tagInput.content.length-1)
 

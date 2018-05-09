@@ -29,7 +29,6 @@
     }
 
     TagInput.prototype.onKeyup = function(c) {
-      console.log(c);
       if (this.separators.indexOf(c) !== -1) {
         return this.addTag(this.tagInput.content.substring(0, this.tagInput.content.length - 1));
       }
