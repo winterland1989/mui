@@ -14,7 +14,8 @@ class Modal
 
     onClickInternal: (e) =>
         t = u.getTarget e
-        if @clickToHide and ((u.targetHasClass t, 'Modal') or (u.targetHasClass t, 'HVCenter'))
+        # some element may have no className, such as svg
+        if @clickToHide and t.className and ((u.targetHasClass t, 'Modal') or (u.targetHasClass t, 'HVCenter'))
             @hide()
 
     onEscInternal: (e) =>
