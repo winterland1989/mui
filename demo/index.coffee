@@ -319,6 +319,7 @@ class Demo
                     ###
                         @tagList = []         # List of String
                         placeholder = ''      # String, placeholder of tag input
+                        @separators = ' ,，'     # String, list of separators which will separate tags onkeyup
                         @onAdd = u.noOp       # (String) -> a, triggered on tag adding
                         @onDel = u.noOp       # (Int) -> a, triggered on tag deleting
                     ###

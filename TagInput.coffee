@@ -8,6 +8,7 @@ class TagInput
     constructor: ({
           @tagList = []         # List of String
         , placeholder = ''      # String, placeholder of tag input
+        , @separators = ' ,，'     # String, list of separators which will separate tags onkeyup
         , @onAdd = u.noOp       # (String) -> a, triggered on tag adding
         , @onDel = u.noOp       # (Int) -> a, triggered on tag deleting
     }) ->
@@ -15,6 +16,12 @@ class TagInput
             content: ''
             placeholder: placeholder
             onEnter: @addTag
+            onKeyup: @onKeyup
+
+    onKeyup: (c) =>
+        console.log(c)
+        if @separators.indexOf(c) != -1
+            @addTag @tagInput.content.substring(0, @tagInput.content.length-1)
 
     addTag: (tag) =>
         if (@tagList.indexOf(tag) == -1) and (tag != '')

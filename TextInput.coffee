@@ -44,7 +44,7 @@ class TextInput
                 if err instanceof Error
                     @validationMsg = err.message
         else
-            err = @onKeyup c
+            err = @onKeyup c[c.length-1]
             @validationMsg = ''
             if err instanceof Error
                 @validationMsg = err.message

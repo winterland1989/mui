@@ -15,16 +15,25 @@
 
   TagInput = (function() {
     function TagInput(arg) {
-      var placeholder, ref, ref1, ref2, ref3;
-      this.tagList = (ref = arg.tagList) != null ? ref : [], placeholder = (ref1 = arg.placeholder) != null ? ref1 : '', this.onAdd = (ref2 = arg.onAdd) != null ? ref2 : u.noOp, this.onDel = (ref3 = arg.onDel) != null ? ref3 : u.noOp;
+      var placeholder, ref, ref1, ref2, ref3, ref4;
+      this.tagList = (ref = arg.tagList) != null ? ref : [], placeholder = (ref1 = arg.placeholder) != null ? ref1 : '', this.separators = (ref2 = arg.separators) != null ? ref2 : ' ,，', this.onAdd = (ref3 = arg.onAdd) != null ? ref3 : u.noOp, this.onDel = (ref4 = arg.onDel) != null ? ref4 : u.noOp;
       this.delTag = bind(this.delTag, this);
       this.addTag = bind(this.addTag, this);
+      this.onKeyup = bind(this.onKeyup, this);
       this.tagInput = new TextInput({
         content: '',
         placeholder: placeholder,
-        onEnter: this.addTag
+        onEnter: this.addTag,
+        onKeyup: this.onKeyup
       });
     }
+
+    TagInput.prototype.onKeyup = function(c) {
+      console.log(c);
+      if (this.separators.indexOf(c) !== -1) {
+        return this.addTag(this.tagInput.content.substring(0, this.tagInput.content.length - 1));
+      }
+    };
 
     TagInput.prototype.addTag = function(tag) {
       if ((this.tagList.indexOf(tag) === -1) && (tag !== '')) {

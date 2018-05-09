@@ -53,7 +53,7 @@
           }
         }
       } else {
-        err = this.onKeyup(c);
+        err = this.onKeyup(c[c.length - 1]);
         this.validationMsg = '';
         if (err instanceof Error) {
           return this.validationMsg = err.message;

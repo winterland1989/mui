@@ -27,14 +27,14 @@ Switch.mss =
         width: '2em'
         height: '1em'
         borderRadius: '0.6em'
-        padding: '0.1em'
+        padding: '0.15em'
         background: style.main[4]
 
     '.Switch.Disabled':
         width: '2em'
         height: '1em'
         borderRadius: '0.6em'
-        padding: '0.1em'
+        padding: '0.15em'
         background: style.grey[4]
         $hover:
             background: style.grey[5]
