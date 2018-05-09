@@ -25,7 +25,7 @@
     Modal.prototype.onClickInternal = function(e) {
       var t;
       t = u.getTarget(e);
-      if (this.clickToHide && t.className && ((u.targetHasClass(t, 'Modal')) || (u.targetHasClass(t, 'HVCenter')))) {
+      if (this.clickToHide && t.className.indexOf && ((u.targetHasClass(t, 'Modal')) || (u.targetHasClass(t, 'HVCenter')))) {
         return this.hide();
       }
     };
