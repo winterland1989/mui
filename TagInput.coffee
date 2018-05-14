@@ -3,6 +3,7 @@ s = require 'mss-js'
 style = require './style'
 u = require './utils'
 TextInput = require './TextInput'
+Button = require './Button'
 
 class TagInput
     constructor: ({
@@ -17,12 +18,16 @@ class TagInput
             placeholder: placeholder
             onEnter: @addTag
             onKeyup: @onKeyup
+        @addBtn = new Button
+            text: '+'
+            onClick: @addTag
 
     onKeyup: (c) =>
         if @separators.indexOf(c) != -1
-            @addTag @tagInput.content.substring(0, @tagInput.content.length-1)
-
-    addTag: (tag) =>
+            @tagInput.content = @tagInput.content.substring(0, @tagInput.content.length-1)
+            @addTag()
+    addTag: =>
+        tag = @tagInput.content
         if (@tagList.indexOf(tag) == -1) and (tag != '')
             @tagList.push tag
             @onAdd(tag)
@@ -46,6 +51,7 @@ class TagInput
                     , '✕'
 
             @tagInput.view()
+            @addBtn.view()
 
 
 
@@ -71,6 +77,11 @@ TagInput.mss = s.merge [
         TextInput:
             display: 'inline-block'
             width: '100px'
+
+        Button:
+            position: 'relative'
+            left: '-1px'
+            width: '2em'
 
 ]
 
