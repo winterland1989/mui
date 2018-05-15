@@ -108,10 +108,12 @@
         Button: {
           position: 'relative',
           display: 'inline-block',
-          left: '-1px',
-          width: '2em',
-          height: '1.93em',
-          verticalAlign: 'middle'
+          left: '-1.7em',
+          width: '1.5em',
+          height: '1.5em',
+          borderRadius: '0.75em',
+          verticalAlign: 'middle',
+          lineHeight: '1.6em'
         }
       }
     }
