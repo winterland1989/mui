@@ -90,7 +90,8 @@
           border: '1px solid ' + style.border[4],
           color: style.text[0],
           padding: '4px 12px',
-          margin: '0 4px',
+          margin: '0 4px 0 0',
+          verticalAlign: 'middle',
           DelBtn: {
             display: 'inline-block',
             marginLeft: '12px',
