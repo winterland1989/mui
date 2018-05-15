@@ -322,6 +322,7 @@ class Demo
                         @separators = ' ,，'     # String, list of separators which will separate tags onkeyup
                         @onAdd = u.noOp       # (String) -> a, triggered on tag adding
                         @onDel = u.noOp       # (Int) -> a, triggered on tag deleting
+                        @maxTagNum = Number.MAX_SAFE_INTEGER  # Int, limit the max tag user can input
                     ###
                     """
             ]

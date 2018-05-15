@@ -12,6 +12,7 @@ class TagInput
         , @separators = ' ,，'     # String, list of separators which will separate tags onkeyup
         , @onAdd = u.noOp       # (String) -> a, triggered on tag adding
         , @onDel = u.noOp       # (Int) -> a, triggered on tag deleting
+        , @maxTagNum = Number.MAX_SAFE_INTEGER  # Int, limit the max tag user can input
     }) ->
         @tagInput = new TextInput
             content: ''
@@ -28,7 +29,7 @@ class TagInput
             @addTag()
     addTag: =>
         tag = @tagInput.content
-        if (@tagList.indexOf(tag) == -1) and (tag != '')
+        if (@tagList.indexOf(tag) == -1) and (tag != '') and (@tagList.length < @maxTagNum)
             @tagList.push tag
             @onAdd(tag)
             @tagInput.content = ''
@@ -50,8 +51,9 @@ class TagInput
                         onclick: @delTag
                     , '✕'
 
-            @tagInput.view()
-            @addBtn.view()
+            m '.TagInputGroup',
+                @tagInput.view()
+                @addBtn.view()
 
 
 
@@ -66,7 +68,7 @@ TagInput.mss = s.merge [
             border: '1px solid ' + style.border[4]
             color: style.text[0]
             padding: '4px 12px'
-            margin: '0 4px 0 0'
+            margin: '0 4px 4px 0'
             verticalAlign: 'middle'
 
             DelBtn:
@@ -76,19 +78,27 @@ TagInput.mss = s.merge [
                 cursor: 'pointer'
                 $hover:
                     color: style.warn[4]
-        TextInput:
-            display: 'inline-block'
-            width: '100px'
 
-        Button:
+        TagInputGroup:
             position: 'relative'
             display: 'inline-block'
-            left: '-1.7em'
-            width: '1.5em'
-            height: '1.5em'
-            borderRadius: '0.75em'
             verticalAlign: 'middle'
-            lineHeight: '1.6em'
+            margin: '0 4px 4px 0'
+            width: '100px'
+            TextInput:
+                width: '100%'
+
+        Button:
+            position: 'absolute'
+            margin: 0
+            display: 'inline-block'
+            right: '0.2em'
+            width: '1.6em'
+            top: '0.165em'
+            height: '1.6em'
+            lineHeight: '1.65em'
+            borderRadius: '0.8em'
+            verticalAlign: 'middle'
 
 
 ]

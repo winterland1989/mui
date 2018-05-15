@@ -17,8 +17,8 @@
 
   TagInput = (function() {
     function TagInput(arg) {
-      var placeholder, ref, ref1, ref2, ref3, ref4;
-      this.tagList = (ref = arg.tagList) != null ? ref : [], placeholder = (ref1 = arg.placeholder) != null ? ref1 : '', this.separators = (ref2 = arg.separators) != null ? ref2 : ' ,，', this.onAdd = (ref3 = arg.onAdd) != null ? ref3 : u.noOp, this.onDel = (ref4 = arg.onDel) != null ? ref4 : u.noOp;
+      var placeholder, ref, ref1, ref2, ref3, ref4, ref5;
+      this.tagList = (ref = arg.tagList) != null ? ref : [], placeholder = (ref1 = arg.placeholder) != null ? ref1 : '', this.separators = (ref2 = arg.separators) != null ? ref2 : ' ,，', this.onAdd = (ref3 = arg.onAdd) != null ? ref3 : u.noOp, this.onDel = (ref4 = arg.onDel) != null ? ref4 : u.noOp, this.maxTagNum = (ref5 = arg.maxTagNum) != null ? ref5 : Number.MAX_SAFE_INTEGER;
       this.delTag = bind(this.delTag, this);
       this.addTag = bind(this.addTag, this);
       this.onKeyup = bind(this.onKeyup, this);
@@ -44,7 +44,7 @@
     TagInput.prototype.addTag = function() {
       var tag;
       tag = this.tagInput.content;
-      if ((this.tagList.indexOf(tag) === -1) && (tag !== '')) {
+      if ((this.tagList.indexOf(tag) === -1) && (tag !== '') && (this.tagList.length < this.maxTagNum)) {
         this.tagList.push(tag);
         this.onAdd(tag);
         return this.tagInput.content = '';
@@ -75,7 +75,7 @@
           }, '✕')));
         }
         return results;
-      }).call(this), this.tagInput.view(), this.addBtn.view());
+      }).call(this), m('.TagInputGroup', this.tagInput.view(), this.addBtn.view()));
     };
 
     return TagInput;
@@ -90,7 +90,7 @@
           border: '1px solid ' + style.border[4],
           color: style.text[0],
           padding: '4px 12px',
-          margin: '0 4px 0 0',
+          margin: '0 4px 4px 0',
           verticalAlign: 'middle',
           DelBtn: {
             display: 'inline-block',
@@ -102,19 +102,27 @@
             }
           }
         },
-        TextInput: {
-          display: 'inline-block',
-          width: '100px'
-        },
-        Button: {
+        TagInputGroup: {
           position: 'relative',
           display: 'inline-block',
-          left: '-1.7em',
-          width: '1.5em',
-          height: '1.5em',
-          borderRadius: '0.75em',
           verticalAlign: 'middle',
-          lineHeight: '1.6em'
+          margin: '0 4px 4px 0',
+          width: '100px',
+          TextInput: {
+            width: '100%'
+          }
+        },
+        Button: {
+          position: 'absolute',
+          margin: 0,
+          display: 'inline-block',
+          right: '0.2em',
+          width: '1.6em',
+          top: '0.165em',
+          height: '1.6em',
+          lineHeight: '1.65em',
+          borderRadius: '0.8em',
+          verticalAlign: 'middle'
         }
       }
     }
