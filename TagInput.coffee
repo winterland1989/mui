@@ -51,9 +51,10 @@ class TagInput
                         onclick: @delTag
                     , '✕'
 
-            m '.TagInputGroup',
-                @tagInput.view()
-                @addBtn.view()
+            if @tagList.length < @maxTagNum
+                m '.TagInputGroup',
+                    @tagInput.view()
+                    @addBtn.view()
 
 
 

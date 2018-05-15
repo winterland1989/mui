@@ -75,7 +75,7 @@
           }, '✕')));
         }
         return results;
-      }).call(this), m('.TagInputGroup', this.tagInput.view(), this.addBtn.view()));
+      }).call(this), this.tagList.length < this.maxTagNum ? m('.TagInputGroup', this.tagInput.view(), this.addBtn.view()) : void 0);
     };
 
     return TagInput;
