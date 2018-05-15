@@ -107,8 +107,11 @@
         },
         Button: {
           position: 'relative',
+          display: 'inline-block',
           left: '-1px',
-          width: '2em'
+          width: '2em',
+          height: '1.93em',
+          verticalAlign: 'middle'
         }
       }
     }
