@@ -28,10 +28,6 @@
         onEnter: this.addTag,
         onKeyup: this.onKeyup
       });
-      this.addBtn = new Button({
-        text: '+',
-        onClick: this.addTag
-      });
     }
 
     TagInput.prototype.onKeyup = function(c) {
@@ -75,7 +71,9 @@
           }, '✕')));
         }
         return results;
-      }).call(this), this.tagList.length < this.maxTagNum ? m('.TagInputGroup', this.tagInput.view(), this.addBtn.view()) : void 0);
+      }).call(this), this.tagList.length < this.maxTagNum ? m('.TagInputGroup', this.tagInput.view(), m('.AddBtn', {
+        onclick: this.addTag
+      }, m.trust('<svg t="1526436892886" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1905" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><defs><style type="text/css"></style></defs><path d="M512 64C264.64 64 64 264.576 64 512c0 247.36 200.64 448 448 448 247.424 0 448-200.64 448-448C960 264.576 759.424 64 512 64zM734.272 553.216l-181.12-0.064 0 181.184c0 23.488-18.368 42.624-41.152 42.624-22.72 0.064-41.152-19.072-41.152-42.56L470.848 553.152l-181.12 0C266.24 553.216 246.976 534.656 246.976 512.064c0.128-22.656 19.264-41.152 42.88-41.088l180.992 0L470.848 289.792c0-23.68 18.496-42.688 41.152-42.752 22.72-0.064 41.152 19.136 41.152 42.688l0 181.248 181.12 0c23.616-0.128 42.752 18.432 42.752 41.152C777.024 534.656 758.016 553.216 734.272 553.216z" p-id="1906"></path></svg>'))) : void 0);
     };
 
     return TagInput;
@@ -112,17 +110,16 @@
             width: '100%'
           }
         },
-        Button: {
+        AddBtn: {
           position: 'absolute',
-          margin: 0,
-          display: 'inline-block',
           right: '0.2em',
-          width: '1.6em',
           top: '0.165em',
-          height: '1.6em',
-          lineHeight: '1.65em',
-          borderRadius: '0.8em',
-          verticalAlign: 'middle'
+          cursor: 'pointer',
+          svg: {
+            fill: style.main[4],
+            width: '1.6em',
+            height: '1.6em'
+          }
         }
       }
     }
