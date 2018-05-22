@@ -171,22 +171,26 @@
 
     DatePicker.prototype.preMonth = function(e) {
       this.displayDate.setMonth(this.displayDate.getMonth() - 1);
-      return this.init();
+      this.init();
+      return u.cancelBubble(e);
     };
 
     DatePicker.prototype.nextMonth = function(e) {
       this.displayDate.setMonth(this.displayDate.getMonth() + 1);
-      return this.init();
+      this.init();
+      return u.cancelBubble(e);
     };
 
     DatePicker.prototype.preYear = function(e) {
       this.displayDate.setFullYear(this.displayDate.getFullYear() - 1);
-      return this.init();
+      this.init();
+      return u.cancelBubble(e);
     };
 
     DatePicker.prototype.nextYear = function(e) {
       this.displayDate.setFullYear(this.displayDate.getFullYear() + 1);
-      return this.init();
+      this.init();
+      return u.cancelBubble(e);
     };
 
     DatePicker.prototype.selectDate = function(e) {

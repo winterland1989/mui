@@ -122,18 +122,22 @@ class DatePicker
     preMonth: (e) =>
         @displayDate.setMonth(@displayDate.getMonth() - 1)
         @init()
+        u.cancelBubble e
 
     nextMonth: (e) =>
         @displayDate.setMonth(@displayDate.getMonth() + 1)
         @init()
+        u.cancelBubble e
 
     preYear: (e) =>
         @displayDate.setFullYear(@displayDate.getFullYear() - 1)
         @init()
+        u.cancelBubble e
 
     nextYear: (e) =>
         @displayDate.setFullYear(@displayDate.getFullYear() + 1)
         @init()
+        u.cancelBubble e
 
     selectDate: (e) =>
         if u.targetHasClass (u.getTarget e), 'Available'
