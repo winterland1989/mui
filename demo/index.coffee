@@ -17,6 +17,7 @@ TagInput  =require '../TagInput'
 TextArea = require '../TextArea'
 Collaspe = require '../Collaspe'
 Notify = require '../Notify'
+QuestionMark = require '../QuestionMark'
 
 u = require '../utils'
 style = require '../style'
@@ -330,6 +331,27 @@ class Demo
         @demoTagInput = new TagInput
             tagList: ['foo', 'bar', 'qux']
 
+        @demoQuestionMark = new QuestionMark
+            message: 'This is a help message, <a href="//nowhere">link</a>'
+
+        @demoQuestionMarkDoc = new Collaspe
+            titleArray: ['QuestionMark document']
+            widgetArray: [
+                view: ->
+                    m 'textarea', readonly: true,
+                    """
+                    QuestionMark = require 'mui-js/QuestionMark'
+
+                    demoQuestionMark = new QuestionMark
+                        message: 'This is a help message, <a href="//nowhere">link</a>'
+
+                    ###
+                        @icon = mmsvg/action/help       # mmsvg icon
+                        @message = "hello world!"       # String
+                    ###
+                    """
+            ]
+
         @demoTextArea = new TextArea
             placeholder: 'type digits and enter!'
             onChange: (str) ->
@@ -566,6 +588,9 @@ class Demo
             m 'li', @demoTagInputDoc.view()
             m 'li', @demoTagInput.view()
 
+            m 'li', @demoQuestionMarkDoc.view()
+            m 'li', @demoQuestionMark.view()
+
             m 'li', @demoTextAreaDoc.view()
             m 'li', @demoTextArea.view()
             m 'li', @demoTextArea2.view()
@@ -612,6 +637,7 @@ s.tag s.merge [
     Modal.mss
     TextInput.mss
     TagInput.mss
+    QuestionMark.mss
     TextArea.mss
     Collaspe.mss
     Notify.mss
