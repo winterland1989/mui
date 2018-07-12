@@ -1,6 +1,6 @@
 m = require 'mithril'
 s = require 'mss-js'
-
+downIcon = require 'mmsvg/google/msvg/navigation/expand-more'
 style = require './style'
 u = require './utils'
 
@@ -14,6 +14,7 @@ class Dropdown
     ,   @onSelect = u.noOp         # (String, Int) -> ...
     ,   @ifAvailable = (-> true)   # (String, Int) -> ture | false
     ,   @allowEmptySelect = true   # Bool
+    ,   @showDownArrow = true
     }) ->
 
         if (@allowEmptySelect == false) and !@itemArray[@currentIndex]
@@ -65,6 +66,8 @@ class Dropdown
                     else if @currentIndex?
                         @itemArray[@currentIndex]
                     else ''
+            if @showDownArrow = true
+                m '.DownArrow', downIcon
             @autoHideDropDown.view()
 
 Dropdown.mss =
@@ -83,6 +86,12 @@ Dropdown.mss =
             borderRadius: 0
         'DropdownInput[disabled]':
             cursor: 'pointer'
+
+        DownArrow:
+            svg: fill: '#999'
+            position: 'absolute'
+            top: '0.1em'
+            right: '0.3em'
 
         DropdownList:
             position: 'absolute'
