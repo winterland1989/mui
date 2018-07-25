@@ -332,7 +332,7 @@ class Demo
             tagList: ['foo', 'bar', 'qux']
 
         @demoQuestionMark = new QuestionMark
-            message: 'This is a help message, <a href="//nowhere">link</a>'
+            message: 'This is a help message, <a href="//nowhere">link</a><p>test</p><p>test</p><p>test</p>'
 
         @demoQuestionMarkDoc = new Collaspe
             titleArray: ['QuestionMark document']

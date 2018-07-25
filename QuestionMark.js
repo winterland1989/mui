@@ -19,7 +19,7 @@
     }
 
     QuestionMark.prototype.view = function() {
-      return m('.QuestionMark', m('span', this.icon), m('.Message', m.trust(this.message)));
+      return m('.QuestionMark', m('span', this.icon), m('.Message', m.trust(this.message)), m('.Arrow'), m('.ArrowBorder'));
     };
 
     return QuestionMark;
@@ -36,28 +36,43 @@
         fill: style.main[4]
       },
       Message: {
-        display: 'none'
+        display: 'none',
+        position: 'absolute',
+        background: "#fff",
+        border: '1px solid #d8e2f5',
+        boxShadow: '0 0 5px #dee2f5',
+        borderRadius: '2px',
+        width: '400px',
+        left: '-40px',
+        bottom: '33px',
+        padding: '8px'
+      },
+      Arrow: {
+        display: 'none',
+        position: 'absolute',
+        top: '-13px',
+        left: '5px',
+        width: '11px',
+        height: '11px',
+        background: '#fff',
+        zIndex: 1,
+        transform: 'rotate(45deg)'
+      },
+      ArrowBorder: {
+        display: 'none',
+        position: 'absolute',
+        top: '-14px',
+        left: '4px',
+        zIndex: -1,
+        width: '12px',
+        height: '12px',
+        border: '1px solid #d8e2f5',
+        boxShadow: '0 0 5px #dee2f5',
+        transform: 'rotate(45deg)'
       },
       $hover: {
-        Message: {
-          color: '#fff',
-          width: '200px',
-          left: '2em',
-          top: '-0.2em',
-          position: 'absolute',
-          display: 'block',
-          background: style.main[4],
-          padding: '0.5em',
-          $before: {
-            content: '""',
-            position: 'absolute',
-            top: 0,
-            left: '-1.5em',
-            width: 0,
-            height: 0,
-            border: '1em solid transparent',
-            borderRight: '1em solid ' + style.main[4]
-          }
+        Arrow_ArrowBorder_Message: {
+          display: 'block'
         }
       }
     }
