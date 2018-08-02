@@ -86,8 +86,9 @@
     };
 
     Dropdown.prototype.view = function() {
-      return m('.Dropdown', {
-        onclick: this.autoHideDropDown.show
+      return m('div', {
+        onclick: this.autoHideDropDown.show,
+        className: this.autoHideDropDown.showWidget ? "Dropdown Expanded" : "Dropdown"
       }, m('input.DropdownInput', {
         disabled: this.allowEmptySelect ? '' : 'true',
         onkeyup: this.autoComplete,
@@ -124,7 +125,8 @@
         },
         position: 'absolute',
         top: '0.1em',
-        right: '0.3em'
+        right: '0.3em',
+        transition: 'transform .3s ease'
       },
       DropdownList: {
         position: 'absolute',
@@ -157,6 +159,11 @@
           background: style.main[4],
           color: style.text[8]
         }
+      }
+    },
+    Expanded: {
+      DownArrow: {
+        transform: 'rotate(180deg)'
       }
     }
   };

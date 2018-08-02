@@ -54,9 +54,11 @@ class Dropdown
         u.cancelBubble e
 
     view: ->
-        m '.Dropdown', onclick: @autoHideDropDown.show,
-            m 'input.DropdownInput'
-            ,
+        m 'div',
+            onclick: @autoHideDropDown.show
+            className: if @autoHideDropDown.showWidget then "Dropdown Expanded" else "Dropdown"
+        ,
+            m 'input.DropdownInput',
                 disabled: if @allowEmptySelect then '' else 'true'
                 onkeyup: @autoComplete
                 placeholder: @placeholder
@@ -92,6 +94,7 @@ Dropdown.mss =
             position: 'absolute'
             top: '0.1em'
             right: '0.3em'
+            transition: 'transform .3s ease'
 
         DropdownList:
             position: 'absolute'
@@ -122,5 +125,9 @@ Dropdown.mss =
             Current:
                 background: style.main[4]
                 color: style.text[8]
+    Expanded:
+        DownArrow:
+            transform: 'rotate(180deg)'
+
 
 module.exports = Dropdown
