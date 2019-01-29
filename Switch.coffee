@@ -29,6 +29,8 @@ Switch.mss =
         borderRadius: '0.6em'
         padding: '0.15em'
         background: style.main[4]
+        SwitchBtn:
+            left: '1em'
 
     '.Switch.Disabled':
         width: '2em'
@@ -38,12 +40,11 @@ Switch.mss =
         background: style.grey[4]
         $hover:
             background: style.grey[5]
-        SwitchBtn:
-            left: '1em'
 
     Switch:
         display: 'inline-block'
         position: 'relative'
+        boxSizing: 'content-box'
         $hover:
             background: style.main[5]
             cursor: 'pointer'
