@@ -16,6 +16,7 @@
       var ref, ref1, ref2, ref3, ref4, ref5, ref6, ref7;
       this.content = (ref = arg.content) != null ? ref : '', this.disabled = (ref1 = arg.disabled) != null ? ref1 : false, this.placeholder = (ref2 = arg.placeholder) != null ? ref2 : '', this.onPaste = (ref3 = arg.onPaste) != null ? ref3 : u.noOp, this.onChange = (ref4 = arg.onChange) != null ? ref4 : u.noOp, this.onKeyup = (ref5 = arg.onKeyup) != null ? ref5 : u.noOp, this.onEnter = (ref6 = arg.onEnter) != null ? ref6 : u.noOp, this.onClick = (ref7 = arg.onClick) != null ? ref7 : u.noOp;
       this.onkeyupInternal = bind(this.onkeyupInternal, this);
+      this.onPasteInternal = bind(this.onPasteInternal, this);
       this.onChangeInternal = bind(this.onChangeInternal, this);
       this.validationMsg = '';
     }
@@ -34,6 +35,17 @@
       var c, err;
       c = (u.getTarget(e)).value;
       err = this.onChange(c);
+      this.validationMsg = '';
+      if (err instanceof Error) {
+        this.validationMsg = err.message;
+      }
+      return this.content = c;
+    };
+
+    TextInput.prototype.onPasteInternal = function(e) {
+      var c, err;
+      c = (u.getTarget(e)).value;
+      err = this.onPaste(c);
       this.validationMsg = '';
       if (err instanceof Error) {
         this.validationMsg = err.message;
@@ -69,7 +81,7 @@
         value: this.content,
         placeholder: this.placeholder,
         onclick: this.onClick,
-        onpaste: this.onPaste
+        onpaste: this.onPasteInternal
       }), this.validationMsg !== '' ? m('.ValidationMsg', this.validationMsg) : void 0);
     };
 

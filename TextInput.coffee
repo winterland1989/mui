@@ -37,6 +37,14 @@ class TextInput
             @validationMsg = err.message
         @content = c
 
+    onPasteInternal: (e) =>
+        c = (u.getTarget e).value
+        err = @onPaste c
+        @validationMsg = ''
+        if err instanceof Error
+            @validationMsg = err.message
+        @content = c
+
     onkeyupInternal: (e) =>
         c = (u.getTarget e).value
         @content = c
@@ -60,7 +68,7 @@ class TextInput
                 value: @content
                 placeholder: @placeholder
                 onclick: @onClick
-                onpaste: @onPaste
+                onpaste: @onPasteInternal
             if @validationMsg != ''
                 m '.ValidationMsg', @validationMsg
 
