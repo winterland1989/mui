@@ -296,12 +296,16 @@ class Demo
                         @content = ''           # String
                         @disabled = false       # Boolean
                         @placeholder = ''       # String
+                        @onPaste = u.noOp       # (String) -> a | Error
+                                                # triggered on Paste
                         @onChange = u.noOp      # (String) -> a | Error
                                                 # triggered on Blur
                         @onEnter = u.noOp       # (String) -> a | Error
                                                 # triggered when user release Enter
                         @onKeyup  = u.noOp      # (String) -> a | Error
                                                 # triggered when user release key
+                        @onClick = u.noOp       # () -> a
+                                                # triggered when user click the input
                     ###
                     """
             ]

@@ -13,8 +13,8 @@
 
   TextInput = (function() {
     function TextInput(arg) {
-      var ref, ref1, ref2, ref3, ref4, ref5, ref6;
-      this.content = (ref = arg.content) != null ? ref : '', this.disabled = (ref1 = arg.disabled) != null ? ref1 : false, this.placeholder = (ref2 = arg.placeholder) != null ? ref2 : '', this.onChange = (ref3 = arg.onChange) != null ? ref3 : u.noOp, this.onKeyup = (ref4 = arg.onKeyup) != null ? ref4 : u.noOp, this.onEnter = (ref5 = arg.onEnter) != null ? ref5 : u.noOp, this.onClick = (ref6 = arg.onClick) != null ? ref6 : u.noOp;
+      var ref, ref1, ref2, ref3, ref4, ref5, ref6, ref7;
+      this.content = (ref = arg.content) != null ? ref : '', this.disabled = (ref1 = arg.disabled) != null ? ref1 : false, this.placeholder = (ref2 = arg.placeholder) != null ? ref2 : '', this.onPaste = (ref3 = arg.onPaste) != null ? ref3 : u.noOp, this.onChange = (ref4 = arg.onChange) != null ? ref4 : u.noOp, this.onKeyup = (ref5 = arg.onKeyup) != null ? ref5 : u.noOp, this.onEnter = (ref6 = arg.onEnter) != null ? ref6 : u.noOp, this.onClick = (ref7 = arg.onClick) != null ? ref7 : u.noOp;
       this.onkeyupInternal = bind(this.onkeyupInternal, this);
       this.onChangeInternal = bind(this.onChangeInternal, this);
       this.validationMsg = '';
@@ -68,7 +68,8 @@
         onkeyup: this.onkeyupInternal,
         value: this.content,
         placeholder: this.placeholder,
-        onclick: this.onClick
+        onclick: this.onClick,
+        onpaste: this.onPaste
       }), this.validationMsg !== '' ? m('.ValidationMsg', this.validationMsg) : void 0);
     };
 

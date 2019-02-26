@@ -8,6 +8,8 @@ class TextInput
         @content = ''           # String
     ,   @disabled = false       # Boolean
     ,   @placeholder = ''       # String
+    ,   @onPaste = u.noOp       # (String) -> a | Error
+                                # triggered on Paste
     ,   @onChange = u.noOp      # (String) -> a | Error
                                 # triggered on Blur or user stroke Enter
     ,   @onKeyup  = u.noOp      # (String) -> a | Error
@@ -58,6 +60,7 @@ class TextInput
                 value: @content
                 placeholder: @placeholder
                 onclick: @onClick
+                onpaste: @onPaste
             if @validationMsg != ''
                 m '.ValidationMsg', @validationMsg
 
