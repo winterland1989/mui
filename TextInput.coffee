@@ -31,21 +31,21 @@ class TextInput
 
     onChangeInternal: (e) =>
         c = (u.getTarget e).value
+        @content = c
         err = @onChange c
         @validationMsg = ''
         if err instanceof Error
             @validationMsg = err.message
-        @content = c
 
     onPasteInternal: (e) =>
         setTimeout(
             (=>
                 c = (u.getTarget e).value
+                @content = c
                 err = @onPaste c
                 @validationMsg = ''
                 if err instanceof Error
-                    @validationMsg = err.message
-                @content = c)
+                    @validationMsg = err.message)
         , 4)
 
 

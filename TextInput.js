@@ -34,12 +34,12 @@
     TextInput.prototype.onChangeInternal = function(e) {
       var c, err;
       c = (u.getTarget(e)).value;
+      this.content = c;
       err = this.onChange(c);
       this.validationMsg = '';
       if (err instanceof Error) {
-        this.validationMsg = err.message;
+        return this.validationMsg = err.message;
       }
-      return this.content = c;
     };
 
     TextInput.prototype.onPasteInternal = function(e) {
@@ -47,12 +47,12 @@
         return function() {
           var c, err;
           c = (u.getTarget(e)).value;
+          _this.content = c;
           err = _this.onPaste(c);
           _this.validationMsg = '';
           if (err instanceof Error) {
-            _this.validationMsg = err.message;
+            return _this.validationMsg = err.message;
           }
-          return _this.content = c;
         };
       })(this)), 4);
     };
