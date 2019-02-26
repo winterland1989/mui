@@ -38,12 +38,16 @@ class TextInput
         @content = c
 
     onPasteInternal: (e) =>
-        c = (u.getTarget e).value
-        err = @onPaste c
-        @validationMsg = ''
-        if err instanceof Error
-            @validationMsg = err.message
-        @content = c
+        setTimeout(
+            (=>
+                c = (u.getTarget e).value
+                err = @onPaste c
+                @validationMsg = ''
+                if err instanceof Error
+                    @validationMsg = err.message
+                @content = c)
+        , 4)
+
 
     onkeyupInternal: (e) =>
         c = (u.getTarget e).value

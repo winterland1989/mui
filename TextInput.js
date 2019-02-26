@@ -43,14 +43,18 @@
     };
 
     TextInput.prototype.onPasteInternal = function(e) {
-      var c, err;
-      c = (u.getTarget(e)).value;
-      err = this.onPaste(c);
-      this.validationMsg = '';
-      if (err instanceof Error) {
-        this.validationMsg = err.message;
-      }
-      return this.content = c;
+      return setTimeout(((function(_this) {
+        return function() {
+          var c, err;
+          c = (u.getTarget(e)).value;
+          err = _this.onPaste(c);
+          _this.validationMsg = '';
+          if (err instanceof Error) {
+            _this.validationMsg = err.message;
+          }
+          return _this.content = c;
+        };
+      })(this)), 4);
     };
 
     TextInput.prototype.onkeyupInternal = function(e) {
