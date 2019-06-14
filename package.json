@@ -1,5 +1,5 @@
 {
-  "name": "mui-js",
+  "name": "@ad/mui-js",
   "version": "0.3.6",
   "description": "a ui library for mithril",
   "dependencies": {
