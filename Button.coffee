@@ -2,61 +2,65 @@ m = require 'mithril'
 s = require 'mss-js'
 style = require './style'
 u = require './utils'
-{ BUTTON_WIDTH_MAP, BUTTON_HEIGHT_MAP, FONTSIZE_MAP } = require './CONSTANT'
 
-module.exports = class Button
+class Button
     constructor: ({
-        @label                      # String | mithril view | [mithril views]
-    ,   @disabled = false           # Boolean (default = false)
-    ,   @onClick = u.noOp           # (data :: String) -> a (default = ->)
-    ,   @data = ''                  # String (default = '')
-    ,   @size = 'M'                 # size: 'XS' | 'S' | 'M' | 'L' | 'XL'         (default = 'M')
-    ,   @width ='FIXED'             # width: 'FIXED' | 'PADDING' | '100%', '123px'...       (default = '100px')
+        @text               # String
+    ,   @prefix             # mithril svg view
+    ,   @suffix             # mithril svg view
+    ,   data = null         # HashMap
+    ,   @disabled = false
+    ,   @onClick = u.noOp   # (HashMap) -> a
     }) ->
+        @dataJSON = JSON.stringify data
 
     onClickInternal: (e) =>
         unless @disabled
-            data = u.getCurrentTargetData(e, 'data')
+            json = u.getCurrentTargetData(e, 'json')
+            data = JSON.parse json
             @onClick(data)
 
     view: ->
         self = @
-        m "button.Button"
+        m '.Button'
             ,
-                style:
-                    padding: if @width == 'PADDING' then '0 16px' else 0
-                    width:
-                        if @width == 'PADDING' then 'auto'
-                        else if @width == 'FIXED' then BUTTON_WIDTH_MAP[@size]
-                        else @width
-                    height: BUTTON_HEIGHT_MAP[@size]
-                    lineHeight: BUTTON_HEIGHT_MAP[@size]
-                    fontSize: FONTSIZE_MAP[@size]
                 onclick: @onClickInternal
-                'data-data': @data
-                disabled: @disabled
-            , @label
+                'data-json': @dataJSON
+                className: if @disabled then 'Disabled' else ''
+            ,
+                m '.Prefix', @prefix
+                m 'span', @text
+                m '.Suffix', @suffix
 
 Button.mss =
-    Button:
+    Button: s.LineSize('2em', '1em')
         position: 'relative'
-        borderRadius: '4px'
-        border: '1px solid #DADFE3'
+        width: '100px'
         textAlign: 'center'
-        color: '#333'
-        background: '#F8F9FA'
+        background: style.main[4]
+        color: style.text[8]
+        borderRadius: '0.1em'
+        Prefix_Suffix:
+            position: 'absolute'
+            svg:
+                fill: style.text[8]
+                height: '1.4em'
+                width: '1.4em'
+        Prefix:
+            left: '0.3em'
+            top: '0.3em'
+        Suffix:
+            right: '0.3em'
+            top: '0.3em'
+
         cursor: 'pointer'
-        $hover_$focus:
-            borderColor: '#2F88FF'
-            color: '#2F88FF'
-        $disabled:
-            borderColor: '#EDF1F5'
-            background: '#FCFCFC'
-            cursor: 'not-allowed'
-            color: '#D6D6D6'
-        $focus:
-            outline: 'none'
-            background: '#F0F9FF'
-        $active:
-            borderColor: '#1C68D9'
-            color: '#1C68D9'
+        $hover:
+            background: style.main[5]
+
+    '.Button.Disabled':
+        background: style.border[4]
+        cursor: 'not-allowed'
+
+
+module.exports = Button
+
