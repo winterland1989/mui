@@ -56,7 +56,7 @@
       border: '1px solid #DADFE3',
       textAlign: 'center',
       color: '#333',
-      background: '#F8F9FA',
+      background: '#FFF',
       cursor: 'pointer',
       $hover_$focus: {
         borderColor: '#2F88FF',

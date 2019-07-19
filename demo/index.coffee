@@ -6,7 +6,10 @@ infoIcon = require 'mmsvg/google/msvg/action/info-outline'
 msgIcon = require 'mmsvg/google/msvg/communication/message'
 
 Button = require '../Button'
-ButtonGroup = require '../ButtonGroup'
+ButtonThemed = require '../ButtonThemed'
+ButtonDashed = require '../ButtonDashed'
+ButtonWire = require '../ButtonWire'
+GroupButton = require '../GroupButton'
 DatePicker = require '../DatePicker'
 Switch = require '../Switch'
 CheckBox  =require '../CheckBox'
@@ -25,20 +28,68 @@ tableView = require '../tableView'
 
 class Demo
     constructor: ->
-        @demoButton1 = new Button
-            text: 'Just Button'
+        @demoCheckBoxes = [
+            new CheckBox
+                enable: true
+            new CheckBox
+                disabled: true
+                enable: true
+            new CheckBox
+                enable: true
+                partial: true
+        ]
+        @demoCheckBoxDoc = new Collaspe
+            titleArray: ['CheckBox document']
+            widgetArray: [
+                view: ->
+                    m 'textarea', readonly: true,
+                    """
+                    CheckBox = require 'mui-js/CheckBox'
 
-        @demoButton2 = new Button
-            text: 'Build'
-            prefix: u.svg buildIcon
+                    demoCheckBox = new CheckBox
+                        enable: true
 
-        @demoButton3 = new Button
-            text: 'Delete'
-            suffix: u.svg delIcon
+                    ###
+                        enable = true       # Boolean
+                        onToggle = ( -> )   # (Boolean) -> a
+                    ###
+                    """
+            ]
 
-        @demoButton4 = new Button
-            text: 'Disabled'
-            disabled: true
+        @demoButtons = [
+            new Button
+                label: 'Foo'
+            new Button
+                label: [buildIcon, 'Build']
+            new Button
+                label: ['Delete', delIcon]
+            new Button
+                label: 'Disabled'
+                disabled: true
+            new Button
+                label: 'Foo'
+                size: 'XS'
+            new Button
+                label: 'Foo'
+                width: 'PADDING'
+            new Button
+                label: 'Foo'
+                width: '100%'
+            new ButtonThemed
+                label: 'Foo'
+            new ButtonDashed
+                label: 'Foo'
+            new ButtonWire
+                label: 'Foo'
+        ]
+
+        @demoButton6 = new Button
+            label: 'Foo'
+            size: 'XL'
+
+        @demoButton7 = new Button
+            label: 'Foo'
+            width: 'PADDING'
 
         @demoButtonDoc = new Collaspe
             titleArray: ['Button document']
@@ -66,14 +117,14 @@ class Demo
             ]
 
         @demoBtnGroupDoc = new Collaspe
-            titleArray: ['ButtonGroup document']
+            titleArray: ['GroupButton document']
             widgetArray: [
                 view: ->
                     m 'textarea', readonly: true,
                     """
-                    ButtonGroup = require 'mui-js/ButtonGroup'
+                    GroupButton = require 'mui-js/GroupButton'
 
-                    demoBtnGroup = new ButtonGroup
+                    demoBtnGroup = new GroupButton
                         textArray: ['foo', 'bar', 'qux']
                         onChange: (enabledArray) => ...
 
@@ -87,12 +138,12 @@ class Demo
             ]
 
 
-        @demoBtnGroup = new ButtonGroup
+        @demoBtnGroup = new GroupButton
             textArray: ['foo', 'bar', 'qux']
             onChange: (enabledArray) =>
                 @demoNotify1.show(msgIcon, JSON.stringify enabledArray)
 
-        @demoBtnGroup2 = new ButtonGroup
+        @demoBtnGroup2 = new GroupButton
             textArray: ['foo', 'bar', 'qux']
             multiSelection: false
             onChange: (enabledArray) =>
@@ -148,26 +199,6 @@ class Demo
                     """
             ]
 
-        @demoCheckBox = new CheckBox
-            enable: true
-
-        @demoCheckBoxDoc = new Collaspe
-            titleArray: ['CheckBox document']
-            widgetArray: [
-                view: ->
-                    m 'textarea', readonly: true,
-                    """
-                    CheckBox = require 'mui-js/CheckBox'
-
-                    demoCheckBox = new CheckBox
-                        enable: true
-
-                    ###
-                        enable = true       # Boolean
-                        onToggle = ( -> )   # (Boolean) -> a
-                    ###
-                    """
-            ]
 
         @demoDropDown1 = new DropDown
             itemArray: ['foo', 'bar', '~~~']
@@ -555,12 +586,11 @@ class Demo
     view: -> [
 
         m 'ul.Demo',
+            m 'li', @demoCheckBoxDoc.view()
+            for cb in @demoCheckBoxes then m 'li', cb.view()
+
             m 'li', @demoButtonDoc.view()
-            m 'li',
-                @demoButton1.view()
-                @demoButton2.view()
-                @demoButton3.view()
-                @demoButton4.view()
+            for btn in @demoButtons then m 'li', btn.view()
 
             m 'li', @demoBtnGroupDoc.view()
             m 'li', @demoBtnGroup.view()
@@ -572,9 +602,6 @@ class Demo
 
             m 'li', @demoSwitchDoc.view()
             m 'li', @demoSwitch.view()
-
-            m 'li', @demoCheckBoxDoc.view()
-            m 'li', @demoCheckBox.view()
 
             m 'li', @demoDropDownDoc.view()
             m 'li', @demoDropDown1.view()
@@ -633,7 +660,10 @@ class Demo
 
 s.tag s.merge [
     Button.mss
-    ButtonGroup.mss
+    ButtonThemed.mss
+    ButtonDashed.mss
+    ButtonWire.mss
+    GroupButton.mss
     DatePicker.mss
     Switch.mss
     CheckBox.mss
@@ -662,9 +692,14 @@ s.tag s.merge [
         li:
             margin: '14px'
 
-    Button:
+    Button_ButtonThemed:
         display: 'inline-block'
-        marginRight: '14px'
+        marginRight: '4px'
+        svg:
+            margin: '-4px 6px 0 0'
+            verticalAlign: 'middle'
+            fill: 'currentColor'
+
 
     NotifyBtnGroup:
         Button:

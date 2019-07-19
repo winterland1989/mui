@@ -2,9 +2,10 @@ m = require 'mithril'
 s = require 'mss-js'
 style = require './style'
 u = require './utils'
+
 { BUTTON_WIDTH_MAP, BUTTON_HEIGHT_MAP, FONTSIZE_MAP } = require './CONSTANT'
 
-module.exports = class Button
+module.exports = class ButtonThemed
     constructor: ({
         @label                      # String | mithril view | [mithril views]
     ,   @disabled = false           # Boolean (default = false)
@@ -21,7 +22,7 @@ module.exports = class Button
 
     view: ->
         self = @
-        m "button.Button"
+        m "button.ButtonThemed"
             ,
                 style:
                     padding: if @width == 'PADDING' then '0 16px' else 0
@@ -37,26 +38,26 @@ module.exports = class Button
                 disabled: @disabled
             , @label
 
-Button.mss =
-    Button:
+ButtonThemed.mss =
+    ButtonThemed:
         position: 'relative'
         borderRadius: '4px'
-        border: '1px solid #DADFE3'
+        border: '1px solid #2F88FF'
         textAlign: 'center'
-        color: '#333'
-        background: '#F8F9FA'
+        color: '#FFF'
+        background: '#2F88FF'
         cursor: 'pointer'
         $hover_$focus:
-            borderColor: '#2F88FF'
-            color: '#2F88FF'
+            borderColor: '#57A5FF'
+            background: '#57A5FF'
         $disabled:
-            borderColor: '#EDF1F5'
-            background: '#FCFCFC'
+            borderColor: '#A8D7FF'
+            background: '#A8D7FF'
             cursor: 'not-allowed'
-            color: '#D6D6D6'
         $focus:
             outline: 'none'
-            background: '#F0F9FF'
         $active:
             borderColor: '#1C68D9'
-            color: '#1C68D9'
+            background: '#1C68D9'
+
+

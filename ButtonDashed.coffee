@@ -4,7 +4,7 @@ style = require './style'
 u = require './utils'
 { BUTTON_WIDTH_MAP, BUTTON_HEIGHT_MAP, FONTSIZE_MAP } = require './CONSTANT'
 
-module.exports = class Button
+module.exports = class ButtonDashed
     constructor: ({
         @label                      # String | mithril view | [mithril views]
     ,   @disabled = false           # Boolean (default = false)
@@ -21,7 +21,7 @@ module.exports = class Button
 
     view: ->
         self = @
-        m "button.Button"
+        m "button.ButtonDashed"
             ,
                 style:
                     padding: if @width == 'PADDING' then '0 16px' else 0
@@ -37,11 +37,11 @@ module.exports = class Button
                 disabled: @disabled
             , @label
 
-Button.mss =
-    Button:
+ButtonDashed.mss =
+    ButtonDashed:
         position: 'relative'
         borderRadius: '4px'
-        border: '1px solid #DADFE3'
+        border: '1px dashed #DADFE3'
         textAlign: 'center'
         color: '#333'
         background: '#F8F9FA'
@@ -60,3 +60,6 @@ Button.mss =
         $active:
             borderColor: '#1C68D9'
             color: '#1C68D9'
+
+
+
